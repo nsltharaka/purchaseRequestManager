@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Java Program",
+            "request": "launch",
+            "mainClass": "com.App",
+            "vmArgs": "--module-path \"${workspaceFolder}\\javafx-sdk-19\\lib\" --add-modules javafx.controls,javafx.fxml -Dglass.win.uiScale=100%"
+        }
+    ]
+}

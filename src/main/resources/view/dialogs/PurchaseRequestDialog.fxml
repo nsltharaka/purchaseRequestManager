@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonType?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<DialogPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.dialogControllers.PurchaseRequestDialogController">
+   <content>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../styles/purchase-request.css">
+         <children>
+            <Label layoutX="29.0" layoutY="30.0" styleClass="component--title" text="Purchase Request" />
+            <VBox layoutX="29.0" layoutY="75.0" spacing="5.0">
+               <children>
+                  <Label prefHeight="18.0" prefWidth="67.0" text="Request ID" />
+                  <TextField fx:id="txtRequestID" editable="false" prefHeight="25.0" prefWidth="200.0" />
+               </children>
+            </VBox>
+            <VBox layoutX="252.0" layoutY="75.0" spacing="5.0">
+               <children>
+                  <Label text="Request Date" />
+                  <DatePicker fx:id="dtpRequestDate" editable="false" prefHeight="25.0" prefWidth="200.0" />
+               </children>
+            </VBox>
+            <VBox layoutX="476.0" layoutY="75.0" spacing="5.0">
+               <children>
+                  <Label prefHeight="18.0" prefWidth="107.0" text="Request Due Date" />
+                  <DatePicker fx:id="dtpDueDate" prefHeight="25.0" prefWidth="200.0" />
+               </children>
+            </VBox>
+            <VBox layoutX="29.0" layoutY="144.0" spacing="5.0">
+               <children>
+                  <Label prefHeight="18.0" prefWidth="123.0" text="Requested Department" />
+                  <ComboBox fx:id="cmbRequestedDepartment" prefHeight="25.0" prefWidth="200.0" promptText="Select Department" />
+               </children>
+            </VBox>
+            <Button fx:id="btnAddItem" layoutX="616.0" layoutY="177.0" mnemonicParsing="false" prefWidth="60.0" text="Add" />
+            <TableView fx:id="tableItems" layoutX="28.0" layoutY="206.0" prefHeight="258.0" prefWidth="648.0">
+               <columns>
+                  <TableColumn fx:id="columnItemName" editable="false" prefWidth="226.0" sortable="false" text="Item Name" />
+                  <TableColumn fx:id="columnItemDescription" editable="false" prefWidth="238.0" sortable="false" text="Item Description" />
+                  <TableColumn fx:id="columnQuantity" editable="false" prefWidth="166.0" sortable="false" text="Quantity" />
+                  <TableColumn fx:id="columnUnit" editable="false" prefWidth="166.0" sortable="false" text="Unit" />
+               </columns>
+            </TableView>
+            <Button fx:id="btnUpdateItem" layoutX="551.0" layoutY="177.0" mnemonicParsing="false" prefWidth="60.0" text="Update" />
+            <Button fx:id="btnRemoveItem" layoutX="486.0" layoutY="177.0" mnemonicParsing="false" prefWidth="60.0" text="Remove" />
+         </children>
+      </AnchorPane>
+   </content>
+   <buttonTypes>
+      <ButtonType fx:constant="APPLY" />
+      <ButtonType fx:constant="CANCEL" />
+   </buttonTypes>
+</DialogPane>

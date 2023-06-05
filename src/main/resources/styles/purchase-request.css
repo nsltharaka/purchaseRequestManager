@@ -1,0 +1,65 @@
+@import url("root.css");
+
+.container {
+    -fx-selection-bar: -teal4;
+    -fx-selection-bar-non-focused: lightgray;
+
+    -fx-focus-color: -teal4;
+    -fx-faint-focus-color: transparent;
+
+    -fx-padding: 0 10px 20px 10px;
+}
+
+.component {}
+
+.component--title {
+    -fx-font-weight: bold;
+    -fx-font-size: 26px;
+}
+
+.component--sub-title {
+    -fx-font-size: 16px;
+}
+
+/* **************** */
+/* shortcut panel */
+/* **************** */
+
+.shortcut-button--container {
+    -fx-cursor: HAND;
+}
+
+.shortcut-button {
+    -fx-min-width: 210px;
+    -fx-min-height: 30px;
+
+    -fx-background-color: -white;
+    -fx-border-color: -teal4;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-background-insets: 0;
+    -fx-text-fill: -teal4;
+}
+
+.shortcut-button .text {
+    -fx-font-weight: bold;
+}
+
+.shortcut-button:hover {
+    -fx-background-color: -teal4;
+    -fx-text-fill: -white;
+}
+
+.summary-panel {
+    -fx-background-color: -white;
+    -fx-border-color: -teal4;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-background-insets: 0;
+}
+
+.summary-panel--title {
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-text-fill: -teal4;
+}

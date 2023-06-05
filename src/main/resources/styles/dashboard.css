@@ -1,0 +1,85 @@
+@import url("root.css");
+
+.container {
+    -fx-padding: 0 10px 0 10px;
+}
+
+/* Item summary cards */
+
+.component--title {
+    -fx-font-weight: bold;
+    -fx-font-size: 26px;
+}
+
+.itemsSummary--component {
+    -fx-background-color: -white;
+    -fx-background-radius: 10px;
+}
+
+.itemsSummary--component-text {
+    -fx-text-fill: -black;
+    -fx-font-weight: bold;
+    -fx-font-size: 30px;
+}
+
+.itemsSummary--component-subText {
+    -fx-font-size: 18px;
+    -fx-text-fill: #808080;
+}
+
+.separator .line {
+    -fx-background-color: -black;
+    -fx-pref-width: 2px;
+    -fx-border-color: TRANSPARENT;
+}
+
+/* summary cards */
+
+.summary-card {
+    -fx-padding: 15px;
+
+    -fx-background-color: -white;
+    -fx-background-radius: 10px;
+}
+
+.summary-card--title {
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+}
+
+.default-color0.chart-pie {
+    -fx-pie-color: -teal5;
+}
+
+.default-color1.chart-pie {
+    -fx-pie-color: -teal3;
+}
+
+.default-color2.chart-pie {
+    -fx-pie-color: -teal1;
+}
+
+.default-color3.chart-pie {
+    -fx-pie-color: -teal2;
+}
+
+.default-color4.chart-pie {
+    -fx-pie-color: -teal4;
+}
+
+.chart-content {
+    -fx-padding: 20px;
+}
+
+.chart-pie {
+    -fx-background-insets: 2;
+    -fx-border-width: 2;
+}
+
+.chart-pie:hover {
+    -fx-cursor: HAND;
+}
+
+.chart-legend {
+    -fx-background-color: -white;
+}

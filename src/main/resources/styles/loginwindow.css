@@ -1,0 +1,54 @@
+@import url("root.css");
+
+/* ************* */
+/* login button */
+/* ************ */
+.Button {
+    -fx-background-color: -teal3;
+    -fx-background-radius: 7px;
+    -fx-border-radius: 7px;
+    -fx-cursor: HAND;
+    -fx-font-weight: bold;
+}
+
+.Button:hover {
+    -fx-background-color: -teal5;
+}
+
+/* ******************************* */
+/* logo and the name at Login page */
+/* ******************************* */
+.login--leftPane {
+    -fx-background-color: -teal3;
+}
+
+.login--welcomeText {
+    -fx-font-weight: bold;
+    -fx-font-size: 24px;
+}
+
+.info-label {
+    -fx-text-fill: -teal4;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+}
+
+.login--textFields {
+    -fx-border-color: -teal3;
+    -fx-border-radius: 7px;
+    -fx-background-radius: 7px;
+    -fx-prompt-text-fill: gray;
+}
+
+.login--textFields:focused {
+    -fx-focus-color: -teal4;
+    -fx-border-width: 1.3px;
+    -fx-faint-focus-color: TRANSPARENT;
+}
+
+/* ************* */
+/* Close Button */
+/* ************ */
+.login--closeBtn:hover {
+    -fx-icon-color: -teal3;
+}

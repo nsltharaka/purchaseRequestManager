@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.HomeScreenController">
+   <left>
+      <VBox styleClass="control-panel" stylesheets="@../styles/dashBoard-controlPanel.css" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="TOP_CENTER" minHeight="-Infinity" prefWidth="300.0" VBox.vgrow="NEVER">
+               <children>
+                  <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/logo.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="47.0" prefWidth="184.0" styleClass="test" text="Purchase Requests Manager" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font name="Arial Bold" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Separator maxHeight="1.0" minHeight="1.0" prefWidth="200.0">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Separator>
+               </children>
+               <padding>
+                  <Insets bottom="25.0" left="30.0" right="30.0" top="25.0" />
+               </padding>
+            </VBox>
+            <VBox fx:id="buttonContainer" fillWidth="false" prefWidth="300.0" spacing="10.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Button fx:id="btnDashBoard" graphicTextGap="15.0" mnemonicParsing="false" onAction="#getDashBoardWindow" prefHeight="60.0" prefWidth="300.0" styleClass="dashboard-navigationButton" text="Dashboard" textFill="WHITE">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="mdi2m-monitor-dashboard" iconSize="24" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btnItems" graphicTextGap="15.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#getRequestedItemsWindow" prefHeight="45.0" prefWidth="300.0" styleClass="dashboard-navigationButton" text="Requested Items" textFill="WHITE">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="mdi2p-package" iconSize="24" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btnPurchaseRequests" graphicTextGap="15.0" layoutX="10.0" layoutY="65.0" mnemonicParsing="false" onAction="#getPurchaseRequestsWindow" prefHeight="45.0" prefWidth="300.0" styleClass="dashboard-navigationButton" text="Purchase Requests" textFill="WHITE">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="mdi2f-file-question" iconSize="24" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btnPriceQuotations" graphicTextGap="15.0" layoutX="10.0" layoutY="120.0" mnemonicParsing="false" onAction="#getPriceQuotationsWindow" prefHeight="45.0" prefWidth="300.0" styleClass="dashboard-navigationButton" text="Price Quotations" textFill="WHITE">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="mdi2f-file-compare" iconSize="24" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btnPurchaseOrders" graphicTextGap="15.0" layoutX="10.0" layoutY="175.0" mnemonicParsing="false" onAction="#getPurchaseOrdersWindow" prefHeight="45.0" prefWidth="300.0" styleClass="dashboard-navigationButton" text="Purchase Orders" textFill="WHITE">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="mdi2c-cart" iconSize="24" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btnReports" graphicTextGap="15.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#getReportsWindow" prefHeight="45.0" prefWidth="300.0" styleClass="dashboard-navigationButton" text="Reports" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="mdi2b-bookshelf" iconSize="24" />
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" maxHeight="85.0" prefWidth="300.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Button graphicTextGap="15.0" mnemonicParsing="false" onAction="#handleLogOut" prefHeight="40.0" prefWidth="260.0" styleClass="logOutButton" text="Log Out" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </left>
+   <top>
+      <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0" styleClass="container" stylesheets="@../styles/mainScreen-titleBar.css" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitWidth="23.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
+               <image>
+                  <Image url="@../images/icons8-packages-32.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </ImageView>
+            <MenuBar styleClass="menuBar" HBox.hgrow="ALWAYS">
+               <menus>
+                  <Menu mnemonicParsing="false" text="File">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Close" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Edit">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Delete" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Help">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="About" />
+                     </items>
+                  </Menu>
+               </menus>
+            </MenuBar>
+            <Label fx:id="lblWindowTitle" text="Purchase Request Manager" HBox.hgrow="ALWAYS" />
+            <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+               <children>
+                  <Button fx:id="btnMinimize" maxHeight="30.0" mnemonicParsing="false" onAction="#handleWindowAction" prefWidth="40.0" styleClass="windowActionButton" text="—" />
+                  <Button fx:id="btnMaximize" minHeight="0.0" mnemonicParsing="false" onAction="#handleWindowAction" prefHeight="30.0" prefWidth="40.0" styleClass="windowActionButton">
+                     <graphic>
+                        <FontIcon iconLiteral="mdi2c-crop-square" iconSize="16" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btnClose" contentDisplay="CENTER" minHeight="0.0" mnemonicParsing="false" onAction="#handleWindowAction" prefHeight="30.0" prefWidth="40.0">
+                     <graphic>
+                        <FontIcon iconLiteral="mdi-window-close" iconSize="16" />
+                     </graphic>
+                     <styleClass>
+                        <String fx:value="windowActionButton" />
+                        <String fx:value="windowActionButton-close" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <AnchorPane fx:id="mainPanel" />
+   </center>
+</BorderPane>

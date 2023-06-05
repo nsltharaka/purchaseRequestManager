@@ -1,0 +1,13 @@
+@import url("root.css");
+
+.container {}
+
+.debug {
+    -fx-border-color: green;
+    -fx-background-color: rgba(144, 238, 144, 0.562);
+}
+
+.page-title {
+    -fx-font-weight: bold;
+    -fx-font-size: 28px;
+}

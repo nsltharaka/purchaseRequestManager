@@ -1,0 +1,113 @@
+@import url("root.css");
+
+/* ************************** */
+/* control panel in dashboard */
+/* ************************** */
+.control-panel {
+    -fx-background-color: -teal4;
+}
+
+/* ************************** */
+/* control panel separator */
+/* ************************** */
+.separator {
+    -fx-background-color: -white;
+}
+
+.separator-v2 {
+    -fx-background-color: -teal5;
+
+}
+
+/* ************************** */
+/* Navigation Buttons */
+/* ************************** */
+
+.dashboard-navigationButton {
+
+    -fx-pref-height: 60px;
+    -fx-padding: 0 0 0 30px;
+
+    -fx-background-color: INHERIT;
+    -fx-border-radius: 0px;
+    -fx-background-radius: 0px;
+    -fx-alignment: CENTER-LEFT;
+    -fx-font-size: 16px;
+}
+
+.dashboard-subNavigationButton {
+    -fx-font-size: 14px;
+}
+
+.dashboard-navigationButton:hover {
+    -fx-background-color: -teal5;
+    -fx-cursor: HAND;
+    -fx-font-weight: bold;
+}
+
+.active {
+    -fx-background-color: -teal5;
+    -fx-cursor: HAND;
+    -fx-font-weight: bold;
+
+    -fx-border-style: solid;
+    -fx-border-width: 0 0 0 5px;
+    -fx-border-color: -white;
+    -fx-padding: 0 0 0 25px;
+}
+
+/* ************************** */
+/* title pane in dash board */
+/* ************************** */
+.title-pane>.title {
+    -fx-background-color: INHERIT;
+    -fx-border-radius: 0px;
+    -fx-background-radius: 0px;
+}
+
+.title-pane>.title .text {
+    -fx-font-size: 16px;
+}
+
+.title-pane>.title:hover,
+.title-pane>.title:hover .text {
+    -fx-background-color: -teal5;
+}
+
+.title-pane:focused,
+.title-pane:focused>.title .text {
+    -fx-background-color: -teal5;
+}
+
+.title-pane>.title>.arrow-button {
+    -fx-padding: 0px 20px 0px 24px;
+}
+
+.title-pane>.title>.arrow-button .arrow {
+    -fx-background-color: -white;
+    -fx-font-size: 18px;
+}
+
+.title-pane>*.content {
+    -fx-background-color: INHERIT;
+    -fx-border-color: NONE;
+    -fx-box-border: NONE;
+}
+
+/* ************************** */
+/* Log out button */
+/* ************************** */
+.logOutButton {
+    -fx-background-radius: 3px;
+    -fx-border-radius: 3px;
+    -fx-background-color: -white;
+    -fx-cursor: HAND;
+
+    -fx-text-fill: -teal4;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.logOutButton:hover {
+    -fx-background-color: #dadada;
+}

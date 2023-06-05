@@ -1,0 +1,38 @@
+@import url("root.css");
+
+/* title bar container */
+.container {
+    -fx-background-color: -white;
+}
+
+/* menu bar */
+.menuBar {
+    -fx-background-color: INHERIT;
+}
+
+.menuBar .menu-button:hover,
+.menu-bar .menu-button:focused,
+.menu-bar .menu-button:showing {
+    -fx-background-color: -teal4;
+}
+
+.menuBar .menu-item:hover,
+.menu-item:focused {
+    -fx-background-color: -teal4;
+}
+
+/* action button */
+.windowActionButton {
+    -fx-background-color: INHERIT;
+    -fx-background-radius: NONE;
+    -fx-border-radius: NONE;
+}
+
+.windowActionButton:hover {
+    -fx-background-color: #dfdfdf;
+}
+
+.windowActionButton-close:hover {
+    -fx-background-color: red;
+    -fx-icon-color: -white;
+}
