@@ -1,38 +1,261 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="980.0" styleClass="container" stylesheets="@../styles/requested-items.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.RequestedItemsController">
    <children>
-      <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="980.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox HBox.hgrow="ALWAYS">
+            <VBox alignment="CENTER_LEFT" prefHeight="770.0" prefWidth="970.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <AnchorPane VBox.vgrow="NEVER">
+                  <StackPane alignment="CENTER_LEFT" minHeight="50.0" VBox.vgrow="NEVER">
                      <children>
-                        <Label layoutX="26.0" styleClass="page-title" text="Requested Items" />
+                        <Label styleClass="component--title" text="Requested Items" />
                      </children>
-                  </AnchorPane>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                  </StackPane>
+                  <HBox spacing="10.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <TableView fx:id="tblRequestedItems" editable="true" focusTraversable="false" layoutX="82.0" layoutY="78.0" prefHeight="730.0" prefWidth="780.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                          <columns>
-                            <TableColumn prefWidth="212.0" text="C1" />
-                            <TableColumn minWidth="0.0" prefWidth="206.0" text="C2" />
-                          </columns>
-                        </TableView>
+                        <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <AnchorPane VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <TableView layoutX="189.0" layoutY="117.0" styleClass="table" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <columns>
+                                          <TableColumn prefWidth="75.0" text="Request ID" />
+                                          <TableColumn prefWidth="75.0" text="Category" />
+                                          <TableColumn prefWidth="117.66667175292969" text="Item Name" />
+                                          <TableColumn prefWidth="168.0" text="Item Description" />
+                                          <TableColumn minWidth="0.0" prefWidth="103.0" text="Quantity" />
+                                          <TableColumn minWidth="0.0" prefWidth="103.0" text="Unit" />
+                                          <TableColumn minWidth="0.0" prefWidth="151.33331298828125" text="Status" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                              <GridPane prefHeight="160.0" VBox.vgrow="NEVER">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="NEVER" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="NEVER" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <VBox GridPane.vgrow="NEVER">
+                                       <children>
+                                          <StackPane alignment="CENTER_LEFT">
+                                             <children>
+                                                <Label text="Purchase Request">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                             <padding>
+                                                <Insets bottom="10.0" top="5.0" />
+                                             </padding>
+                                          </StackPane>
+                                          <GridPane hgap="30.0" vgap="5.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                                              <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints />
+                                                <RowConstraints />
+                                                <RowConstraints />
+                                                <RowConstraints />
+                                                <RowConstraints />
+                                                <RowConstraints />
+                                            </rowConstraints>
+                                             <children>
+                                                <Label text="Requested Date :" GridPane.halignment="RIGHT" GridPane.vgrow="ALWAYS" />
+                                                <Label text="05/06/2023" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" />
+                                                <Label layoutX="26.0" layoutY="10.0" text="Due Date :" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                                                <Label layoutX="147.0" layoutY="10.0" text="05/06/2023" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
+                                                <Label layoutX="36.0" layoutY="32.0" text="Requested By :" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                                                <Label layoutX="169.0" layoutY="32.0" text="ACCOUNTING" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
+                                                <Label layoutX="25.0" layoutY="54.0" text="Number of Items :" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+                                                <Label layoutX="10.0" layoutY="83.0" text="10" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
+                                                <Label layoutX="16.0" layoutY="83.0" text="Delivered :" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+                                                <Label layoutX="194.0" layoutY="83.0" text="7" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="4" />
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </VBox>
+                                    <Separator orientation="VERTICAL" GridPane.columnIndex="1" GridPane.hgrow="NEVER" />
+                                    <VBox GridPane.columnIndex="2" GridPane.vgrow="NEVER">
+                                       <children>
+                                          <StackPane alignment="CENTER_LEFT">
+                                             <children>
+                                                <Label text="Price Quotation Report">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="10.0" top="5.0" />
+                                             </padding>
+                                          </StackPane>
+                                          <GridPane hgap="30.0" vgap="5.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints />
+                                                <RowConstraints />
+                                                <RowConstraints />
+                                                <RowConstraints />
+                                             </rowConstraints>
+                                             <children>
+                                                <Label text="Created Date :" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
+                                                <Label text="05/06/2023" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
+                                                <Label layoutX="26.0" layoutY="10.0" text="Approved :" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                                                <Label layoutX="147.0" layoutY="10.0" text="Yes" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
+                                                <Label layoutX="36.0" layoutY="45.0" text="PQ00012" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
+                                                <Label layoutX="142.0" layoutY="45.0" text="report ID :" GridPane.halignment="RIGHT" />
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                       <padding>
+                                          <Insets left="10.0" />
+                                       </padding>
+                                    </VBox>
+                                    <Separator orientation="VERTICAL" GridPane.columnIndex="3" />
+                                    <VBox GridPane.columnIndex="4" GridPane.vgrow="NEVER">
+                                       <children>
+                                          <VBox>
+                                             <children>
+                                                <StackPane alignment="CENTER_LEFT">
+                                                   <children>
+                                                      <Label text="Purchase Order">
+                                                         <font>
+                                                            <Font name="System Bold" size="12.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets bottom="10.0" top="5.0" />
+                                                   </padding>
+                                                </StackPane>
+                                                <StackPane>
+                                                   <children>
+                                                      <GridPane hgap="30.0" vgap="5.0" visible="false">
+                                                         <columnConstraints>
+                                                            <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                                                            <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                                                         </columnConstraints>
+                                                         <rowConstraints>
+                                                            <RowConstraints />
+                                                            <RowConstraints />
+                                                            <RowConstraints />
+                                                            <RowConstraints />
+                                                            <RowConstraints />
+                                                            <RowConstraints />
+                                                         </rowConstraints>
+                                                         <children>
+                                                            <Label text="Created Date :" GridPane.halignment="RIGHT" GridPane.vgrow="ALWAYS" />
+                                                            <Label text="05/06/2023" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" />
+                                                            <Label layoutX="26.0" layoutY="10.0" text="Supplier :" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                                                            <Label layoutX="147.0" layoutY="10.0" text="05/06/2023" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
+                                                            <Label layoutX="36.0" layoutY="32.0" text="Requested By :" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                                                            <Label layoutX="169.0" layoutY="32.0" text="ACCOUNTING" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
+                                                            <Label layoutX="25.0" layoutY="54.0" text="Number of Items :" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+                                                            <Label layoutX="10.0" layoutY="83.0" text="10" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
+                                                            <Label layoutX="16.0" layoutY="83.0" text="Delivered :" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+                                                            <Label layoutX="194.0" layoutY="83.0" text="7" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="4" />
+                                                         </children>
+                                                      </GridPane>
+                                                      <Label prefHeight="36.0" prefWidth="183.0" text="No purchase Order is found for this item." wrapText="true" StackPane.alignment="TOP_CENTER" />
+                                                   </children>
+                                                </StackPane>
+                                             </children>
+                                             <padding>
+                                                <Insets left="10.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" spacing="15.0" HBox.hgrow="SOMETIMES">
+                           <children>
+                              <VBox alignment="CENTER" spacing="10.0" styleClass="shortcut-button--container">
+                                 <children>
+                                    <VBox spacing="7.0">
+                                       <children>
+                                          <Button mnemonicParsing="false" styleClass="shortcut-button" text="New Quotation Report" />
+                                          <Button mnemonicParsing="false" styleClass="shortcut-button" text="Update Status" />
+                                          <Button mnemonicParsing="false" styleClass="shortcut-button" text="Edit Purchase Request" />
+                                          <Button mnemonicParsing="false" styleClass="shortcut-button" text="View Price Quotations" />
+                                       </children>
+                                    </VBox>
+                                    <Separator>
+                                       <padding>
+                                          <Insets left="10.0" right="10.0" />
+                                       </padding>
+                                    </Separator>
+                                    <VBox spacing="7.0">
+                                       <children>
+                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="shortcut-button" text="Add Comment" />
+                                          <Button mnemonicParsing="false" styleClass="shortcut-button" text="Approve Purchase Request" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </VBox>
+                              <Separator prefWidth="200.0">
+                                 <padding>
+                                    <Insets left="10.0" right="10.0" />
+                                 </padding>
+                              </Separator>
+                              <VBox styleClass="summary-panel" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <StackPane alignment="TOP_LEFT">
+                                       <children>
+                                          <Label styleClass="summary-panel--title" text="Quick Summary" />
+                                       </children>
+                                       <padding>
+                                          <Insets left="10.0" top="5.0" />
+                                       </padding>
+                                    </StackPane>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </VBox>
                      </children>
-                  </AnchorPane>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+                  </HBox>
                </children>
             </VBox>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="NEVER" />
          </children>
-      </HBox>
+      </AnchorPane>
    </children>
 </AnchorPane>

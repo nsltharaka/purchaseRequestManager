@@ -30,9 +30,7 @@ public class HomeScreenController {
     private @FXML Button btnReports;
     private @FXML Label lblWindowTitle;
     private @FXML AnchorPane mainPanel;
-
-    @FXML
-    private VBox buttonContainer;
+    private @FXML VBox buttonContainer;
 
     @FXML
     void getDashBoardWindow(ActionEvent event) throws IOException {
