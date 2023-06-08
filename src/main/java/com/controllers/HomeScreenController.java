@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.controllers.dialogControllers.PriceQuotationDialog;
 import com.util.helpers.ScenePath;
 
 import javafx.event.ActionEvent;
@@ -69,7 +70,10 @@ public class HomeScreenController {
 
     @FXML
     void getReportsWindow(ActionEvent event) throws IOException {
-        SceneController.change(mainPanel, ScenePath.REPORTS.getPath());
+        // SceneController.change(mainPanel, ScenePath.REPORTS.getPath());
+
+        new PriceQuotationDialog().showAndWait();
+
         removeActive();
         btnReports.getStyleClass().add("active");
     }

@@ -14,33 +14,25 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-   prefHeight="400.0" prefWidth="615.0" stylesheets="@../styles/loginwindow.css"
-   xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-   fx:controller="com.controllers.LoginScreenController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../styles/loginwindow.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.LoginScreenController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
             <AnchorPane prefHeight="400.0" prefWidth="300.0" styleClass="login--leftPane">
                <children>
-                  <ImageView fitHeight="400.0" fitWidth="300.0" layoutY="1.0" opacity="0.3"
-                     pickOnBounds="true" styleClass="picture">
+                  <ImageView fitHeight="400.0" fitWidth="300.0" layoutY="1.0" opacity="0.3" pickOnBounds="true" styleClass="picture">
                      <image>
                         <Image url="@../images/download.png" />
                      </image>
                   </ImageView>
-                  <VBox alignment="CENTER" prefHeight="401.0" prefWidth="300.0"
-                     AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                     AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <VBox alignment="CENTER" prefHeight="400.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true"
-                           preserveRatio="true">
+                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/logoAtLogin.png" />
                            </image>
                         </ImageView>
-                        <Label prefHeight="57.0" prefWidth="240.0" text="Purchase Requests Manager"
-                           textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                        <Label prefHeight="57.0" prefWidth="240.0" text="Purchase Requests Manager" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                            <font>
                               <Font name="Arial Bold" size="24.0" />
                            </font>
@@ -49,15 +41,11 @@
                   </VBox>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="loginFormContainer" layoutX="300.0" prefHeight="400.0"
-               prefWidth="300.0">
+            <AnchorPane fx:id="loginFormContainer" layoutX="300.0" prefHeight="400.0" prefWidth="300.0">
                <children>
-                  <VBox alignment="CENTER" layoutY="-5.0" prefHeight="400.0" prefWidth="300.0"
-                     AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                     AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <VBox alignment="CENTER" layoutY="-5.0" prefHeight="400.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Label prefHeight="25.0" prefWidth="106.0" styleClass="login--welcomeText"
-                           text="Welcome">
+                        <Label prefHeight="25.0" prefWidth="106.0" styleClass="login--welcomeText" text="Welcome">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
@@ -70,8 +58,7 @@
                               <Insets bottom="20.0" />
                            </padding>
                         </Label>
-                        <TextField fx:id="txtUsername" cache="true" prefHeight="35.0"
-                           prefWidth="201.0" promptText="username" styleClass="login--textFields">
+                        <TextField fx:id="txtUsername" cache="true" prefHeight="35.0" prefWidth="201.0" promptText="username" styleClass="login--textFields">
                            <VBox.margin>
                               <Insets bottom="20.0" />
                            </VBox.margin>
@@ -85,8 +72,7 @@
                               <Font size="13.0" />
                            </font>
                         </TextField>
-                        <PasswordField fx:id="txtPassword" prefHeight="35.0" prefWidth="201.0"
-                           promptText="password" styleClass="login--textFields">
+                        <PasswordField fx:id="txtPassword" prefHeight="35.0" prefWidth="201.0" promptText="password" styleClass="login--textFields">
                            <VBox.margin>
                               <Insets bottom="20.0" />
                            </VBox.margin>
@@ -97,9 +83,7 @@
                               <Font size="13.0" />
                            </font>
                         </PasswordField>
-                        <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#handleLogin"
-                           prefHeight="35.0" prefWidth="70.0" styleClass="Button" text="Log In"
-                           textFill="WHITE" />
+                        <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#handleLogin" prefHeight="35.0" prefWidth="70.0" styleClass="Button" text="Log In" textFill="WHITE" />
                      </children>
                   </VBox>
                </children>
@@ -107,13 +91,15 @@
                   <Insets left="25.0" right="25.0" />
                </padding>
             </AnchorPane>
-            <FontIcon fx:id="btnClose" iconColor="#a1a1a1" iconLiteral="mdi-close" iconSize="18"
-               layoutX="587.0" layoutY="27.0" styleClass="login--closeBtn">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </FontIcon>
          </children>
       </AnchorPane>
+      <FontIcon fx:id="btnClose" iconColor="#a1a1a1" iconLiteral="mdi-close" iconSize="18" styleClass="login--closeBtn" StackPane.alignment="TOP_RIGHT">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <StackPane.margin>
+            <Insets right="15.0" top="15.0" />
+         </StackPane.margin>
+      </FontIcon>
    </children>
 </StackPane>

@@ -3,7 +3,8 @@ package com.util.helpers;
 public enum DialogPath {
 
     PURCHASE_REQUEST_DIALOG("/view/dialogs/PurchaseRequestDialog.fxml"),
-    ITEM_DIALOG("/view/dialogs/ItemDialog.fxml");
+    ITEM_DIALOG("/view/dialogs/ItemDialog.fxml"),
+    PRICE_QUOTATION_DIALOG("/view/dialogs/PriceQuotationDialog.fxml");
 
     private String path;
 

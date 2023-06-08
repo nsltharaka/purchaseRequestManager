@@ -18,7 +18,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class LoginScreenController implements Initializable {
@@ -26,7 +25,6 @@ public class LoginScreenController implements Initializable {
     private @FXML TextField txtUsername;
     private @FXML PasswordField txtPassword;
     private @FXML Label lblInfo;
-    private @FXML AnchorPane loginFormContainer;
     private @FXML FontIcon btnClose;
 
     private UserService service;
