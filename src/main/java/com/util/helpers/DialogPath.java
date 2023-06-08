@@ -5,7 +5,8 @@ public enum DialogPath {
     PURCHASE_REQUEST_DIALOG("/view/dialogs/PurchaseRequestDialog.fxml"),
     ITEM_DIALOG("/view/dialogs/ItemDialog.fxml"),
     PRICE_QUOTATION_DIALOG("/view/dialogs/PriceQuotationDialog.fxml"),
-    ITEM_UPDATE_STATUS_DIALOG("/view/dialogs/ItemUpdateStatusDialog.fxml");
+    ITEM_UPDATE_STATUS_DIALOG("/view/dialogs/ItemUpdateStatusDialog.fxml"),
+    PR_UPDATE_STATUS_DIALOG("/view/dialogs/PurchaseRequestUpdateStatusDialog.fxml");
 
     private String path;
 

@@ -3,7 +3,7 @@ package com.controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.controllers.dialogControllers.ItemUpdateStatusDialog;
+import com.controllers.dialogControllers.PurchaseRequestUpdateStatusDialog;
 import com.controllers.dialogControllers.PriceQuotationDialog;
 
 import javafx.event.ActionEvent;
@@ -40,7 +40,7 @@ public class RequestedItemsController {
     @FXML
     void updateItemStatus(ActionEvent event) {
 
-        ItemUpdateStatusDialog dialog = new ItemUpdateStatusDialog();
+        PurchaseRequestUpdateStatusDialog dialog = new PurchaseRequestUpdateStatusDialog();
         dialog.showAndWait();
 
     }

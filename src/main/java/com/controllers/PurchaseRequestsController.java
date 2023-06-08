@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import com.controllers.dialogControllers.PurchaseRequestUpdateStatusDialog;
+import com.controllers.dialogControllers.PriceQuotationDialog;
 import com.model.dto.ItemDTO;
 import com.model.dto.PurchaseRequestDTO;
 import com.service.PurchaseRequestService;
@@ -19,6 +21,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -132,6 +135,23 @@ public class PurchaseRequestsController {
             PurchaseRequestDialog dialog = new PurchaseRequestDialog(p);
             dialog.show();
         });
+
+    }
+
+    @FXML
+    void viewPriceQuotations(ActionEvent event) {
+
+        PriceQuotationDialog dialog = new PriceQuotationDialog();
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.NEXT, ButtonType.PREVIOUS);
+        dialog.show();
+
+    }
+
+    @FXML
+    void PurchaseRequestUpdateStatus(ActionEvent event) {
+
+        PurchaseRequestUpdateStatusDialog dialog = new PurchaseRequestUpdateStatusDialog();
+        dialog.showAndWait();
 
     }
 }

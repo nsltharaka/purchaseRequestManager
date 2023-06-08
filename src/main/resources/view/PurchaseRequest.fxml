@@ -80,8 +80,8 @@
                                        <children>
                                           <Button mnemonicParsing="false" onAction="#showAddPurchaseRequestWindow" styleClass="shortcut-button" text="New Purchase Request" />
                                           <Button fx:id="btnViewPurchaseRequest" mnemonicParsing="false" onAction="#viewPurchaseRequest" styleClass="shortcut-button" text="Edit Purchase Request" />
-                                          <Button mnemonicParsing="false" styleClass="shortcut-button" text="View Price Quotations" />
-                                          <Button mnemonicParsing="false" styleClass="shortcut-button" text="Update Status" />
+                                          <Button mnemonicParsing="false" onAction="#viewPriceQuotations" styleClass="shortcut-button" text="View Price Quotations" />
+                                          <Button mnemonicParsing="false" onAction="#PurchaseRequestUpdateStatus" styleClass="shortcut-button" text="Update Status" />
                                        </children>
                                     </VBox>
                                     <Separator>
@@ -92,7 +92,6 @@
                                     <VBox spacing="7.0">
                                        <children>
                                           <Button fx:id="btnViewPurchaseRequest1" mnemonicParsing="false" onAction="#viewPurchaseRequest" styleClass="shortcut-button" text="Approve Purchase Request" />
-                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="shortcut-button" text="Generate Report" />
                                        </children>
                                     </VBox>
                                  </children>
