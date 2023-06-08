@@ -12,6 +12,7 @@ import com.model.dto.PurchaseRequestDTO;
 import com.service.PurchaseRequestService;
 import com.util.Department;
 import com.util.PurchaseRequestStatus;
+import com.util.UserRole;
 import com.util.dialog.PurchaseRequestDialog;
 import com.util.helpers.CurrentUser;
 
@@ -44,6 +45,7 @@ public class PurchaseRequestsController {
     private @FXML TableColumn<PurchaseRequestDTO, PurchaseRequestStatus> columnRequestStatus;
     private @FXML TableColumn<PurchaseRequestDTO, Department> columnRequestedDepartment;
     private @FXML Button btnViewPurchaseRequest;
+    private @FXML Button btnApprovePurchaseRequest;
     private @FXML ResourceBundle resources;
     private @FXML URL location;
 
@@ -90,6 +92,8 @@ public class PurchaseRequestsController {
     private void setPropertyBindings() {
         btnViewPurchaseRequest.disableProperty()
                 .bind(tablePurchaseRequests.getSelectionModel().selectedIndexProperty().isEqualTo(-1));
+        btnApprovePurchaseRequest.disableProperty()
+                .bind(CurrentUser.getCurrentUser().userRole.isEqualTo(UserRole.PURCHASER));
 
         tableItemsInPR.itemsProperty().bindBidirectional(selectedPurchaseRequestDTO.itemDTOs);
 
@@ -157,16 +161,6 @@ public class PurchaseRequestsController {
 
     @FXML
     void approvePurchaseRequest(ActionEvent event) {
-
-        // HACK
-        // if (CurrentUser.getCurrentUser().userRole.get() == UserRole.PURCHASER) {
-        // var alert = new Alert(AlertType.INFORMATION, "Purchaser is not authorized to
-        // perform this action.");
-        // alert.setHeaderText(null);
-        // alert.setTitle("Unauthorized");
-        // alert.show();
-        // return;
-        // }
 
         // get a list of unapproved PRs and show each in a dialog
         var purchaseRequestDialog = new PurchaseRequestDialog();
