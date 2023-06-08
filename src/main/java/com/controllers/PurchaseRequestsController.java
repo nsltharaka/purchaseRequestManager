@@ -5,8 +5,8 @@ import java.time.LocalDate;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import com.controllers.dialogControllers.PurchaseRequestUpdateStatusDialog;
 import com.controllers.dialogControllers.PriceQuotationDialog;
+import com.controllers.dialogControllers.PurchaseRequestUpdateStatusDialog;
 import com.model.dto.ItemDTO;
 import com.model.dto.PurchaseRequestDTO;
 import com.service.PurchaseRequestService;
@@ -152,6 +152,25 @@ public class PurchaseRequestsController {
 
         PurchaseRequestUpdateStatusDialog dialog = new PurchaseRequestUpdateStatusDialog();
         dialog.showAndWait();
+
+    }
+
+    @FXML
+    void approvePurchaseRequest(ActionEvent event) {
+
+        // HACK
+        // if (CurrentUser.getCurrentUser().userRole.get() == UserRole.PURCHASER) {
+        // var alert = new Alert(AlertType.INFORMATION, "Purchaser is not authorized to
+        // perform this action.");
+        // alert.setHeaderText(null);
+        // alert.setTitle("Unauthorized");
+        // alert.show();
+        // return;
+        // }
+
+        // get a list of unapproved PRs and show each in a dialog
+        var purchaseRequestDialog = new PurchaseRequestDialog();
+        purchaseRequestDialog.show();
 
     }
 }

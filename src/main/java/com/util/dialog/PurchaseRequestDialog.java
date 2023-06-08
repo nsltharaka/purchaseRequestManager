@@ -6,6 +6,8 @@ import java.util.Optional;
 import com.controllers.dialogControllers.PurchaseRequestDialogController;
 import com.model.dto.ItemDTO;
 import com.model.dto.PurchaseRequestDTO;
+import com.util.UserRole;
+import com.util.helpers.CurrentUser;
 import com.util.helpers.DialogPath;
 
 import javafx.event.ActionEvent;
@@ -90,6 +92,8 @@ public class PurchaseRequestDialog extends Dialog<PurchaseRequestDTO> {
         controller.cmbRequestedDepartment.valueProperty()
                 .bindBidirectional(purchaseRequestDTO.requestedDepartment);
         controller.tableItems.itemsProperty().bindBidirectional(purchaseRequestDTO.itemDTOs);
+        controller.chboxApproved.visibleProperty()
+                .bind(CurrentUser.getCurrentUser().userRole.isEqualTo(UserRole.MANAGER));
     }
 
     private PurchaseRequestDTO resultConverter(ButtonType buttonType) {

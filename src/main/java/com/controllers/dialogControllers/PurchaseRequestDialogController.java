@@ -50,9 +50,9 @@ public class PurchaseRequestDialogController {
 
         cmbRequestedDepartment.setItems(FXCollections.observableArrayList(Department.values()));
 
-        if (CurrentUser.getCurrentUser().userRole.get() == UserRole.MANAGER) {
-            chboxApproved.setVisible(true);
-        }
+        // if (CurrentUser.getCurrentUser().userRole.get() == UserRole.MANAGER) {
+        // chboxApproved.setVisible(true);
+        // }
 
     }
 

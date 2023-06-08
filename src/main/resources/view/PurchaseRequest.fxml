@@ -91,7 +91,7 @@
                                     </Separator>
                                     <VBox spacing="7.0">
                                        <children>
-                                          <Button fx:id="btnViewPurchaseRequest1" mnemonicParsing="false" onAction="#viewPurchaseRequest" styleClass="shortcut-button" text="Approve Purchase Request" />
+                                          <Button fx:id="btnViewPurchaseRequest1" mnemonicParsing="false" onAction="#approvePurchaseRequest" styleClass="shortcut-button" text="Approve Purchase Request" />
                                        </children>
                                     </VBox>
                                  </children>
