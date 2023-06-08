@@ -3,7 +3,13 @@ package com.controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.controllers.dialogControllers.PriceQuotationDialog;
+import com.model.PriceQuotation;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 
 public class RequestedItemsController {
 
@@ -22,6 +28,14 @@ public class RequestedItemsController {
          * -using-hibernate
          */
 
+    }
+
+    @FXML
+    void ShowNewQuotationReportWindow(ActionEvent event) {
+
+        Dialog<PriceQuotation> dialog = new PriceQuotationDialog();
+        dialog.getDialogPane().getButtonTypes().add(0, ButtonType.APPLY);
+        dialog.showAndWait();
     }
 
 }

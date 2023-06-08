@@ -207,7 +207,7 @@
                                  <children>
                                     <VBox spacing="7.0">
                                        <children>
-                                          <Button mnemonicParsing="false" styleClass="shortcut-button" text="New Quotation Report" />
+                                          <Button mnemonicParsing="false" onAction="#ShowNewQuotationReportWindow" styleClass="shortcut-button" text="New Quotation Report" />
                                           <Button mnemonicParsing="false" styleClass="shortcut-button" text="Update Status" />
                                        </children>
                                     </VBox>

@@ -1,0 +1,9 @@
+@import url("root.css");
+
+.container {
+    -fx-selection-bar: -teal4;
+    -fx-selection-bar-non-focused: lightgray;
+
+    -fx-focus-color: -teal4;
+    -fx-faint-focus-color: transparent;
+}

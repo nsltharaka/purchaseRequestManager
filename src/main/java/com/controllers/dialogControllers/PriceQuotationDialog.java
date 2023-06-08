@@ -9,27 +9,26 @@ import com.util.helpers.DialogPath;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
 
 public class PriceQuotationDialog extends Dialog<PriceQuotation> {
 
-    private PriceQuotationController controller;
-
     public static class PriceQuotationController {
 
         private @FXML ResourceBundle resources;
         private @FXML URL location;
-        private @FXML Button btn;
 
         @FXML
         void initialize() {
         }
     }
 
+    private PriceQuotationController controller;
+
     public PriceQuotationDialog() {
         super();
+        this.setTitle("Price Quotation Report");
         this.setDialogPane(loadFXML());
     }
 
@@ -47,6 +46,10 @@ public class PriceQuotationDialog extends Dialog<PriceQuotation> {
             e.printStackTrace();
             return null;
         }
+    }
+
+    private void setPropertyBindings() {
+
     }
 
 }

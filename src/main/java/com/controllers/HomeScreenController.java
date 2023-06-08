@@ -70,10 +70,7 @@ public class HomeScreenController {
 
     @FXML
     void getReportsWindow(ActionEvent event) throws IOException {
-        // SceneController.change(mainPanel, ScenePath.REPORTS.getPath());
-
-        new PriceQuotationDialog().showAndWait();
-
+        SceneController.change(mainPanel, ScenePath.REPORTS.getPath());
         removeActive();
         btnReports.getStyleClass().add("active");
     }
