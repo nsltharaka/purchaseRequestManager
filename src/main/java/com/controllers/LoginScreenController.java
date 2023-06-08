@@ -32,15 +32,15 @@ public class LoginScreenController implements Initializable {
     @FXML
     void handleLogin(ActionEvent event) throws IOException {
 
-        // if (!validateFields()) {
-        // lblInfo.setText("Fields cannot be empty");
-        // return;
-        // }
+        if (!validateFields()) {
+            lblInfo.setText("Fields cannot be empty");
+            return;
+        }
 
-        // if (!validateUser()) {
-        // lblInfo.setText("User not found");
-        // return;
-        // }
+        if (!validateUser()) {
+            lblInfo.setText("User not found");
+            return;
+        }
 
         // successful login, redirects to main screen
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

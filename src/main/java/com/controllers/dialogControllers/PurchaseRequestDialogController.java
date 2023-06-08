@@ -5,10 +5,13 @@ import java.util.ResourceBundle;
 
 import com.model.dto.ItemDTO;
 import com.util.Department;
+import com.util.UserRole;
+import com.util.helpers.CurrentUser;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
@@ -31,6 +34,7 @@ public class PurchaseRequestDialogController {
     public @FXML Button btnAddItem;
     public @FXML Button btnUpdateItem;
     public @FXML Button btnRemoveItem;
+    public @FXML CheckBox chboxApproved;
 
     @FXML
     void initialize() {
@@ -45,6 +49,10 @@ public class PurchaseRequestDialogController {
         });
 
         cmbRequestedDepartment.setItems(FXCollections.observableArrayList(Department.values()));
+
+        if (CurrentUser.getCurrentUser().userRole.get() == UserRole.MANAGER) {
+            chboxApproved.setVisible(true);
+        }
 
     }
 
