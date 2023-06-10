@@ -16,6 +16,7 @@ import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextArea;
 
 public class PurchaseRequestUpdateStatusDialog extends Dialog<Tuple<PurchaseRequestStatus, String>> {
+
     public static class Controller {
         private @FXML ResourceBundle resources;
         private @FXML URL location;

@@ -1,23 +1,45 @@
-package com.util.dialog;
+package com.controllers.dialogControllers;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-import com.controllers.dialogControllers.ItemDialogController;
 import com.model.dto.ItemDTO;
 import com.util.helpers.DialogPath;
 
 import javafx.beans.binding.BooleanBinding;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.util.converter.IntegerStringConverter;
 
 public class ItemDialog extends Dialog<ItemDTO> {
 
+    public static class Controller {
+        private @FXML ResourceBundle resources;
+        private @FXML URL location;
+        public @FXML TextField txtItemDescription;
+        public @FXML TextField txtItemName;
+        public @FXML TextField txtItemUnit;
+        public @FXML TextField txtRequestedQuantity;
+
+        void initialize() {
+            // making sure that quantity contains only numbers
+            txtRequestedQuantity.textProperty().addListener((observable, oldValue, newValue) -> {
+                if (!newValue.matches("\\d*")) {
+                    txtRequestedQuantity.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            });
+        }
+
+    }
+
     private ItemDTO itemDTO;
-    private ItemDialogController controller;
+    private Controller controller;
 
     public ItemDialog() {
         this(new ItemDTO());

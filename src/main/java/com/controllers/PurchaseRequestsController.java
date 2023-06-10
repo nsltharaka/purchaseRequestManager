@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.controllers.dialogControllers.PriceQuotationDialog;
+import com.controllers.dialogControllers.PurchaseRequestDialog;
 import com.controllers.dialogControllers.PurchaseRequestUpdateStatusDialog;
 import com.model.dto.ItemDTO;
 import com.model.dto.PurchaseRequestDTO;
@@ -13,7 +14,6 @@ import com.service.PurchaseRequestService;
 import com.util.Department;
 import com.util.PurchaseRequestStatus;
 import com.util.UserRole;
-import com.util.dialog.PurchaseRequestDialog;
 import com.util.helpers.CurrentUser;
 
 import javafx.beans.value.ObservableValue;

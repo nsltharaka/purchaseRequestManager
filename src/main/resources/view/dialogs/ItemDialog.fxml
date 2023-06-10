@@ -10,11 +10,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<DialogPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.dialogControllers.ItemDialogController">
+<DialogPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+   fx:controller="com.util.dialog.ItemDialog$Controller">
    <content>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="307.0" prefWidth="472.0">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+         minWidth="-Infinity" prefHeight="307.0" prefWidth="472.0">
          <children>
-            <VBox layoutX="54.0" layoutY="47.0" prefHeight="307.0" prefWidth="472.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <VBox layoutX="54.0" layoutY="47.0" prefHeight="307.0" prefWidth="472.0" spacing="10.0"
+               AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+               AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <HBox alignment="CENTER_LEFT" spacing="10.0">
                      <children>
@@ -22,10 +26,13 @@
                         <TextField fx:id="txtItemName" promptText="required" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
-                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="166.0" prefWidth="472.0" spacing="10.0">
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="166.0" prefWidth="472.0"
+                     spacing="10.0">
                      <children>
                         <Label minWidth="100.0" text="Item Description" HBox.hgrow="NEVER" />
-                        <TextField fx:id="txtItemDescription" alignment="TOP_LEFT" prefHeight="171.0" prefWidth="362.0" promptText="(Optional)" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="txtItemDescription" alignment="TOP_LEFT"
+                           prefHeight="171.0" prefWidth="362.0" promptText="(Optional)"
+                           HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" spacing="10.0">
@@ -34,8 +41,10 @@
                         <TextField fx:id="txtRequestedQuantity" />
                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                            <children>
-                              <Label minWidth="30.0" prefHeight="17.0" prefWidth="30.0" text="Unit" HBox.hgrow="NEVER" />
-                              <TextField fx:id="txtItemUnit" prefHeight="25.0" prefWidth="82.0" promptText="required" HBox.hgrow="ALWAYS" />
+                              <Label minWidth="30.0" prefHeight="17.0" prefWidth="30.0" text="Unit"
+                                 HBox.hgrow="NEVER" />
+                              <TextField fx:id="txtItemUnit" prefHeight="25.0" prefWidth="82.0"
+                                 promptText="required" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
                      </children>

@@ -22,7 +22,7 @@ public class PurchaseRequest {
 
     @Id
     @GeneratedValue(generator = "rq-generator")
-    @GenericGenerator(name = "rq-generator", strategy = "com.util.idGenerators.RequestIdGenerator")
+    @GenericGenerator(name = "rq-generator", strategy = "com.model.idGenerators.RequestIdGenerator")
     private String requestId;
 
     @OneToMany(mappedBy = "purchaseRequest", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)

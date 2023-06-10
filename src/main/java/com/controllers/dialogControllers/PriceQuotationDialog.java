@@ -47,9 +47,4 @@ public class PriceQuotationDialog extends Dialog<PriceQuotation> {
             return null;
         }
     }
-
-    private void setPropertyBindings() {
-
-    }
-
 }

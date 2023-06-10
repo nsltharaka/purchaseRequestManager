@@ -1,4 +1,4 @@
-package com.util.idGenerators;
+package com.model.idGenerators;
 
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.IdentifierGenerator;
