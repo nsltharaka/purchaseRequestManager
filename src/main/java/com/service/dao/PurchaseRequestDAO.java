@@ -1,15 +1,14 @@
 package com.service.dao;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Consumer;
-
+import com.model.PurchaseRequest;
+import com.service.db.Database;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.resource.transaction.spi.TransactionStatus;
 
-import com.model.PurchaseRequest;
-import com.service.db.Database;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Consumer;
 
 public class PurchaseRequestDAO {
 
@@ -66,4 +65,21 @@ public class PurchaseRequestDAO {
         return transaction.getStatus() == TransactionStatus.COMMITTED;
     }
 
+    public boolean remove(String id) {
+
+        try (Session session = Database.getSessionFactory().openSession()) {
+            var purchaseRequest = session.find(PurchaseRequest.class, id);
+
+            if (purchaseRequest == null) {
+                return false;
+            }
+
+            session.remove(purchaseRequest);
+            return true;
+
+        } catch (Exception e) {
+            System.out.println("error removing from the database");
+            return false;
+        }
+    }
 }

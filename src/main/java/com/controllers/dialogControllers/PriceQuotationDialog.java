@@ -1,18 +1,17 @@
 package com.controllers.dialogControllers;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import com.model.PriceQuotation;
+import com.model.PriceQuotationsReport;
 import com.util.helpers.DialogPath;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
 
-public class PriceQuotationDialog extends Dialog<PriceQuotation> {
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class PriceQuotationDialog extends Dialog<PriceQuotationsReport> {
 
     public static class PriceQuotationController {
 
