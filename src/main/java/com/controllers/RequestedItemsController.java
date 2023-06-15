@@ -4,7 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.controllers.dialogControllers.PurchaseRequestUpdateStatusDialog;
-import com.controllers.dialogControllers.PriceQuotationDialog;
+import com.controllers.dialogControllers.PriceQuotationReportDialog;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,7 +32,7 @@ public class RequestedItemsController {
     @FXML
     void ShowNewQuotationReportWindow(ActionEvent event) {
 
-        PriceQuotationDialog dialog = new PriceQuotationDialog();
+        PriceQuotationReportDialog dialog = new PriceQuotationReportDialog();
         dialog.getDialogPane().getButtonTypes().add(0, ButtonType.APPLY);
         dialog.showAndWait();
     }

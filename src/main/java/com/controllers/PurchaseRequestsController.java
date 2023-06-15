@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import com.controllers.dialogControllers.PriceQuotationDialog;
+import com.controllers.dialogControllers.PriceQuotationReportDialog;
 import com.controllers.dialogControllers.PurchaseRequestDialog;
 import com.controllers.dialogControllers.PurchaseRequestUpdateStatusDialog;
 import com.model.dto.ItemDTO;
@@ -145,7 +145,7 @@ public class PurchaseRequestsController {
     @FXML
     void viewPriceQuotations(ActionEvent event) {
 
-        PriceQuotationDialog dialog = new PriceQuotationDialog();
+        PriceQuotationReportDialog dialog = new PriceQuotationReportDialog();
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.NEXT, ButtonType.PREVIOUS);
         dialog.show();
 

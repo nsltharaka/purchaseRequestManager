@@ -9,6 +9,8 @@ import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
 
 import com.model.Item;
+import com.model.PriceQuotation;
+import com.model.PriceQuotationsReport;
 import com.model.PurchaseRequest;
 import com.model.User;
 
@@ -27,7 +29,7 @@ public class Database {
                 settings.put(Environment.URL, "jdbc:mysql://localhost/test");
                 settings.put(Environment.USER, "root");
                 settings.put(Environment.PASS, "");
-                // settings.put(Environment.HBM2DDL_AUTO, "create");
+                settings.put(Environment.HBM2DDL_AUTO, "create");
                 settings.put(Environment.SHOW_SQL, true);
 
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
@@ -38,6 +40,8 @@ public class Database {
                 config.addAnnotatedClass(User.class);
                 config.addAnnotatedClass(PurchaseRequest.class);
                 config.addAnnotatedClass(Item.class);
+                config.addAnnotatedClass(PriceQuotationsReport.class);
+                config.addAnnotatedClass(PriceQuotation.class);
 
                 sessionFactory = config.buildSessionFactory(serviceRegistry);
 

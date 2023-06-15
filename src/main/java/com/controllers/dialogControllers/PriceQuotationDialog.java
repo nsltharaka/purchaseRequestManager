@@ -1,33 +1,42 @@
 package com.controllers.dialogControllers;
 
-import com.model.PriceQuotationsReport;
+import java.io.IOException;
+
+import com.model.dto.PriceQuotationDTO;
 import com.util.helpers.DialogPath;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-public class PriceQuotationDialog extends Dialog<PriceQuotationsReport> {
+public class PriceQuotationDialog extends Dialog<PriceQuotationDTO> {
 
     public static class PriceQuotationController {
 
-        private @FXML ResourceBundle resources;
-        private @FXML URL location;
+        private @FXML CheckBox chkSelectedSupplier;
 
-        @FXML
-        void initialize() {
-        }
+        private @FXML TableView<?> tblItems;
+        private @FXML TableColumn<?, ?> columnItemDescription;
+        private @FXML TableColumn<?, ?> columnItemName;
+        private @FXML TableColumn<?, ?> columnItemQuantity;
+        private @FXML TableColumn<?, ?> columnItemUnit;
+
+        private @FXML TextField txtSupplierName;
+        private @FXML TextArea txtSupplierAddress;
+        private @FXML TextField txtQuotedPrice;
     }
 
     private PriceQuotationController controller;
 
     public PriceQuotationDialog() {
         super();
-        this.setTitle("Price Quotation Report");
+        this.setTitle("Price Quotation");
         this.setDialogPane(loadFXML());
     }
 
@@ -46,4 +55,5 @@ public class PriceQuotationDialog extends Dialog<PriceQuotationsReport> {
             return null;
         }
     }
+
 }

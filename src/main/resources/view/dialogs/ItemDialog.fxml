@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 
 <DialogPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-   fx:controller="com.util.dialog.ItemDialog$Controller">
+   fx:controller="com.controllers.dialogControllers.ItemDialog$Controller">
    <content>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
          minWidth="-Infinity" prefHeight="307.0" prefWidth="472.0">

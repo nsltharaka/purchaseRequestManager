@@ -15,7 +15,7 @@
 
 <DialogPane styleClass="container" stylesheets="@../../styles/PurchaseRequestDialog.css"
    xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-   fx:controller="com.util.dialog.PurchaseRequestDialog$Controller">
+   fx:controller="com.controllers.dialogControllers.PurchaseRequestDialog$Controller">
    <content>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
          minWidth="-Infinity" stylesheets="@../../styles/purchase-request.css">

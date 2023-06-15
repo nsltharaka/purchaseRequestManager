@@ -17,7 +17,7 @@ public class PriceQuotationsReport {
 
     @Id
     @GeneratedValue(generator = "pq-gen")
-    @GenericGenerator(name = "pq-gen", strategy = "com.model.PriceQuotation")
+    @GenericGenerator(name = "pq-gen", strategy = "com.model.idGenerators.QuotationReportIdGenerator")
     private String id;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "priceQuotationsReport", orphanRemoval = true)

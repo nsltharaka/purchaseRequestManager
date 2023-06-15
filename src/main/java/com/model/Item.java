@@ -14,8 +14,8 @@ public class Item {
     private PurchaseRequest purchaseRequest;
 
     @ManyToOne()
-    @JoinColumn(name = "quotationReport_id", nullable = false)
-    private PriceQuotationsReport priceQuotationReport;
+    @JoinColumn(name = "quotationReport_id")
+    private PriceQuotationsReport priceQuotationsReport;
 
     private String itemName;
     private String itemDescription;
