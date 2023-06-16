@@ -32,30 +32,30 @@
                            <children>
                               <AnchorPane VBox.vgrow="ALWAYS">
                                  <children>
-                                    <TableView layoutX="189.0" layoutY="117.0" styleClass="table" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <TableView fx:id="tblItems" layoutX="189.0" layoutY="117.0" styleClass="table" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <columns>
-                                          <TableColumn prefWidth="75.0" text="Request ID" />
-                                          <TableColumn prefWidth="75.0" text="Category" />
-                                          <TableColumn prefWidth="117.66667175292969" text="Item Name" />
-                                          <TableColumn prefWidth="168.0" text="Item Description" />
-                                          <TableColumn minWidth="0.0" prefWidth="103.0" text="Quantity" />
-                                          <TableColumn minWidth="0.0" prefWidth="103.0" text="Unit" />
-                                          <TableColumn minWidth="0.0" prefWidth="151.33331298828125" text="Status" />
+                                          <TableColumn fx:id="columnRequestID" prefWidth="75.0" text="Request ID" />
+                                          <TableColumn fx:id="columnCategory" prefWidth="75.0" text="Category" />
+                                          <TableColumn fx:id="columnItemName" prefWidth="117.66667175292969" text="Item Name" />
+                                          <TableColumn fx:id="columnItemDescription" prefWidth="168.0" text="Item Description" />
+                                          <TableColumn fx:id="columnItemQuantity" minWidth="0.0" prefWidth="103.0" text="Quantity" />
+                                          <TableColumn fx:id="columnItemUnit" minWidth="0.0" prefWidth="103.0" text="Unit" />
+                                          <TableColumn fx:id="columnItemStatus" minWidth="0.0" prefWidth="151.33331298828125" text="Status" />
                                        </columns>
                                     </TableView>
                                  </children>
                               </AnchorPane>
                               <GridPane prefHeight="160.0" VBox.vgrow="NEVER">
-                                <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    <ColumnConstraints hgrow="NEVER" />
+                                 <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                     <ColumnConstraints hgrow="NEVER" />
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
+                                    <ColumnConstraints hgrow="NEVER" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
                                  <children>
                                     <VBox GridPane.vgrow="NEVER">
                                        <children>
@@ -75,18 +75,18 @@
                                              </padding>
                                           </StackPane>
                                           <GridPane hgap="30.0" vgap="5.0">
-                                            <columnConstraints>
-                                              <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-                                              <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-                                            </columnConstraints>
-                                            <rowConstraints>
-                                              <RowConstraints />
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
                                                 <RowConstraints />
                                                 <RowConstraints />
                                                 <RowConstraints />
                                                 <RowConstraints />
                                                 <RowConstraints />
-                                            </rowConstraints>
+                                                <RowConstraints />
+                                             </rowConstraints>
                                              <children>
                                                 <Label text="Requested Date :" GridPane.halignment="RIGHT" GridPane.vgrow="ALWAYS" />
                                                 <Label text="05/06/2023" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" />

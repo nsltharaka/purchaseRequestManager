@@ -62,8 +62,6 @@ public class PriceQuotationReportDialog extends Dialog<PriceQuotationsReport> {
 
     private void handleAddQuotation(ActionEvent e) {
 
-        new PriceQuotationDialog().show();
-
     }
 
     private DialogPane loadFXML() {

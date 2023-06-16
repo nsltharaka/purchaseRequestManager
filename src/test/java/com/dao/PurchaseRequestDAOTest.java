@@ -49,7 +49,7 @@ public class PurchaseRequestDAOTest {
         var itemDTO = ItemMapper.toDTO(item);
 
         System.out.println(prDTO.itemDTOs.get().toString());
-        System.out.println(itemDTO.purchaseRequestDTO.requestStatus);
+        // System.out.println(itemDTO.purchaseRequestDTO.requestStatus);
 
     }
 }

@@ -1,12 +1,15 @@
 package com.controllers.dialogControllers;
 
 import java.io.IOException;
+import java.util.List;
 
+import com.model.dto.ItemDTO;
 import com.model.dto.PriceQuotationDTO;
 import com.util.helpers.DialogPath;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
@@ -21,23 +24,48 @@ public class PriceQuotationDialog extends Dialog<PriceQuotationDTO> {
 
         private @FXML CheckBox chkSelectedSupplier;
 
-        private @FXML TableView<?> tblItems;
-        private @FXML TableColumn<?, ?> columnItemDescription;
-        private @FXML TableColumn<?, ?> columnItemName;
-        private @FXML TableColumn<?, ?> columnItemQuantity;
-        private @FXML TableColumn<?, ?> columnItemUnit;
+        private @FXML TableView<ItemDTO> tblItems;
+        private @FXML TableColumn<ItemDTO, String> columnItemDescription;
+        private @FXML TableColumn<ItemDTO, String> columnItemName;
+        private @FXML TableColumn<ItemDTO, Integer> columnItemQuantity;
+        private @FXML TableColumn<ItemDTO, String> columnItemUnit;
 
         private @FXML TextField txtSupplierName;
         private @FXML TextArea txtSupplierAddress;
         private @FXML TextField txtQuotedPrice;
+
+        @FXML
+        void initialize() {
+
+            columnItemName.setCellValueFactory(param -> param.getValue().itemName);
+            columnItemDescription.setCellValueFactory(param -> param.getValue().itemDescription);
+            columnItemUnit.setCellValueFactory(param -> param.getValue().quantityUnit);
+            columnItemQuantity.setCellValueFactory(param -> param.getValue().itemQuantity.asObject());
+
+        }
+
     }
 
     private PriceQuotationController controller;
+    private List<ItemDTO> itemList;
 
-    public PriceQuotationDialog() {
+    public PriceQuotationDialog(List<ItemDTO> itemList) {
         super();
+        this.itemList = itemList;
         this.setTitle("Price Quotation");
         this.setDialogPane(loadFXML());
+
+        setPropertyBindings();
+        this.setResultConverter(this::resultConverter);
+    }
+
+    private void setPropertyBindings() {
+
+    }
+
+    private PriceQuotationDTO resultConverter(ButtonType buttonType) {
+        return null;
+
     }
 
     private DialogPane loadFXML() {

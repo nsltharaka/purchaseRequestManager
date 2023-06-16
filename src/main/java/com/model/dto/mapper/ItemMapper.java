@@ -11,7 +11,8 @@ public class ItemMapper {
                 .setItemName(item.getItemName())
                 .setItemDescription(item.getItemDescription())
                 .setItemQuantity(item.getItemQuantity())
-                .setQuantityUnit(item.getQuantityUnit());
+                .setQuantityUnit(item.getQuantityUnit())
+                .setPurchaseRequestId(item.getPurchaseRequest().getRequestId());
 
     }
 

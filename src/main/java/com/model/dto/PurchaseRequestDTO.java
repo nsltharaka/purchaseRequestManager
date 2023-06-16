@@ -8,11 +8,12 @@ import com.util.PurchaseRequestStatus;
 
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 
 public class PurchaseRequestDTO {
 
-    public SimpleObjectProperty<String> requestId;
+    public SimpleStringProperty requestId;
     public SimpleObjectProperty<Department> requestedDepartment;
     public SimpleObjectProperty<LocalDate> requestDate;
     public SimpleObjectProperty<LocalDate> dueDate;
@@ -20,7 +21,7 @@ public class PurchaseRequestDTO {
     public SimpleObjectProperty<PurchaseRequestStatus> requestStatus;
 
     public PurchaseRequestDTO() {
-        this.requestId = new SimpleObjectProperty<>();
+        this.requestId = new SimpleStringProperty();
         this.requestedDepartment = new SimpleObjectProperty<>();
         this.requestDate = new SimpleObjectProperty<>(LocalDate.now());
         this.dueDate = new SimpleObjectProperty<>();

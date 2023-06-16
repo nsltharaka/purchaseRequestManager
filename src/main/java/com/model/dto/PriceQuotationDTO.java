@@ -5,8 +5,8 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class PriceQuotationDTO {
 
-    SimpleStringProperty supplierName;
-    SimpleStringProperty supplierAddress;
-    SimpleMapProperty<Long, Double> item_quotedPrice;
+    public SimpleStringProperty supplierName;
+    public SimpleStringProperty supplierAddress;
+    public SimpleMapProperty<Long, Double> item_quotedPrice;
 
 }

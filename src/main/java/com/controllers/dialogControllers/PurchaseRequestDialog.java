@@ -108,7 +108,7 @@ public class PurchaseRequestDialog extends Dialog<PurchaseRequestDTO> {
         Optional<ItemDTO> optionalItem = dialog.showAndWait();
 
         optionalItem.ifPresent(i -> {
-            i.purchaseRequestDTO = this.purchaseRequestDTO;
+            // i.purchaseRequestId = this.purchaseRequestDTO.requestId;
             controller.tableItems.getItems().remove(index);
             controller.tableItems.getItems().add(index, i);
         });

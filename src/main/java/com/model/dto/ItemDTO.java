@@ -2,6 +2,7 @@ package com.model.dto;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 public class ItemDTO {
 
@@ -9,17 +10,18 @@ public class ItemDTO {
     public SimpleObjectProperty<String> itemDescription;
     public SimpleIntegerProperty itemQuantity;
     public SimpleObjectProperty<String> quantityUnit;
-    public PurchaseRequestDTO purchaseRequestDTO;
+    public SimpleStringProperty purchaseRequestId;
 
     public ItemDTO() {
         this.itemName = new SimpleObjectProperty<>();
         this.itemDescription = new SimpleObjectProperty<>();
         this.itemQuantity = new SimpleIntegerProperty(0);
         this.quantityUnit = new SimpleObjectProperty<>("pcs");
+        this.purchaseRequestId = new SimpleStringProperty();
     }
 
-    public ItemDTO setPurchaseRequestDTO(PurchaseRequestDTO purchaseRequest) {
-        this.purchaseRequestDTO = purchaseRequest;
+    public ItemDTO setPurchaseRequestId(String id) {
+        this.purchaseRequestId.set(id);
         return this;
     }
 

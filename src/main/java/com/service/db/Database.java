@@ -29,7 +29,8 @@ public class Database {
                 settings.put(Environment.URL, "jdbc:mysql://localhost/test");
                 settings.put(Environment.USER, "root");
                 settings.put(Environment.PASS, "");
-                settings.put(Environment.HBM2DDL_AUTO, "create");
+                settings.put(Environment.HBM2DDL_AUTO, "update");
+                // settings.put(Environment.HBM2DDL_AUTO, "create");
                 settings.put(Environment.SHOW_SQL, true);
 
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
