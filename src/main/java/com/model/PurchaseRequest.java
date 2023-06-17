@@ -1,37 +1,17 @@
 package com.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
-
-import org.hibernate.annotations.GenericGenerator;
 
 import com.util.Department;
 import com.util.PurchaseRequestStatus;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-
-@Entity
 public class PurchaseRequest {
 
-    @Id
-    @GeneratedValue(generator = "rq-generator")
-    @GenericGenerator(name = "rq-generator", strategy = "com.model.idGenerators.RequestIdGenerator")
     private String requestId;
-
-    @OneToMany(mappedBy = "purchaseRequest", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private List<Item> items;
-
-    @Enumerated(EnumType.STRING)
+    private List<Item> items = new ArrayList<>();
     private Department requestedDepartment;
-
-    @Enumerated(EnumType.STRING)
     private PurchaseRequestStatus requestStatus;
     private LocalDate requestDate;
     private LocalDate dueDate;

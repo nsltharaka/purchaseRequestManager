@@ -2,26 +2,11 @@ package com.model;
 
 import com.util.PurchaseRequestStatus;
 
-import jakarta.persistence.*;
-
-@Entity
 public class Item {
 
-    @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
-
-    @ManyToOne()
-    @JoinColumn(name = "purchase_request_id", nullable = false)
-    private PurchaseRequest purchaseRequest;
-
-    @ManyToOne()
-    @JoinColumn(name = "quotationReport_id")
-    private PriceQuotationsReport priceQuotationsReport;
-
-    @Enumerated(EnumType.STRING)
+    private String purchaseRequestId;
     private PurchaseRequestStatus itemStatus;
-
     private String itemName;
     private String itemDescription;
     private int itemQuantity;
@@ -36,12 +21,12 @@ public class Item {
         this.id = id;
     }
 
-    public PurchaseRequest getPurchaseRequest() {
-        return purchaseRequest;
+    public String getPurchaseRequestId() {
+        return purchaseRequestId;
     }
 
-    public void setPurchaseRequest(PurchaseRequest purchaseRequest) {
-        this.purchaseRequest = purchaseRequest;
+    public void setPurchaseRequestId(String purchaseRequest) {
+        this.purchaseRequestId = purchaseRequest;
     }
 
     public String getItemName() {

@@ -14,14 +14,14 @@ public class ItemMapper {
                 .setQuantityUnit(item.getQuantityUnit())
                 .setItemCategory(item.getItemCategory())
                 .setItemStatus(item.getItemStatus())
-                .setPurchaseRequestId(item.getPurchaseRequest().getRequestId());
+                .setPurchaseRequestId(item.getPurchaseRequestId());
 
     }
 
     public static Item toItem(ItemDTO dto) {
 
         var item = new Item();
-        item.setId(dto.itemId.get());
+        // item.setId(dto.itemId.get());
         item.setItemName(dto.itemName.get());
         item.setItemDescription(dto.itemDescription.get());
         item.setItemQuantity(dto.itemQuantity.get());

@@ -8,44 +8,45 @@ import com.model.dto.PurchaseRequestDTO;
 import com.model.dto.UserDTO;
 import com.model.dto.mapper.ItemMapper;
 import com.model.dto.mapper.PurchaseRequestMapper;
+import com.model.idGenerators.RequestIdGenerator;
+import com.service.dao.ItemDAO;
 import com.service.dao.PurchaseRequestDAO;
 
 public class PurchaseRequestService {
 
-    private PurchaseRequestDAO dao;
+    private PurchaseRequestDAO purchaseRequestDAO;
+    private ItemDAO itemDAO;
     private UserDTO userDTO;
 
     public PurchaseRequestService(UserDTO user) {
-        this.dao = new PurchaseRequestDAO();
+        this.purchaseRequestDAO = new PurchaseRequestDAO();
+        this.itemDAO = new ItemDAO();
         this.userDTO = user;
     }
 
     public boolean insertPurchaseRequest(PurchaseRequestDTO dto) {
 
-        // if (userDTO.userRole.get() != UserRole.PURCHASER) {
-        // throw new UnsupportedOperationException("User does not have permission to
-        // perform this action");
-        // }
+        String prId = RequestIdGenerator.generate();
 
-        return dao.insert(pr -> {
+        var itemList = dto.itemDTOs.stream()
+                .map(ItemMapper::toItem)
+                .peek(item -> item.setPurchaseRequestId(prId))
+                .collect(Collectors.toList());
+
+        return purchaseRequestDAO.insert(pr -> {
+
+            pr.setRequestId(prId);
             pr.setRequestDate(dto.requestDate.get());
             pr.setDueDate(dto.dueDate.get());
             pr.setRequestedDepartment(dto.requestedDepartment.get());
             pr.setRequestStatus(dto.requestStatus.get());
-
-            var itemList = dto.itemDTOs.stream()
-                    .map(ItemMapper::toItem)
-                    .peek(item -> item.setPurchaseRequest(pr))
-                    .collect(Collectors.toList());
-
-            pr.setItems(itemList);
 
         });
 
     }
 
     public Optional<PurchaseRequestDTO> getPurchaseRequest(String id) {
-        var result = dao.getPurchaseRequest(id);
+        var result = purchaseRequestDAO.getPurchaseRequest(id);
 
         return result.map(PurchaseRequestMapper::toDTO)
                 .or(Optional::empty);
@@ -53,7 +54,7 @@ public class PurchaseRequestService {
 
     public Optional<List<PurchaseRequestDTO>> getAllPurchaseRequests() {
 
-        var resultSet = dao.getAllPurchaseRequests();
+        var resultSet = purchaseRequestDAO.getAllPurchaseRequests();
 
         return resultSet.map(list -> list.stream()
                 .map(PurchaseRequestMapper::toDTO)

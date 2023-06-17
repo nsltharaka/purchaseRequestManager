@@ -3,7 +3,7 @@ package com;
 import java.io.IOException;
 
 import com.controllers.SceneController;
-import com.service.db.Database;
+import com.service.db.DBConnection;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -23,14 +23,12 @@ public class App extends Application {
     @Override
     public void stop() throws Exception {
         super.stop();
-        Database.shutdown();
     }
 
     @Override
     public void init() throws Exception {
         // initialize the database properties
-        var session = Database.getSessionFactory().openSession();
-        session.close();
+        DBConnection.testConnection();
     }
 
     public static void main(String[] args) {

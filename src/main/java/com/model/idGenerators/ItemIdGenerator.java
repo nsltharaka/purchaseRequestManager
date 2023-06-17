@@ -1,9 +1,11 @@
 package com.model.idGenerators;
 
-public class QuotationReportIdGenerator {
+public class ItemIdGenerator {
 
     public String generate() {
+
         return "";
+
     }
 
 }

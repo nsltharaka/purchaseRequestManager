@@ -1,15 +1,29 @@
 package com.model.idGenerators;
 
-import org.hibernate.engine.spi.SharedSessionContractImplementor;
-import org.hibernate.id.IdentifierGenerator;
+import com.service.db.DBConnection;
 
-public class RequestIdGenerator implements IdentifierGenerator {
+public class RequestIdGenerator {
 
-    @Override
-    public Object generate(SharedSessionContractImplementor session, Object object) {
+    public static String generate() {
 
-        long count = session.createQuery("select count(*) from PurchaseRequest", Long.class).getSingleResult();
+        return DBConnection.executeQueryWithResults(con -> {
 
-        return String.format("PR%03d", count + 1);
+            try {
+                var statement = con.prepareStatement("SELECT COUNT(*) FROM purchase_request");
+                var rs = statement.executeQuery();
+
+                if (!rs.next())
+                    return "";
+
+                long lastId = rs.getLong(1);
+                return String.format("PR%03d", lastId + 1);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "";
+            }
+
+        });
+
     }
 }

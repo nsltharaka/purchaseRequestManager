@@ -1,85 +1,59 @@
 package com.service.dao;
 
-import com.model.PurchaseRequest;
-import com.service.db.Database;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.resource.transaction.spi.TransactionStatus;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
+
+import com.model.PurchaseRequest;
+import com.service.db.DBConnection;
 
 public class PurchaseRequestDAO {
 
     public Optional<PurchaseRequest> getPurchaseRequest(String id) {
 
-        Optional<PurchaseRequest> result = Optional.empty();
-
-        try (Session session = Database.getSessionFactory().openSession()) {
-
-            var pr = session.find(PurchaseRequest.class, id);
-            result = Optional.of(pr);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("error finding PR");
-        }
-
-        return result;
+        return null;
 
     }
 
     public Optional<List<PurchaseRequest>> getAllPurchaseRequests() {
 
-        try (Session session = Database.getSessionFactory().openSession()) {
-
-            var result = session.createQuery("from PurchaseRequest", PurchaseRequest.class).list();
-            return Optional.of(result);
-
-        } catch (Exception e) {
-            return Optional.empty();
-        }
+        return null;
 
     }
 
     public boolean insert(Consumer<PurchaseRequest> block) {
 
         var pr = new PurchaseRequest();
+        block.accept(pr);
 
-        Transaction transaction = null;
-        try (Session session = Database.getSessionFactory().openSession()) {
+        return DBConnection.executeQueryWithResults(con -> {
 
-            transaction = session.beginTransaction();
+            try {
+                var prStatement = con.prepareStatement(
+                        "INSERT INTO purchase_request " +
+                                "(request_id, requested_date, due_date, requested_department, request_status) " +
+                                "VALUES (?,?,?,?,?)");
 
-            session.persist(pr);
-            block.accept(pr);
+                prStatement.setString(1, pr.getRequestId());
+                prStatement.setString(2, pr.getRequestDate().toString());
+                prStatement.setString(3, pr.getDueDate().toString());
+                prStatement.setString(4, pr.getRequestedDepartment().toString());
+                prStatement.setString(5, pr.getRequestStatus().toString());
 
-            transaction.commit();
+                var itemStatement = con.prepareStatement(
+                        String.join(
+                                " ",
+                                "INSERT INTO item",
+                                "(item_id, )"));
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("error inserting PR");
-        }
+                return prStatement.executeUpdate() > 0;
 
-        return transaction.getStatus() == TransactionStatus.COMMITTED;
-    }
-
-    public boolean remove(String id) {
-
-        try (Session session = Database.getSessionFactory().openSession()) {
-            var purchaseRequest = session.find(PurchaseRequest.class, id);
-
-            if (purchaseRequest == null) {
+            } catch (Exception e) {
+                e.printStackTrace();
                 return false;
             }
 
-            session.remove(purchaseRequest);
-            return true;
+        });
 
-        } catch (Exception e) {
-            System.out.println("error removing from the database");
-            return false;
-        }
     }
 }

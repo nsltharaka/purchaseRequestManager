@@ -1,34 +1,39 @@
 package com.service.dao;
 
+import java.sql.SQLException;
 import java.util.Optional;
 
-import org.hibernate.Session;
-
 import com.model.User;
-import com.service.db.Database;
-
-import jakarta.persistence.TypedQuery;
+import com.service.db.DBConnection;
+import com.util.UserRole;
 
 public class UserDAO {
 
     public Optional<User> getConnectedUser(String username, String password) {
 
-        User user = null;
+        return DBConnection.executeQueryWithResults(con -> {
+            try {
+                var statement = con.prepareStatement("SELECT * FROM users WHERE username=? AND password=?");
+                statement.setString(1, username);
+                statement.setString(2, password);
 
-        try (Session session = Database.getSessionFactory().openSession()) {
+                var rs = statement.executeQuery();
 
-            TypedQuery<User> query = session.createQuery(
-                    "SELECT u FROM User u WHERE username= :username AND password= :password",
-                    User.class);
+                if (!rs.next())
+                    return Optional.empty();
 
-            query.setParameter("username", username);
-            query.setParameter("password", password);
+                var user = new User();
+                user.setUsername(rs.getString("username"));
+                user.setUserRole(UserRole.valueOf(rs.getString("user_role")));
 
-            user = query.getSingleResult();
-            return Optional.of(user);
+                return Optional.of(user);
 
-        } catch (Exception e) {
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
             return Optional.empty();
-        }
+        });
+
     }
 }
