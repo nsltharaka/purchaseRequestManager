@@ -15,8 +15,10 @@ public class ItemDTO {
     public SimpleStringProperty itemCategory;
     public SimpleObjectProperty<PurchaseRequestStatus> itemStatus;
     public SimpleStringProperty purchaseRequestId;
+    public SimpleStringProperty itemId;
 
     public ItemDTO() {
+        this.itemId = new SimpleStringProperty();
         this.itemName = new SimpleObjectProperty<>();
         this.itemDescription = new SimpleObjectProperty<>();
         this.itemQuantity = new SimpleIntegerProperty(0);
@@ -58,6 +60,11 @@ public class ItemDTO {
 
     public ItemDTO setItemStatus(PurchaseRequestStatus itemStatus) {
         this.itemStatus.set(itemStatus);
+        return this;
+    }
+
+    public ItemDTO setItemId(String itemId) {
+        this.itemId.set(itemId);
         return this;
     }
 }

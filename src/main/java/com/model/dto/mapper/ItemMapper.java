@@ -21,6 +21,7 @@ public class ItemMapper {
     public static Item toItem(ItemDTO dto) {
 
         var item = new Item();
+        item.setId(dto.itemId.get());
         item.setItemName(dto.itemName.get());
         item.setItemDescription(dto.itemDescription.get());
         item.setItemQuantity(dto.itemQuantity.get());

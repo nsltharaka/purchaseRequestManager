@@ -8,8 +8,8 @@ import jakarta.persistence.*;
 public class Item {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id;
 
     @ManyToOne()
     @JoinColumn(name = "purchase_request_id", nullable = false)
@@ -28,11 +28,11 @@ public class Item {
     private String QuantityUnit;
     private String itemCategory;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
