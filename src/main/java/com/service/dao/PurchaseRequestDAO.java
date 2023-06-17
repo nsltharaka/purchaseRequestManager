@@ -46,7 +46,6 @@ public class PurchaseRequestDAO {
     public boolean insert(Consumer<PurchaseRequest> block) {
 
         var pr = new PurchaseRequest();
-        block.accept(pr);
 
         Transaction transaction = null;
         try (Session session = Database.getSessionFactory().openSession()) {
@@ -54,6 +53,7 @@ public class PurchaseRequestDAO {
             transaction = session.beginTransaction();
 
             session.persist(pr);
+            block.accept(pr);
 
             transaction.commit();
 
