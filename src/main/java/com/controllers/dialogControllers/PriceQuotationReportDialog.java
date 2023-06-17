@@ -5,8 +5,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.model.PriceQuotationsReport;
+import com.model.dto.ItemDTO;
 import com.util.helpers.DialogPath;
 
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -50,13 +53,20 @@ public class PriceQuotationReportDialog extends Dialog<PriceQuotationsReport> {
     }
 
     private PriceQuotationReportController controller;
+    private SimpleListProperty<ItemDTO> items = new SimpleListProperty<>();
 
     public PriceQuotationReportDialog() {
         super();
         this.setTitle("Price Quotation Report");
         this.setDialogPane(loadFXML());
 
+        setPropertyBindings();
+
         controller.btnAddQuotation.setOnAction(this::handleAddQuotation);
+
+    }
+
+    private void setPropertyBindings() {
 
     }
 
@@ -78,5 +88,10 @@ public class PriceQuotationReportDialog extends Dialog<PriceQuotationsReport> {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public void setItems(ObservableList<ItemDTO> selectedItems) {
+        items.clear();
+        selectedItems.forEach(items::add);
     }
 }
