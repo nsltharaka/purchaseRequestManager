@@ -42,7 +42,7 @@ public class RequestedItemsController {
         tblItems.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         columnRequestID.setCellValueFactory(param -> param.getValue().purchaseRequestId);
-        // columnCategory.setCellValueFactory(param -> param.getValue().itemCategory);
+        columnCategory.setCellValueFactory(param -> param.getValue().itemCategory);
         columnItemName.setCellValueFactory(param -> param.getValue().itemName);
         columnItemDescription.setCellValueFactory(param -> param.getValue().itemDescription);
         columnItemQuantity.setCellValueFactory(param -> param.getValue().itemQuantity.asObject());

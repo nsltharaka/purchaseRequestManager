@@ -11,6 +11,7 @@ import javafx.beans.binding.BooleanBinding;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextField;
@@ -26,8 +27,19 @@ public class ItemDialog extends Dialog<ItemDTO> {
         public @FXML TextField txtItemName;
         public @FXML TextField txtItemUnit;
         public @FXML TextField txtRequestedQuantity;
+        public @FXML ComboBox<String> cmbItemCategory;
 
+        @FXML
         void initialize() {
+
+            cmbItemCategory.getItems().addAll(
+                    "STATIONARY",
+                    "WELFARE",
+                    "PRODUCTION",
+                    "SAFETY",
+                    "COMPUTER_PARTS",
+                    "OTHER");
+
             // making sure that quantity contains only numbers
             txtRequestedQuantity.textProperty().addListener((observable, oldValue, newValue) -> {
                 if (!newValue.matches("\\d*")) {
@@ -70,6 +82,7 @@ public class ItemDialog extends Dialog<ItemDTO> {
         controller.txtItemName.textProperty().bindBidirectional(itemDTO.itemName);
         controller.txtItemDescription.textProperty().bindBidirectional(itemDTO.itemDescription);
         controller.txtItemUnit.textProperty().bindBidirectional(itemDTO.quantityUnit);
+        controller.cmbItemCategory.valueProperty().bindBidirectional(itemDTO.itemCategory);
 
         // using a formatter to do the validation on enter or unfocus.
         // defaults to 0 if parser failed to convert.
@@ -112,5 +125,6 @@ public class ItemDialog extends Dialog<ItemDTO> {
         itemDTO.itemDescription.set(dto.itemDescription.get());
         itemDTO.itemQuantity.set(dto.itemQuantity.get());
         itemDTO.quantityUnit.set(dto.quantityUnit.get());
+        itemDTO.itemCategory.set(dto.itemCategory.get());
     }
 }

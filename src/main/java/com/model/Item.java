@@ -21,6 +21,7 @@ public class Item {
     private String itemDescription;
     private int itemQuantity;
     private String QuantityUnit;
+    private String itemCategory;
 
     public Long getId() {
         return id;
@@ -40,6 +41,10 @@ public class Item {
 
     public String getItemName() {
         return itemName;
+    }
+
+    public String getItemCategory() {
+        return itemCategory;
     }
 
     public void setItemName(String itemName) {
@@ -68,5 +73,9 @@ public class Item {
 
     public void setQuantityUnit(String unit) {
         this.QuantityUnit = unit;
+    }
+
+    public void setItemCategory(String itemCategory) {
+        this.itemCategory = itemCategory;
     }
 }

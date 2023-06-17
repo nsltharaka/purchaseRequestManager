@@ -10,6 +10,7 @@ public class ItemDTO {
     public SimpleObjectProperty<String> itemDescription;
     public SimpleIntegerProperty itemQuantity;
     public SimpleObjectProperty<String> quantityUnit;
+    public SimpleStringProperty itemCategory;
     public SimpleStringProperty purchaseRequestId;
 
     public ItemDTO() {
@@ -17,6 +18,7 @@ public class ItemDTO {
         this.itemDescription = new SimpleObjectProperty<>();
         this.itemQuantity = new SimpleIntegerProperty(0);
         this.quantityUnit = new SimpleObjectProperty<>("pcs");
+        this.itemCategory = new SimpleStringProperty();
         this.purchaseRequestId = new SimpleStringProperty();
     }
 
@@ -42,6 +44,11 @@ public class ItemDTO {
 
     public ItemDTO setQuantityUnit(String quantityUnit) {
         this.quantityUnit.set(quantityUnit);
+        return this;
+    }
+
+    public ItemDTO setItemCategory(String itemCategory) {
+        this.itemCategory.set(itemCategory);
         return this;
     }
 }
