@@ -1,5 +1,7 @@
 package com.model.dto;
 
+import com.util.PurchaseRequestStatus;
+
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -11,6 +13,7 @@ public class ItemDTO {
     public SimpleIntegerProperty itemQuantity;
     public SimpleObjectProperty<String> quantityUnit;
     public SimpleStringProperty itemCategory;
+    public SimpleObjectProperty<PurchaseRequestStatus> itemStatus;
     public SimpleStringProperty purchaseRequestId;
 
     public ItemDTO() {
@@ -19,6 +22,7 @@ public class ItemDTO {
         this.itemQuantity = new SimpleIntegerProperty(0);
         this.quantityUnit = new SimpleObjectProperty<>("pcs");
         this.itemCategory = new SimpleStringProperty();
+        this.itemStatus = new SimpleObjectProperty<>(PurchaseRequestStatus.PENDING_APPROVAL);
         this.purchaseRequestId = new SimpleStringProperty();
     }
 
@@ -49,6 +53,11 @@ public class ItemDTO {
 
     public ItemDTO setItemCategory(String itemCategory) {
         this.itemCategory.set(itemCategory);
+        return this;
+    }
+
+    public ItemDTO setItemStatus(PurchaseRequestStatus itemStatus) {
+        this.itemStatus.set(itemStatus);
         return this;
     }
 }

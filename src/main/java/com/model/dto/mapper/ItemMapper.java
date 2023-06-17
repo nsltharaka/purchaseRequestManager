@@ -13,6 +13,7 @@ public class ItemMapper {
                 .setItemQuantity(item.getItemQuantity())
                 .setQuantityUnit(item.getQuantityUnit())
                 .setItemCategory(item.getItemCategory())
+                .setItemStatus(item.getItemStatus())
                 .setPurchaseRequestId(item.getPurchaseRequest().getRequestId());
 
     }
@@ -25,6 +26,7 @@ public class ItemMapper {
         item.setItemQuantity(dto.itemQuantity.get());
         item.setQuantityUnit(dto.quantityUnit.get());
         item.setItemCategory(dto.itemCategory.get());
+        item.setItemStatus(dto.itemStatus.get());
 
         return item;
 

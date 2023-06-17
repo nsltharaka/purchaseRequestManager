@@ -34,7 +34,7 @@ public class RequestedItemsController {
     private @FXML TableColumn<ItemDTO, String> columnItemDescription;
     private @FXML TableColumn<ItemDTO, Integer> columnItemQuantity;
     private @FXML TableColumn<ItemDTO, String> columnItemUnit;
-    private @FXML TableColumn<ItemDTO, ?> columnItemStatus;
+    private @FXML TableColumn<ItemDTO, PurchaseRequestStatus> columnItemStatus;
 
     @FXML
     void initialize() {
@@ -47,7 +47,7 @@ public class RequestedItemsController {
         columnItemDescription.setCellValueFactory(param -> param.getValue().itemDescription);
         columnItemQuantity.setCellValueFactory(param -> param.getValue().itemQuantity.asObject());
         columnItemUnit.setCellValueFactory(param -> param.getValue().quantityUnit);
-        // columnItemStatus.setCellValueFactory(param -> param.getValue().itemStatus);
+        columnItemStatus.setCellValueFactory(param -> param.getValue().itemStatus);
 
         populateTable();
     }

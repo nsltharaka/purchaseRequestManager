@@ -1,5 +1,7 @@
 package com.model;
 
+import com.util.PurchaseRequestStatus;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -16,6 +18,9 @@ public class Item {
     @ManyToOne()
     @JoinColumn(name = "quotationReport_id")
     private PriceQuotationsReport priceQuotationsReport;
+
+    @Enumerated(EnumType.STRING)
+    private PurchaseRequestStatus itemStatus;
 
     private String itemName;
     private String itemDescription;
@@ -45,6 +50,10 @@ public class Item {
 
     public String getItemCategory() {
         return itemCategory;
+    }
+
+    public PurchaseRequestStatus getItemStatus() {
+        return itemStatus;
     }
 
     public void setItemName(String itemName) {
@@ -77,5 +86,9 @@ public class Item {
 
     public void setItemCategory(String itemCategory) {
         this.itemCategory = itemCategory;
+    }
+
+    public void setItemStatus(PurchaseRequestStatus itemStatus) {
+        this.itemStatus = itemStatus;
     }
 }
