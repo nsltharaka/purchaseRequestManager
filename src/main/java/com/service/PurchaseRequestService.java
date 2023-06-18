@@ -2,14 +2,11 @@ package com.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import com.model.dto.PurchaseRequestDTO;
 import com.model.dto.UserDTO;
-import com.model.dto.mapper.ItemMapper;
 import com.model.dto.mapper.PurchaseRequestMapper;
 import com.model.idGenerators.RequestIdGenerator;
-import com.service.dao.ItemDAO;
 import com.service.dao.PurchaseRequestDAO;
 
 public class PurchaseRequestService {
@@ -48,10 +45,6 @@ public class PurchaseRequestService {
             return Optional.empty();
 
         var dto = PurchaseRequestMapper.toDTO(result);
-        dto.setLazyLoading(() -> new ItemDAO().selectAllWhere(id).stream()
-                .map(ItemMapper::toDTO)
-                .toList());
-
         return Optional.of(dto);
 
     }
@@ -60,17 +53,14 @@ public class PurchaseRequestService {
 
         var resultSet = purchaseRequestDAO.getAllPurchaseRequests();
 
-        if (resultSet == null)
+        if (resultSet.isEmpty())
             return Optional.empty();
 
-        var dtos = resultSet.stream()
+        var purchaseRequestDTOs = resultSet.stream()
                 .map(PurchaseRequestMapper::toDTO)
-                .peek(dto -> dto.setLazyLoading(() -> new ItemDAO().selectAllWhere(dto.requestId.get()).stream()
-                        .map(ItemMapper::toDTO)
-                        .toList()))
                 .toList();
 
-        return Optional.of(dtos);
+        return Optional.of(purchaseRequestDTOs);
 
     }
 

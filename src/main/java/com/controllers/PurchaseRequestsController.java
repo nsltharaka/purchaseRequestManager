@@ -82,12 +82,9 @@ public class PurchaseRequestsController {
         PurchaseRequestDTO selectedItem = tablePurchaseRequests.getSelectionModel().getSelectedItem();
 
         if (selectedItem != null) {
-            var pr = service.getPurchaseRequest(selectedItem.requestId.get());
-            var items = itemService.getItemsFor(selectedItem.requestId.get());
-
-            items.ifPresent(list -> {
-                selectedPurchaseRequestDTO.itemDTOs.setAll(list);
-            });
+            String selectedRequestId = selectedItem.requestId.get();
+            var pr = service.getPurchaseRequest(selectedRequestId);
+            var items = itemService.getItemsFor(selectedRequestId);
 
             pr.ifPresent(p -> selectedPurchaseRequestDTO
                     .setRequestId(p.requestId.get())
@@ -95,6 +92,10 @@ public class PurchaseRequestsController {
                     .setDueDate(p.dueDate.get())
                     .setRequestStatus(p.requestStatus.get())
                     .setRequestedDepartment(p.requestedDepartment.get()));
+
+            items.ifPresent(list -> {
+                selectedPurchaseRequestDTO.setItemDTOs(list);
+            });
         }
     }
 

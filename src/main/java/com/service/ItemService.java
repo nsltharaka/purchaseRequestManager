@@ -2,11 +2,11 @@ package com.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import com.model.Item;
 import com.model.dto.ItemDTO;
 import com.model.dto.mapper.ItemMapper;
+import com.model.idGenerators.ItemIdGenerator;
 import com.service.dao.ItemDAO;
 
 import javafx.beans.property.SimpleListProperty;
@@ -15,17 +15,23 @@ public class ItemService {
 
     private ItemDAO itemDAO = new ItemDAO();
 
-    public List<ItemDTO> selectAllItems() {
+    public Optional<List<ItemDTO>> selectAllItems() {
 
-        return null;
+        var results = itemDAO.selectAll();
+
+        List<ItemDTO> itemDTOs = results.stream()
+                .map(ItemMapper::toDTO)
+                .toList();
+
+        return results.isEmpty() ? Optional.empty() : Optional.of(itemDTOs);
 
     }
 
-    public boolean insertItems(SimpleListProperty<ItemDTO> dtos) {
+    public boolean insertItems(SimpleListProperty<ItemDTO> itemDTOs) {
 
-        List<Item> items = dtos.get().stream()
+        List<Item> items = itemDTOs.get().stream()
                 .map(ItemMapper::toItem)
-                .peek(i -> i.setId(UUID.randomUUID()))
+                .peek(i -> i.setId(ItemIdGenerator.generate()))
                 .toList();
 
         return itemDAO.insertAll(items);

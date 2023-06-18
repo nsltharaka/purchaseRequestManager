@@ -52,21 +52,4 @@ public class DBConnection {
 
         return null;
     }
-
-    public static void name(String query, Consumer<PreparedStatement> block) {
-
-        try (Connection connection = DriverManager.getConnection(DATABASE_URI, USERNAME, PASSWORD)) {
-
-            PreparedStatement prepareStatement = connection.prepareStatement(query);
-            block.accept(prepareStatement);
-
-            connection.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("error executing query");
-        }
-
-    }
-
 }

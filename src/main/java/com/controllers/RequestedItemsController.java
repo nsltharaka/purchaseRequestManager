@@ -1,7 +1,6 @@
 package com.controllers;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import com.controllers.dialogControllers.PriceQuotationReportDialog;
@@ -53,10 +52,12 @@ public class RequestedItemsController {
 
     private void populateTable() {
 
-        List<ItemDTO> allItems = itemService.selectAllItems();
+        var allItems = itemService.selectAllItems();
 
-        tblItems.getItems().clear();
-        tblItems.getItems().addAll(allItems);
+        allItems.ifPresent(list -> {
+            tblItems.getItems().clear();
+            tblItems.getItems().addAll(list);
+        });
 
     }
 
