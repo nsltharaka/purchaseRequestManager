@@ -8,11 +8,12 @@ public class ItemMapper {
     public static ItemDTO toDTO(Item item) {
 
         return new ItemDTO()
+                .setItemId(item.getId().toString())
+                .setItemCategory(item.getItemCategory())
                 .setItemName(item.getItemName())
                 .setItemDescription(item.getItemDescription())
                 .setItemQuantity(item.getItemQuantity())
                 .setQuantityUnit(item.getQuantityUnit())
-                .setItemCategory(item.getItemCategory())
                 .setItemStatus(item.getItemStatus())
                 .setPurchaseRequestId(item.getPurchaseRequestId());
 
@@ -20,14 +21,15 @@ public class ItemMapper {
 
     public static Item toItem(ItemDTO dto) {
 
-        var item = new Item();
-        // item.setId(dto.itemId.get());
-        item.setItemName(dto.itemName.get());
-        item.setItemDescription(dto.itemDescription.get());
-        item.setItemQuantity(dto.itemQuantity.get());
-        item.setQuantityUnit(dto.quantityUnit.get());
-        item.setItemCategory(dto.itemCategory.get());
-        item.setItemStatus(dto.itemStatus.get());
+        var item = new Item()
+                .setItemCategory(dto.itemCategory.get())
+                .setItemName(dto.itemName.get())
+                .setItemDescription(dto.itemDescription.get())
+                .setItemQuantity(dto.itemQuantity.get())
+                .setQuantityUnit(dto.quantityUnit.get())
+                .setItemCategory(dto.itemCategory.get())
+                .setItemStatus(dto.itemStatus.get())
+                .setPurchaseRequestId(dto.purchaseRequestId.get());
 
         return item;
 

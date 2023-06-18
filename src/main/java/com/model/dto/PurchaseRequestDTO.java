@@ -2,6 +2,7 @@ package com.model.dto;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.function.Supplier;
 
 import com.util.Department;
 import com.util.PurchaseRequestStatus;
@@ -19,6 +20,7 @@ public class PurchaseRequestDTO {
     public SimpleObjectProperty<LocalDate> dueDate;
     public SimpleListProperty<ItemDTO> itemDTOs;
     public SimpleObjectProperty<PurchaseRequestStatus> requestStatus;
+    public Supplier<List<ItemDTO>> lazyItems;
 
     public PurchaseRequestDTO() {
         this.requestId = new SimpleStringProperty();
@@ -57,5 +59,14 @@ public class PurchaseRequestDTO {
     public PurchaseRequestDTO setRequestStatus(PurchaseRequestStatus requestStatus) {
         this.requestStatus.set(requestStatus);
         return this;
+    }
+
+    public void setLazyLoading(Supplier<List<ItemDTO>> lazyItems) {
+        this.lazyItems = lazyItems;
+    }
+
+    @Override
+    public String toString() {
+        return requestId.get();
     }
 }

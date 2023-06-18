@@ -15,12 +15,10 @@ import com.service.dao.PurchaseRequestDAO;
 public class PurchaseRequestService {
 
     private PurchaseRequestDAO purchaseRequestDAO;
-    private ItemDAO itemDAO;
     private UserDTO userDTO;
 
     public PurchaseRequestService(UserDTO user) {
         this.purchaseRequestDAO = new PurchaseRequestDAO();
-        this.itemDAO = new ItemDAO();
         this.userDTO = user;
     }
 
@@ -28,10 +26,8 @@ public class PurchaseRequestService {
 
         String prId = RequestIdGenerator.generate();
 
-        var itemList = dto.itemDTOs.stream()
-                .map(ItemMapper::toItem)
-                .peek(item -> item.setPurchaseRequestId(prId))
-                .collect(Collectors.toList());
+        dto.itemDTOs.get()
+                .forEach(item -> item.setPurchaseRequestId(prId));
 
         return purchaseRequestDAO.insert(pr -> {
 
@@ -41,26 +37,40 @@ public class PurchaseRequestService {
             pr.setRequestedDepartment(dto.requestedDepartment.get());
             pr.setRequestStatus(dto.requestStatus.get());
 
-        });
+        }) && new ItemService().insertItems(dto.itemDTOs);
 
     }
 
     public Optional<PurchaseRequestDTO> getPurchaseRequest(String id) {
         var result = purchaseRequestDAO.getPurchaseRequest(id);
 
-        return result.map(PurchaseRequestMapper::toDTO)
-                .or(Optional::empty);
+        if (result == null)
+            return Optional.empty();
+
+        var dto = PurchaseRequestMapper.toDTO(result);
+        dto.setLazyLoading(() -> new ItemDAO().selectAllWhere(id).stream()
+                .map(ItemMapper::toDTO)
+                .toList());
+
+        return Optional.of(dto);
+
     }
 
     public Optional<List<PurchaseRequestDTO>> getAllPurchaseRequests() {
 
         var resultSet = purchaseRequestDAO.getAllPurchaseRequests();
 
-        return resultSet.map(list -> list.stream()
-                .map(PurchaseRequestMapper::toDTO)
-                .collect(Collectors.toList())
+        if (resultSet == null)
+            return Optional.empty();
 
-        ).or(Optional::empty);
+        var dtos = resultSet.stream()
+                .map(PurchaseRequestMapper::toDTO)
+                .peek(dto -> dto.setLazyLoading(() -> new ItemDAO().selectAllWhere(dto.requestId.get()).stream()
+                        .map(ItemMapper::toDTO)
+                        .toList()))
+                .toList();
+
+        return Optional.of(dtos);
 
     }
 

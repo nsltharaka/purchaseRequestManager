@@ -1,23 +1,78 @@
 package com.service.dao;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Consumer;
 
 import com.model.PurchaseRequest;
 import com.service.db.DBConnection;
+import com.util.Department;
+import com.util.PurchaseRequestStatus;
 
 public class PurchaseRequestDAO {
 
-    public Optional<PurchaseRequest> getPurchaseRequest(String id) {
+    public PurchaseRequest getPurchaseRequest(String id) {
 
-        return null;
+        return DBConnection.executeQueryWithResults(con -> {
+
+            try {
+
+                var statement = con.prepareStatement("SELECT * FROM purchase_request WHERE request_id=?");
+                statement.setString(1, id);
+
+                var rs = statement.executeQuery();
+
+                if (!rs.next())
+                    return null;
+
+                return new PurchaseRequest()
+                        .setRequestId(rs.getString("request_id"))
+                        .setRequestDate(rs.getDate("requested_date").toLocalDate())
+                        .setDueDate(rs.getDate("due_date").toLocalDate())
+                        .setRequestedDepartment(Department.valueOf(rs.getString("requested_department")))
+                        .setRequestStatus(PurchaseRequestStatus.valueOf(rs.getString("request_status")));
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("error getting purchase request");
+            }
+            return null;
+
+        });
 
     }
 
-    public Optional<List<PurchaseRequest>> getAllPurchaseRequests() {
+    public List<PurchaseRequest> getAllPurchaseRequests() {
 
-        return null;
+        return DBConnection.executeQueryWithResults(con -> {
+
+            try {
+
+                var statement = con.prepareStatement("SELECT * FROM purchase_request");
+                var rs = statement.executeQuery();
+
+                List<PurchaseRequest> prList = new ArrayList<>();
+                while (rs.next()) {
+
+                    var pr = new PurchaseRequest()
+                            .setRequestId(rs.getString("request_id"))
+                            .setRequestDate(rs.getDate("requested_date").toLocalDate())
+                            .setDueDate(rs.getDate("due_date").toLocalDate())
+                            .setRequestedDepartment(Department.valueOf(rs.getString("requested_department")))
+                            .setRequestStatus(PurchaseRequestStatus.valueOf(rs.getString("request_status")));
+
+                    prList.add(pr);
+                }
+
+                return prList;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("error getting all purchase requests");
+            }
+            return List.of();
+
+        });
 
     }
 
@@ -39,12 +94,6 @@ public class PurchaseRequestDAO {
                 prStatement.setString(3, pr.getDueDate().toString());
                 prStatement.setString(4, pr.getRequestedDepartment().toString());
                 prStatement.setString(5, pr.getRequestStatus().toString());
-
-                var itemStatement = con.prepareStatement(
-                        String.join(
-                                " ",
-                                "INSERT INTO item",
-                                "(item_id, )"));
 
                 return prStatement.executeUpdate() > 0;
 

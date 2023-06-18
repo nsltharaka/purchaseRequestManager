@@ -1,7 +1,6 @@
 package com.model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.util.Department;
@@ -10,11 +9,11 @@ import com.util.PurchaseRequestStatus;
 public class PurchaseRequest {
 
     private String requestId;
-    private List<Item> items = new ArrayList<>();
-    private Department requestedDepartment;
-    private PurchaseRequestStatus requestStatus;
     private LocalDate requestDate;
     private LocalDate dueDate;
+    private Department requestedDepartment;
+    private PurchaseRequestStatus requestStatus;
+    private List<Item> items;
 
     public String getRequestId() {
         return requestId;
@@ -40,27 +39,33 @@ public class PurchaseRequest {
         return dueDate;
     }
 
-    public void setRequestId(String requestId) {
+    public PurchaseRequest setRequestId(String requestId) {
         this.requestId = requestId;
+        return this;
     }
 
-    public void setRequestDate(LocalDate requestDate) {
+    public PurchaseRequest setRequestDate(LocalDate requestDate) {
         this.requestDate = requestDate;
+        return this;
     }
 
-    public void setDueDate(LocalDate dueDate) {
+    public PurchaseRequest setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
+        return this;
     }
 
-    public void setItems(List<Item> items) {
+    public PurchaseRequest setItems(List<Item> items) {
         this.items = items;
+        return this;
     }
 
-    public void setRequestedDepartment(Department depString) {
+    public PurchaseRequest setRequestedDepartment(Department depString) {
         this.requestedDepartment = depString;
+        return this;
     }
 
-    public void setRequestStatus(PurchaseRequestStatus status) {
+    public PurchaseRequest setRequestStatus(PurchaseRequestStatus status) {
         this.requestStatus = status;
+        return this;
     }
 }

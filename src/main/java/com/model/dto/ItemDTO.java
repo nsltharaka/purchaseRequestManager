@@ -67,4 +67,9 @@ public class ItemDTO {
         this.itemId.set(itemId);
         return this;
     }
+
+    @Override
+    public String toString() {
+        return itemName.get();
+    }
 }

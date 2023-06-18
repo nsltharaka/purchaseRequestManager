@@ -10,6 +10,7 @@ import com.controllers.dialogControllers.PurchaseRequestDialog;
 import com.controllers.dialogControllers.PurchaseRequestUpdateStatusDialog;
 import com.model.dto.ItemDTO;
 import com.model.dto.PurchaseRequestDTO;
+import com.service.ItemService;
 import com.service.PurchaseRequestService;
 import com.util.Department;
 import com.util.PurchaseRequestStatus;
@@ -30,6 +31,7 @@ import javafx.scene.control.TableView;
 public class PurchaseRequestsController {
 
     private PurchaseRequestService service;
+    private ItemService itemService;
     private PurchaseRequestDTO selectedPurchaseRequestDTO;
 
     private @FXML TableView<ItemDTO> tableItemsInPR;
@@ -52,6 +54,8 @@ public class PurchaseRequestsController {
     @FXML
     void initialize() {
         service = new PurchaseRequestService(CurrentUser.getCurrentUser());
+        itemService = new ItemService();
+
         selectedPurchaseRequestDTO = new PurchaseRequestDTO();
 
         columnRequestId.setCellValueFactory(param -> param.getValue().requestId);
@@ -79,13 +83,18 @@ public class PurchaseRequestsController {
 
         if (selectedItem != null) {
             var pr = service.getPurchaseRequest(selectedItem.requestId.get());
+            var items = itemService.getItemsFor(selectedItem.requestId.get());
+
+            items.ifPresent(list -> {
+                selectedPurchaseRequestDTO.itemDTOs.setAll(list);
+            });
+
             pr.ifPresent(p -> selectedPurchaseRequestDTO
                     .setRequestId(p.requestId.get())
                     .setRequestDate(p.requestDate.get())
                     .setDueDate(p.dueDate.get())
                     .setRequestStatus(p.requestStatus.get())
-                    .setRequestedDepartment(p.requestedDepartment.get())
-                    .setItemDTOs(p.itemDTOs.get()));
+                    .setRequestedDepartment(p.requestedDepartment.get()));
         }
     }
 
