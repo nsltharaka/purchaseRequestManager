@@ -68,8 +68,7 @@ public class RequestedItemsController {
         var allItems = itemService.selectAllItems();
 
         allItems.ifPresent(list -> {
-            tblItems.getItems().clear();
-            tblItems.getItems().addAll(list);
+            tblItems.getItems().setAll(list);
         });
 
     }

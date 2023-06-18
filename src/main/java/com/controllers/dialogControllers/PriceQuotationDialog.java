@@ -1,12 +1,18 @@
 package com.controllers.dialogControllers;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.model.dto.ItemDTO;
 import com.model.dto.PriceQuotationDTO;
+import com.util.UserRole;
+import com.util.helpers.CurrentUser;
 import com.util.helpers.DialogPath;
 
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ButtonType;
@@ -37,33 +43,82 @@ public class PriceQuotationDialog extends Dialog<PriceQuotationDTO> {
         @FXML
         void initialize() {
 
+            setTableProperties();
+        }
+
+        private void setTableProperties() {
             columnItemName.setCellValueFactory(param -> param.getValue().itemName);
             columnItemDescription.setCellValueFactory(param -> param.getValue().itemDescription);
             columnItemUnit.setCellValueFactory(param -> param.getValue().quantityUnit);
             columnItemQuantity.setCellValueFactory(param -> param.getValue().itemQuantity.asObject());
-
         }
 
     }
 
     private PriceQuotationController controller;
-    private List<ItemDTO> itemList;
+    private SimpleListProperty<ItemDTO> itemList = new SimpleListProperty<>(FXCollections.observableArrayList());
 
-    public PriceQuotationDialog(List<ItemDTO> itemList) {
+    private PriceQuotationDTO priceQuotationDTO;
+    private Map<ItemDTO, String> map;
+
+    public PriceQuotationDialog(ObservableList<ItemDTO> itemList) {
         super();
-        this.itemList = itemList;
         this.setTitle("Price Quotation");
         this.setDialogPane(loadFXML());
+        this.setResultConverter(this::resultConverter);
+
+        map = new HashMap<>();
+
+        priceQuotationDTO = new PriceQuotationDTO();
+        setItems(itemList);
 
         setPropertyBindings();
-        this.setResultConverter(this::resultConverter);
+        handleMapBindings();
+    }
+
+    private void handleMapBindings() {
+
+        itemList.forEach(i -> {
+            map.put(i, "0.0");
+        });
+
+        controller.tblItems.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            controller.txtQuotedPrice.setText(map.get(newValue));
+        });
+
+        controller.txtQuotedPrice.textProperty().addListener((observable, oldValue, newValue) -> {
+
+            if (!newValue.matches("^(?!0\\d)(\\d{0,5})(\\.\\d{0,2})?$")) {
+                controller.txtQuotedPrice.setText(oldValue);
+            }
+
+            map.put(
+                    controller.tblItems.getSelectionModel().selectedItemProperty().get(), newValue);
+
+        });
+
     }
 
     private void setPropertyBindings() {
 
+        // table items
+        controller.tblItems.itemsProperty().bind(itemList);
+        // checkbox visibility
+        controller.chkSelectedSupplier.visibleProperty()
+                .bind(CurrentUser.getCurrentUser().userRole.isEqualTo(UserRole.MANAGER));
+
+        // Price quotation property bindings
+        controller.txtSupplierName.textProperty().bindBidirectional(priceQuotationDTO.supplierName);
+        controller.txtSupplierAddress.textProperty().bindBidirectional(priceQuotationDTO.supplierAddress);
     }
 
     private PriceQuotationDTO resultConverter(ButtonType buttonType) {
+
+        map.forEach((k, v) -> {
+            priceQuotationDTO.item_quotedPrice.put(k, Double.parseDouble(v));
+        });
+
+        System.out.println(priceQuotationDTO.item_quotedPrice.toString());
         return null;
 
     }
@@ -82,6 +137,10 @@ public class PriceQuotationDialog extends Dialog<PriceQuotationDTO> {
             e.printStackTrace();
             return null;
         }
+    }
+
+    private void setItems(ObservableList<ItemDTO> list) {
+        this.itemList.setAll(list);
     }
 
 }

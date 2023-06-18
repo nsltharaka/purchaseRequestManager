@@ -79,19 +79,17 @@ public class PurchaseRequestsController {
             PurchaseRequestDTO oldValue,
             PurchaseRequestDTO newValue) {
 
-        PurchaseRequestDTO selectedItem = tablePurchaseRequests.getSelectionModel().getSelectedItem();
-
-        if (selectedItem == null)
+        if (newValue == null)
             return;
 
         selectedPurchaseRequestDTO
-                .setRequestId(selectedItem.requestId.get())
-                .setRequestDate(selectedItem.requestDate.get())
-                .setDueDate(selectedItem.dueDate.get())
-                .setRequestStatus(selectedItem.requestStatus.get())
-                .setRequestedDepartment(selectedItem.requestedDepartment.get());
+                .setRequestId(newValue.requestId.get())
+                .setRequestDate(newValue.requestDate.get())
+                .setDueDate(newValue.dueDate.get())
+                .setRequestStatus(newValue.requestStatus.get())
+                .setRequestedDepartment(newValue.requestedDepartment.get());
 
-        var items = itemService.getItemsFor(selectedItem.requestId.get());
+        var items = itemService.getItemsFor(newValue.requestId.get());
         items.ifPresent(list -> {
             selectedPurchaseRequestDTO.setItemDTOs(list);
         });
@@ -99,7 +97,7 @@ public class PurchaseRequestsController {
 
     private void setPropertyBindings() {
         btnViewPurchaseRequest.disableProperty()
-                .bind(tablePurchaseRequests.getSelectionModel().selectedIndexProperty().isEqualTo(-1));
+                .bind(tablePurchaseRequests.getSelectionModel().selectedItemProperty().isNull());
         btnApprovePurchaseRequest.disableProperty()
                 .bind(CurrentUser.getCurrentUser().userRole.isEqualTo(UserRole.PURCHASER));
 

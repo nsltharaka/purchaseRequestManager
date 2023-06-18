@@ -81,9 +81,15 @@ public class PriceQuotationReportDialog extends Dialog<PriceQuotationsReport> {
 
     private void setPropertyBindings() {
         controller.tblItems.itemsProperty().bindBidirectional(items);
+
+        controller.btnItemRemove.disableProperty().bind(
+                controller.tblItems.getSelectionModel().selectedItemProperty().isNull());
     }
 
     private void handleAddQuotation(ActionEvent e) {
+
+        PriceQuotationDialog dialog = new PriceQuotationDialog(items);
+        dialog.show();
 
     }
 

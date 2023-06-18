@@ -70,6 +70,6 @@ public class ItemDTO {
 
     @Override
     public String toString() {
-        return itemName.get();
+        return itemId.get();
     }
 }

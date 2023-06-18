@@ -15,8 +15,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
-import javafx.util.converter.IntegerStringConverter;
+import javafx.util.converter.NumberStringConverter;
 
 public class ItemDialog extends Dialog<ItemDTO> {
 
@@ -42,8 +41,8 @@ public class ItemDialog extends Dialog<ItemDTO> {
 
             // making sure that quantity contains only numbers
             txtRequestedQuantity.textProperty().addListener((observable, oldValue, newValue) -> {
-                if (!newValue.matches("\\d*")) {
-                    txtRequestedQuantity.setText(newValue.replaceAll("[^\\d]", ""));
+                if (!newValue.matches("^(?!0\\d)(\\d{0,5})(\\.\\d{0,2})?$")) {
+                    txtRequestedQuantity.setText("0");
                 }
             });
         }
@@ -83,14 +82,8 @@ public class ItemDialog extends Dialog<ItemDTO> {
         controller.txtItemDescription.textProperty().bindBidirectional(itemDTO.itemDescription);
         controller.txtItemUnit.textProperty().bindBidirectional(itemDTO.quantityUnit);
         controller.cmbItemCategory.valueProperty().bindBidirectional(itemDTO.itemCategory);
-
-        // using a formatter to do the validation on enter or unfocus.
-        // defaults to 0 if parser failed to convert.
-        TextFormatter<Integer> formatter = new TextFormatter<>(new IntegerStringConverter(), 0);
-        controller.txtRequestedQuantity.setTextFormatter(formatter);
-        formatter.valueProperty()
-                .bindBidirectional(itemDTO.itemQuantity.asObject());
-
+        controller.txtRequestedQuantity.textProperty().bindBidirectional(itemDTO.itemQuantity,
+                new NumberStringConverter());
     }
 
     private DialogPane loadFXML() {

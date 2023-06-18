@@ -2,7 +2,6 @@ package com.service.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -15,7 +14,7 @@ public class DBConnection {
     public static void testConnection() {
         try (Connection connection = DriverManager.getConnection(DATABASE_URI, USERNAME, PASSWORD)) {
 
-            System.out.println("Database connection successful");
+            System.out.println("Database connected");
             connection.close();
 
         } catch (Exception e) {
