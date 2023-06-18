@@ -6,21 +6,24 @@ public class RequestIdGenerator {
 
     public static String generate() {
 
+        String query = "SELECT COUNT(*) FROM purchase_request";
+
         return DBConnection.executeQueryWithResults(con -> {
 
-            try {
-                var statement = con.prepareStatement("SELECT COUNT(*) FROM purchase_request");
+            try (var statement = con.prepareStatement(query)) {
                 var rs = statement.executeQuery();
 
                 if (!rs.next())
-                    return "";
+                    return null;
 
                 long lastId = rs.getLong(1);
+
+                rs.close();
                 return String.format("PR%03d", lastId + 1);
 
             } catch (Exception e) {
                 e.printStackTrace();
-                return "";
+                return null;
             }
 
         });

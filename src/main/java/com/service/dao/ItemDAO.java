@@ -95,6 +95,7 @@ public class ItemDAO {
 
             } catch (Exception e) {
                 e.printStackTrace();
+                System.out.println("error selecting all items where id=" + id);
             }
 
             return List.of();
@@ -102,26 +103,17 @@ public class ItemDAO {
 
     }
 
-    private Item resultSetToItem(ResultSet rs) {
+    private Item resultSetToItem(ResultSet rs) throws SQLException {
 
-        try {
-
-            return new Item()
-                    .setId(UUID.fromString(rs.getString("item_id")))
-                    .setItemCategory(rs.getString("item_category"))
-                    .setItemName(rs.getString("item_name"))
-                    .setItemDescription(rs.getString("item_description"))
-                    .setItemQuantity(rs.getInt("item_quantity"))
-                    .setQuantityUnit(rs.getString("quantity_unit"))
-                    .setItemStatus(PurchaseRequestStatus.valueOf(rs.getString("item_status")))
-                    .setPurchaseRequestId(rs.getString("purchase_request_id"));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("error parsing resultSet to Item");
-            return null;
-        }
+        return new Item()
+                .setId(UUID.fromString(rs.getString("item_id")))
+                .setItemCategory(rs.getString("item_category"))
+                .setItemName(rs.getString("item_name"))
+                .setItemDescription(rs.getString("item_description"))
+                .setItemQuantity(rs.getInt("item_quantity"))
+                .setQuantityUnit(rs.getString("quantity_unit"))
+                .setItemStatus(PurchaseRequestStatus.valueOf(rs.getString("item_status")))
+                .setPurchaseRequestId(rs.getString("purchase_request_id"));
 
     }
-
 }

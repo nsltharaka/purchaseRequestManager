@@ -19,8 +19,8 @@ import javafx.scene.control.TableView;
 
 public class RequestedItemsController {
 
-    // ITems service object
-    private ItemService itemService = new ItemService();
+    private ItemService itemService;
+    private ItemDTO selectedItemDTO;
 
     private @FXML ResourceBundle resources;
     private @FXML URL location;
@@ -37,6 +37,21 @@ public class RequestedItemsController {
     @FXML
     void initialize() {
 
+        itemService = new ItemService();
+        selectedItemDTO = new ItemDTO();
+
+        setPropertyBindings();
+        setTableProperties();
+        populateTable();
+    }
+
+    private void setPropertyBindings() {
+        // TODO
+        // bind selected item's properties to labels
+    }
+
+    private void setTableProperties() {
+
         tblItems.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         columnRequestID.setCellValueFactory(param -> param.getValue().purchaseRequestId);
@@ -46,8 +61,6 @@ public class RequestedItemsController {
         columnItemQuantity.setCellValueFactory(param -> param.getValue().itemQuantity.asObject());
         columnItemUnit.setCellValueFactory(param -> param.getValue().quantityUnit);
         columnItemStatus.setCellValueFactory(param -> param.getValue().itemStatus);
-
-        populateTable();
     }
 
     private void populateTable() {

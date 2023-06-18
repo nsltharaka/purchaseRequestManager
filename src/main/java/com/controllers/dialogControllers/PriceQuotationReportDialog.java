@@ -9,6 +9,7 @@ import com.model.dto.ItemDTO;
 import com.util.helpers.DialogPath;
 
 import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,18 +29,20 @@ public class PriceQuotationReportDialog extends Dialog<PriceQuotationsReport> {
         private @FXML TextField reportId;
         private @FXML DatePicker createdDate;
 
-        private @FXML TableView<?> tblItems;
-        private @FXML TableColumn<?, ?> columnItemDescription;
-        private @FXML TableColumn<?, ?> columnQuantity;
-        private @FXML TableColumn<?, ?> columnQuotedPrice;
-        private @FXML TableColumn<?, ?> columnRequestId;
-        private @FXML TableColumn<?, ?> columnItemName;
+        private @FXML TableView<ItemDTO> tblItems;
+        private @FXML TableColumn<ItemDTO, String> columnRequestId;
+        private @FXML TableColumn<ItemDTO, String> columnItemName;
+        private @FXML TableColumn<ItemDTO, String> columnItemDescription;
+        private @FXML TableColumn<ItemDTO, Integer> columnQuantity;
+        private @FXML TableColumn<ItemDTO, String> columnUnit;
+
         private @FXML Button btnItemRemove;
 
         private @FXML TableView<?> tblQuotations;
-        private @FXML TableColumn<?, ?> columnSupplierAddress;
         private @FXML TableColumn<?, ?> columnSupplierName;
-        private @FXML TableColumn<?, ?> columnUnit;
+        private @FXML TableColumn<?, ?> columnSupplierAddress;
+        private @FXML TableColumn<?, ?> columnQuotedPrice;
+
         private @FXML Button btnAddQuotation;
         private @FXML Button btnRemoveQuotation;
         private @FXML Button btnViewQuotation;
@@ -49,11 +52,22 @@ public class PriceQuotationReportDialog extends Dialog<PriceQuotationsReport> {
 
         @FXML
         void initialize() {
+
+            setItemTableProperties();
+
+        }
+
+        private void setItemTableProperties() {
+            columnRequestId.setCellValueFactory(param -> param.getValue().purchaseRequestId);
+            columnItemName.setCellValueFactory(param -> param.getValue().itemName);
+            columnItemDescription.setCellValueFactory(param -> param.getValue().itemDescription);
+            columnQuantity.setCellValueFactory(param -> param.getValue().itemQuantity.asObject());
+            columnUnit.setCellValueFactory(param -> param.getValue().quantityUnit);
         }
     }
 
     private PriceQuotationReportController controller;
-    private SimpleListProperty<ItemDTO> items = new SimpleListProperty<>();
+    private SimpleListProperty<ItemDTO> items = new SimpleListProperty<>(FXCollections.observableArrayList());
 
     public PriceQuotationReportDialog() {
         super();
@@ -61,17 +75,21 @@ public class PriceQuotationReportDialog extends Dialog<PriceQuotationsReport> {
         this.setDialogPane(loadFXML());
 
         setPropertyBindings();
-
         controller.btnAddQuotation.setOnAction(this::handleAddQuotation);
-
+        controller.btnItemRemove.setOnAction(this::handleRemoveItem);
     }
 
     private void setPropertyBindings() {
-
+        controller.tblItems.itemsProperty().bindBidirectional(items);
     }
 
     private void handleAddQuotation(ActionEvent e) {
 
+    }
+
+    private void handleRemoveItem(ActionEvent e) {
+        var index = controller.tblItems.getSelectionModel().getSelectedIndex();
+        items.remove(index);
     }
 
     private DialogPane loadFXML() {
@@ -92,6 +110,7 @@ public class PriceQuotationReportDialog extends Dialog<PriceQuotationsReport> {
 
     public void setItems(ObservableList<ItemDTO> selectedItems) {
         items.clear();
-        selectedItems.forEach(items::add);
+        items.setAll(selectedItems);
     }
+
 }

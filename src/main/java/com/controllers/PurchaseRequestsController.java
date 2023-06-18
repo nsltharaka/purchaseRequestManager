@@ -81,22 +81,20 @@ public class PurchaseRequestsController {
 
         PurchaseRequestDTO selectedItem = tablePurchaseRequests.getSelectionModel().getSelectedItem();
 
-        if (selectedItem != null) {
-            String selectedRequestId = selectedItem.requestId.get();
-            var pr = service.getPurchaseRequest(selectedRequestId);
-            var items = itemService.getItemsFor(selectedRequestId);
+        if (selectedItem == null)
+            return;
 
-            pr.ifPresent(p -> selectedPurchaseRequestDTO
-                    .setRequestId(p.requestId.get())
-                    .setRequestDate(p.requestDate.get())
-                    .setDueDate(p.dueDate.get())
-                    .setRequestStatus(p.requestStatus.get())
-                    .setRequestedDepartment(p.requestedDepartment.get()));
+        selectedPurchaseRequestDTO
+                .setRequestId(selectedItem.requestId.get())
+                .setRequestDate(selectedItem.requestDate.get())
+                .setDueDate(selectedItem.dueDate.get())
+                .setRequestStatus(selectedItem.requestStatus.get())
+                .setRequestedDepartment(selectedItem.requestedDepartment.get());
 
-            items.ifPresent(list -> {
-                selectedPurchaseRequestDTO.setItemDTOs(list);
-            });
-        }
+        var items = itemService.getItemsFor(selectedItem.requestId.get());
+        items.ifPresent(list -> {
+            selectedPurchaseRequestDTO.setItemDTOs(list);
+        });
     }
 
     private void setPropertyBindings() {
@@ -141,14 +139,8 @@ public class PurchaseRequestsController {
     @FXML
     void viewPurchaseRequest(ActionEvent event) {
 
-        var selection = tablePurchaseRequests.getSelectionModel().getSelectedItem();
-
-        Optional<PurchaseRequestDTO> pr = service.getPurchaseRequest(selection.requestId.get());
-
-        pr.ifPresent(p -> {
-            PurchaseRequestDialog dialog = new PurchaseRequestDialog(p);
-            dialog.show();
-        });
+        PurchaseRequestDialog dialog = new PurchaseRequestDialog(selectedPurchaseRequestDTO);
+        dialog.show();
 
     }
 
