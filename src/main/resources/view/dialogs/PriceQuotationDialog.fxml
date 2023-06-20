@@ -31,13 +31,13 @@
                   <HBox alignment="CENTER_LEFT" spacing="10.0">
                      <children>
                         <Label text="Supplier Name" />
-                        <TextField fx:id="txtSupplierName" prefWidth="200.0" />
+                        <TextField fx:id="txtSupplierName" prefWidth="200.0" promptText="required" />
                      </children>
                   </HBox>
                   <HBox alignment="TOP_RIGHT" spacing="10.0">
                      <children>
                         <Label text="Address" />
-                        <TextArea fx:id="txtSupplierAddress" prefHeight="150.0" prefWidth="200.0" />
+                        <TextArea fx:id="txtSupplierAddress" prefHeight="150.0" prefWidth="200.0" promptText="required" />
                      </children>
                   </HBox>
                </children>
@@ -45,7 +45,7 @@
             <HBox alignment="CENTER_LEFT" layoutX="321.0" layoutY="245.0" spacing="10.0">
                <children>
                   <Label text="Price" />
-                  <TextField fx:id="txtQuotedPrice" prefWidth="150.0" />
+                  <TextField fx:id="txtQuotedPrice" prefWidth="150.0" text="0.00" />
                </children>
             </HBox>
             <CheckBox fx:id="chkSelectedSupplier" graphicTextGap="10.0" layoutX="358.0" layoutY="329.0" mnemonicParsing="false" text="Selected Supplier" />

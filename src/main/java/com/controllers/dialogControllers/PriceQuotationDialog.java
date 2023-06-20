@@ -11,10 +11,12 @@ import com.util.helpers.CurrentUser;
 import com.util.helpers.DialogPath;
 
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Dialog;
@@ -61,10 +63,11 @@ public class PriceQuotationDialog extends Dialog<PriceQuotationDTO> {
     private PriceQuotationDTO priceQuotationDTO;
     private Map<ItemDTO, String> map;
 
-    public PriceQuotationDialog(ObservableList<ItemDTO> itemList) {
+    public PriceQuotationDialog(ObservableList<ItemDTO> itemList, ButtonType... buttonTypes) {
         super();
         this.setTitle("Price Quotation");
         this.setDialogPane(loadFXML());
+        this.getDialogPane().getButtonTypes().addAll(buttonTypes);
         this.setResultConverter(this::resultConverter);
 
         map = new HashMap<>();
@@ -107,19 +110,34 @@ public class PriceQuotationDialog extends Dialog<PriceQuotationDTO> {
         controller.chkSelectedSupplier.visibleProperty()
                 .bind(CurrentUser.getCurrentUser().userRole.isEqualTo(UserRole.MANAGER));
 
+        controller.txtQuotedPrice.disableProperty()
+                .bind(controller.tblItems.getSelectionModel().selectedItemProperty().isNull());
+
         // Price quotation property bindings
         controller.txtSupplierName.textProperty().bindBidirectional(priceQuotationDTO.supplierName);
         controller.txtSupplierAddress.textProperty().bindBidirectional(priceQuotationDTO.supplierAddress);
+
+        this.getDialogPane().lookupButton(ButtonType.APPLY).disableProperty()
+                .bind(validate());
+    }
+
+    private ObservableValue<? extends Boolean> validate() {
+
+        return controller.txtSupplierName.textProperty().isEmpty()
+                .or(controller.txtSupplierAddress.textProperty().isEmpty())
+                .asObject();
     }
 
     private PriceQuotationDTO resultConverter(ButtonType buttonType) {
+
+        if (!buttonType.equals(ButtonType.APPLY))
+            return null;
 
         map.forEach((k, v) -> {
             priceQuotationDTO.item_quotedPrice.put(k, Double.parseDouble(v));
         });
 
-        System.out.println(priceQuotationDTO.item_quotedPrice.toString());
-        return null;
+        return priceQuotationDTO;
 
     }
 

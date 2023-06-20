@@ -1,11 +1,13 @@
 package com.controllers;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.controllers.dialogControllers.PriceQuotationReportDialog;
 import com.controllers.dialogControllers.PurchaseRequestUpdateStatusDialog;
 import com.model.dto.ItemDTO;
+import com.model.dto.PriceQuotationsReportDTO;
 import com.service.ItemService;
 import com.util.PurchaseRequestStatus;
 
@@ -79,11 +81,14 @@ public class RequestedItemsController {
         // get selected items of the table
         ObservableList<ItemDTO> selectedItems = tblItems.getSelectionModel().getSelectedItems();
 
-        PriceQuotationReportDialog dialog = new PriceQuotationReportDialog();
+        PriceQuotationReportDialog dialog = new PriceQuotationReportDialog(ButtonType.APPLY);
         dialog.setItems(selectedItems);
 
-        dialog.getDialogPane().getButtonTypes().add(0, ButtonType.APPLY);
-        dialog.showAndWait();
+        var result = dialog.showAndWait();
+
+        result.ifPresent(System.out::println);
+
+        // TODO save this to DB
     }
 
     @FXML

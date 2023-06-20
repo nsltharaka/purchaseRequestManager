@@ -2,7 +2,6 @@ package com.model.dto;
 
 import java.util.Map;
 
-import javafx.beans.property.MapProperty;
 import javafx.beans.property.SimpleMapProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -48,6 +47,19 @@ public class PriceQuotationDTO {
         this.item_quotedPrice.clear();
         this.item_quotedPrice.putAll(item_quotedPrice);
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("""
+                {
+                    pr_id : %s,
+                    supplierName : %s,
+                    supplierAddress : %s,
+                    map : %s,
+
+                }
+                """, priceQuotationId.get(), supplierName.get(), supplierAddress.get(), item_quotedPrice.toString());
     }
 
 }
