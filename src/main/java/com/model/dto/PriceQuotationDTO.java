@@ -11,7 +11,7 @@ public class PriceQuotationDTO {
     public SimpleStringProperty priceQuotationId;
     public SimpleStringProperty supplierName;
     public SimpleStringProperty supplierAddress;
-    public SimpleMapProperty<ItemDTO, Double> item_quotedPrice;
+    public SimpleMapProperty<String, Double> item_quotedPrice;
 
     public SimpleStringProperty priceQuotationReportId;
 
@@ -43,7 +43,7 @@ public class PriceQuotationDTO {
         return this;
     }
 
-    public PriceQuotationDTO setItem_quotedPrice(Map<ItemDTO, Double> item_quotedPrice) {
+    public PriceQuotationDTO setItem_quotedPrice(Map<String, Double> item_quotedPrice) {
         this.item_quotedPrice.clear();
         this.item_quotedPrice.putAll(item_quotedPrice);
         return this;

@@ -38,9 +38,9 @@ public class ItemService {
 
     }
 
-    public Optional<List<ItemDTO>> getItemsFor(String id) {
+    public Optional<List<ItemDTO>> getItemsOf(String of, String id) {
 
-        var results = itemDAO.selectAllWhere(id);
+        var results = itemDAO.selectAllWhere(of, id);
 
         List<ItemDTO> itemDTOs = results.stream()
                 .map(ItemMapper::toDTO)

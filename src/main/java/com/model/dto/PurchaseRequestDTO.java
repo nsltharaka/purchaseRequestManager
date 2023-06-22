@@ -23,8 +23,8 @@ public class PurchaseRequestDTO {
     public PurchaseRequestDTO() {
         this.requestId = new SimpleStringProperty();
         this.requestedDepartment = new SimpleObjectProperty<>();
-        this.requestDate = new SimpleObjectProperty<>(LocalDate.now());
-        this.dueDate = new SimpleObjectProperty<>();
+        this.requestDate = new SimpleObjectProperty<LocalDate>(LocalDate.now());
+        this.dueDate = new SimpleObjectProperty<LocalDate>();
         this.itemDTOs = new SimpleListProperty<>(FXCollections.observableArrayList());
         this.requestStatus = new SimpleObjectProperty<>(PurchaseRequestStatus.PENDING_APPROVAL);
     }

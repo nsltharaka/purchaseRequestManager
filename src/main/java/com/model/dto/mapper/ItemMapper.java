@@ -27,7 +27,6 @@ public class ItemMapper {
                 .setItemDescription(dto.itemDescription.get())
                 .setItemQuantity(dto.itemQuantity.get())
                 .setQuantityUnit(dto.quantityUnit.get())
-                .setItemCategory(dto.itemCategory.get())
                 .setItemStatus(dto.itemStatus.get())
                 .setPurchaseRequestId(dto.purchaseRequestId.get());
 

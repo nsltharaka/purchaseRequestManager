@@ -89,7 +89,7 @@ public class PurchaseRequestsController {
                 .setRequestStatus(newValue.requestStatus.get())
                 .setRequestedDepartment(newValue.requestedDepartment.get());
 
-        var items = itemService.getItemsFor(newValue.requestId.get());
+        var items = itemService.getItemsOf("purchase_request", newValue.requestId.get());
         items.ifPresent(list -> {
             selectedPurchaseRequestDTO.setItemDTOs(list);
         });

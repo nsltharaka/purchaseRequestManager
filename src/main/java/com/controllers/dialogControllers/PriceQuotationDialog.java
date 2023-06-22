@@ -16,7 +16,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Dialog;
@@ -134,7 +133,7 @@ public class PriceQuotationDialog extends Dialog<PriceQuotationDTO> {
             return null;
 
         map.forEach((k, v) -> {
-            priceQuotationDTO.item_quotedPrice.put(k, Double.parseDouble(v));
+            priceQuotationDTO.item_quotedPrice.put(k.itemId.get(), Double.parseDouble(v));
         });
 
         return priceQuotationDTO;

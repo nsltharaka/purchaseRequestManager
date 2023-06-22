@@ -1,14 +1,13 @@
 package com.controllers;
 
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.controllers.dialogControllers.PriceQuotationReportDialog;
 import com.controllers.dialogControllers.PurchaseRequestUpdateStatusDialog;
 import com.model.dto.ItemDTO;
-import com.model.dto.PriceQuotationsReportDTO;
 import com.service.ItemService;
+import com.service.PriceQuotationReportService;
 import com.util.PurchaseRequestStatus;
 
 import javafx.collections.ObservableList;
@@ -48,8 +47,8 @@ public class RequestedItemsController {
     }
 
     private void setPropertyBindings() {
-        // TODO
-        // bind selected item's properties to labels
+        // TODO bind selected item's properties to labels
+
     }
 
     private void setTableProperties() {
@@ -86,9 +85,9 @@ public class RequestedItemsController {
 
         var result = dialog.showAndWait();
 
-        result.ifPresent(System.out::println);
+        var priceQuotationReportService = new PriceQuotationReportService();
+        result.ifPresent(priceQuotationReportService::insertPriceQuotationReport);
 
-        // TODO save this to DB
     }
 
     @FXML

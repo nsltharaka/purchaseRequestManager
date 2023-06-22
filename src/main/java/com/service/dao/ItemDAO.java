@@ -3,8 +3,10 @@ package com.service.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import com.model.Item;
 import com.service.db.DBConnection;
@@ -46,6 +48,33 @@ public class ItemDAO {
         });
     }
 
+    public boolean updateColumnWhere(String key, String value, String... ids) {
+
+        final String idParams = Arrays.stream(ids)
+                .map(str -> "'" + str + "'")
+                .collect(Collectors.joining(", ", "(", ")"));
+
+        final String query = "UPDATE item "
+                + "SET `" + key + "`=? WHERE item_id IN " + idParams;
+
+        return DBConnection.executeQueryWithResults(con -> {
+
+            try (var stmt = con.prepareStatement(query)) {
+
+                // stmt.setString(1, key);
+                stmt.setString(1, value);
+
+                return stmt.executeUpdate() > 0;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+
+        });
+
+    }
+
     public List<Item> selectAll() {
 
         String query = "SELECT * FROM item";
@@ -74,9 +103,9 @@ public class ItemDAO {
 
     }
 
-    public List<Item> selectAllWhere(String id) {
+    public List<Item> selectAllWhere(String where, String id) {
 
-        String query = "SELECT * FROM item WHERE purchase_request_id=?";
+        String query = "SELECT * FROM item WHERE " + where + "_id=?";
 
         return DBConnection.executeQueryWithResults(con -> {
 
