@@ -8,6 +8,7 @@ import com.model.dto.mapper.PriceQuotationReportMapper;
 import com.model.idGenerators.QuotationReportIdGenerator;
 import com.service.dao.ItemDAO;
 import com.service.dao.PriceQuotationReportDAO;
+import com.util.PurchaseRequestStatus;
 
 public class PriceQuotationReportService {
 
@@ -34,6 +35,8 @@ public class PriceQuotationReportService {
 
     public boolean insertPriceQuotationReport(PriceQuotationsReportDTO dto) {
 
+        var itemDAO = new ItemDAO();
+
         String reportId = QuotationReportIdGenerator.generate();
 
         String[] ItemIds = dto.itemsDTOs.stream()
@@ -48,7 +51,11 @@ public class PriceQuotationReportService {
 
                 &&
 
-                new ItemDAO().updateColumnWhere("price_quotation_report_id", reportId, ItemIds);
+                itemDAO.updateColumnWhere("price_quotation_report_id", reportId, ItemIds)
+                &&
+                itemDAO.updateColumnWhere("item_status",
+                        PurchaseRequestStatus.PROCESSING.toString(),
+                        ItemIds);
 
     }
 

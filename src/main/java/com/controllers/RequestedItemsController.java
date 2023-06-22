@@ -13,6 +13,8 @@ import com.util.PurchaseRequestStatus;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
@@ -86,8 +88,22 @@ public class RequestedItemsController {
         var result = dialog.showAndWait();
 
         var priceQuotationReportService = new PriceQuotationReportService();
-        result.ifPresent(priceQuotationReportService::insertPriceQuotationReport);
 
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setHeaderText(null);
+
+        result.ifPresent(pqr -> {
+            try {
+                if (priceQuotationReportService.insertPriceQuotationReport(pqr)) {
+                    alert.setContentText("Price Quotation Report Added");
+                    alert.showAndWait();
+                    populateTable();
+                }
+            } catch (UnsupportedOperationException e) {
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
+            }
+        });
     }
 
     @FXML
