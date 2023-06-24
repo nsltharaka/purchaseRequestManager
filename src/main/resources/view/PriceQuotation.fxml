@@ -27,13 +27,12 @@
                      <children>
                         <AnchorPane prefHeight="600.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <TableView layoutX="189.0" layoutY="117.0" styleClass="table" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TableView fx:id="tblPriceQuotationReports" layoutX="189.0" layoutY="117.0" styleClass="table" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <columns>
-                                    <TableColumn prefWidth="75.0" text="Report ID" />
-                                    <TableColumn prefWidth="117.66667175292969" text="Created Date" />
-                                    <TableColumn prefWidth="168.0" text="Selected Supplier" />
-                                    <TableColumn minWidth="0.0" prefWidth="169.0" text="Purchase Order ID" />
-                                    <TableColumn minWidth="0.0" prefWidth="118.0" text="Status" />
+                                    <TableColumn fx:id="columnReportId" prefWidth="75.0" text="Report ID" />
+                                    <TableColumn fx:id="columnCreatedDate" prefWidth="117.66667175292969" text="Created Date" />
+                                    <TableColumn fx:id="columnSelectedSupplier" prefWidth="168.0" text="Selected Supplier" />
+                                    <TableColumn fx:id="columnStatus" minWidth="0.0" prefWidth="118.0" text="Status" />
                                  </columns>
                               </TableView>
                            </children>

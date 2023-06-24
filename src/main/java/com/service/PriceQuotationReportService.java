@@ -1,7 +1,6 @@
 package com.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.model.dto.PriceQuotationsReportDTO;
 import com.model.dto.mapper.PriceQuotationReportMapper;
@@ -18,18 +17,18 @@ public class PriceQuotationReportService {
         this.reportDAO = new PriceQuotationReportDAO();
     }
 
-    public Optional<List<PriceQuotationsReportDTO>> getAllPriceQuotationReports() {
+    public List<PriceQuotationsReportDTO> getAllPriceQuotationReports() {
 
         var resultSet = reportDAO.selectAll();
 
         if (resultSet.isEmpty())
-            return Optional.empty();
+            return List.of();
 
         var pqrList = resultSet.stream()
                 .map(PriceQuotationReportMapper::toDTO)
                 .toList();
 
-        return Optional.of(pqrList);
+        return pqrList;
 
     }
 
