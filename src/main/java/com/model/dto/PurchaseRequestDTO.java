@@ -6,6 +6,7 @@ import java.util.List;
 import com.util.Department;
 import com.util.PurchaseRequestStatus;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -18,6 +19,7 @@ public class PurchaseRequestDTO {
     public SimpleObjectProperty<LocalDate> requestDate;
     public SimpleObjectProperty<LocalDate> dueDate;
     public SimpleListProperty<ItemDTO> itemDTOs;
+    public SimpleBooleanProperty isApproved;
     public SimpleObjectProperty<PurchaseRequestStatus> requestStatus;
 
     public PurchaseRequestDTO() {
@@ -26,6 +28,7 @@ public class PurchaseRequestDTO {
         this.requestDate = new SimpleObjectProperty<LocalDate>(LocalDate.now());
         this.dueDate = new SimpleObjectProperty<LocalDate>();
         this.itemDTOs = new SimpleListProperty<>(FXCollections.observableArrayList());
+        this.isApproved = new SimpleBooleanProperty(false);
         this.requestStatus = new SimpleObjectProperty<>(PurchaseRequestStatus.PENDING_APPROVAL);
     }
 
@@ -56,6 +59,11 @@ public class PurchaseRequestDTO {
 
     public PurchaseRequestDTO setRequestStatus(PurchaseRequestStatus requestStatus) {
         this.requestStatus.set(requestStatus);
+        return this;
+    }
+
+    public PurchaseRequestDTO setIsApproved(boolean isApproved) {
+        this.isApproved.set(isApproved);
         return this;
     }
 

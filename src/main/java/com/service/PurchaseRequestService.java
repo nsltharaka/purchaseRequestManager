@@ -7,7 +7,9 @@ import com.model.dto.PurchaseRequestDTO;
 import com.model.dto.UserDTO;
 import com.model.dto.mapper.PurchaseRequestMapper;
 import com.model.idGenerators.RequestIdGenerator;
+import com.service.dao.ItemDAO;
 import com.service.dao.PurchaseRequestDAO;
+import com.util.PurchaseRequestStatus;
 
 public class PurchaseRequestService {
 
@@ -32,6 +34,7 @@ public class PurchaseRequestService {
             pr.setRequestDate(dto.requestDate.get());
             pr.setDueDate(dto.dueDate.get());
             pr.setRequestedDepartment(dto.requestedDepartment.get());
+            pr.setApproved(dto.isApproved.get());
             pr.setRequestStatus(dto.requestStatus.get());
 
         }) && new ItemService().insertItems(dto.itemDTOs);
@@ -61,6 +64,23 @@ public class PurchaseRequestService {
                 .toList();
 
         return Optional.of(purchaseRequestDTOs);
+
+    }
+
+    public boolean updatePurchaseRequestApproved(PurchaseRequestDTO requestDTO) {
+
+        String[] itemIds = requestDTO.itemDTOs.stream()
+                .map(dto -> dto.itemId.get())
+                .toArray(length -> new String[length]);
+
+        return purchaseRequestDAO
+                .updateApprovedStatus(pr -> pr.setRequestId(requestDTO.requestId.get())
+                        .setApproved(true)
+                        .setRequestStatus(PurchaseRequestStatus.PROCESSING))
+
+                &&
+
+                new ItemDAO().updateColumnWhere("item_status", "PROCESSING", itemIds);
 
     }
 

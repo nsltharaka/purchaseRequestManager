@@ -87,6 +87,7 @@ public class PurchaseRequestsController {
                 .setRequestDate(newValue.requestDate.get())
                 .setDueDate(newValue.dueDate.get())
                 .setRequestStatus(newValue.requestStatus.get())
+                .setIsApproved(newValue.isApproved.get())
                 .setRequestedDepartment(newValue.requestedDepartment.get());
 
         var items = itemService.getItemsOf("purchase_request", newValue.requestId.get());
@@ -136,9 +137,37 @@ public class PurchaseRequestsController {
 
     @FXML
     void viewPurchaseRequest(ActionEvent event) {
+        PurchaseRequestDialog dialog = new PurchaseRequestDialog(selectedPurchaseRequestDTO);
+        // HACK
+        dialog.getDialogPane().getButtonTypes()
+                .removeIf(btn -> btn.equals(ButtonType.APPLY) || btn.equals(ButtonType.CANCEL));
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+
+        dialog.show();
+    }
+
+    @FXML
+    void approvePurchaseRequest(ActionEvent event) {
+
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setHeaderText(null);
 
         PurchaseRequestDialog dialog = new PurchaseRequestDialog(selectedPurchaseRequestDTO);
-        dialog.show();
+        Optional<PurchaseRequestDTO> optionalRequestDTO = dialog.showAndWait();
+
+        optionalRequestDTO.ifPresent(requestDTO -> {
+            try {
+                if (service.updatePurchaseRequestApproved(requestDTO)) {
+                    alert.setContentText("Purchase Request Updated");
+                    alert.showAndWait();
+                    populateTable();
+                }
+
+            } catch (UnsupportedOperationException e) {
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
+            }
+        });
 
     }
 
@@ -146,7 +175,6 @@ public class PurchaseRequestsController {
     void viewPriceQuotations(ActionEvent event) {
 
         PriceQuotationReportDialog dialog = new PriceQuotationReportDialog();
-        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.NEXT, ButtonType.PREVIOUS);
         dialog.show();
 
     }
@@ -156,15 +184,6 @@ public class PurchaseRequestsController {
 
         PurchaseRequestUpdateStatusDialog dialog = new PurchaseRequestUpdateStatusDialog();
         dialog.showAndWait();
-
-    }
-
-    @FXML
-    void approvePurchaseRequest(ActionEvent event) {
-
-        // get a list of unapproved PRs and show each in a dialog
-        var purchaseRequestDialog = new PurchaseRequestDialog();
-        purchaseRequestDialog.show();
 
     }
 }

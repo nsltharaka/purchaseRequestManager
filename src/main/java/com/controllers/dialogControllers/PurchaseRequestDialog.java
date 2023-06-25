@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import com.model.dto.ItemDTO;
 import com.model.dto.PurchaseRequestDTO;
 import com.util.Department;
+import com.util.PurchaseRequestStatus;
 import com.util.UserRole;
 import com.util.helpers.CurrentUser;
 import com.util.helpers.DialogPath;
@@ -142,7 +143,12 @@ public class PurchaseRequestDialog extends Dialog<PurchaseRequestDTO> {
         controller.dtpDueDate.valueProperty().bindBidirectional(purchaseRequestDTO.dueDate);
         controller.cmbRequestedDepartment.valueProperty()
                 .bindBidirectional(purchaseRequestDTO.requestedDepartment);
+
+        controller.chboxApproved.selectedProperty().bindBidirectional(
+                purchaseRequestDTO.isApproved);
+
         controller.tableItems.itemsProperty().bindBidirectional(purchaseRequestDTO.itemDTOs);
+
         controller.chboxApproved.visibleProperty()
                 .bind(CurrentUser.getCurrentUser().userRole.isEqualTo(UserRole.MANAGER));
     }

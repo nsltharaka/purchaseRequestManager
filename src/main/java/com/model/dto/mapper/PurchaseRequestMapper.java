@@ -12,6 +12,7 @@ public class PurchaseRequestMapper {
                 .setRequestDate(pr.getRequestDate())
                 .setDueDate(pr.getDueDate())
                 .setRequestedDepartment(pr.getRequestedDepartment())
+                .setIsApproved(pr.isApproved())
                 .setRequestStatus(pr.getRequestStatus());
 
     }
@@ -22,6 +23,7 @@ public class PurchaseRequestMapper {
                 .setRequestDate(dto.requestDate.get())
                 .setDueDate(dto.dueDate.get())
                 .setRequestedDepartment(dto.requestedDepartment.get())
+                .setApproved(dto.isApproved.get())
                 .setRequestStatus(dto.requestStatus.get());
 
     }

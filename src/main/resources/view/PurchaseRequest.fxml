@@ -12,18 +12,11 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-   prefHeight="770.0" prefWidth="980.0" styleClass="container"
-   stylesheets="@../styles/purchase-request.css" xmlns="http://javafx.com/javafx/19"
-   xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.PurchaseRequestsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="980.0" styleClass="container" stylesheets="@../styles/purchase-request.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.PurchaseRequestsController">
    <children>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-         minWidth="-Infinity" prefHeight="770.0" prefWidth="980.0" AnchorPane.bottomAnchor="0.0"
-         AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="980.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox alignment="CENTER_LEFT" prefHeight="770.0" prefWidth="970.0" spacing="10.0"
-               AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-               AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <VBox alignment="CENTER_LEFT" prefHeight="770.0" prefWidth="970.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <StackPane alignment="CENTER_LEFT" minHeight="50.0" VBox.vgrow="NEVER">
                      <children>
@@ -36,21 +29,13 @@
                            <children>
                               <AnchorPane prefHeight="600.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <TableView fx:id="tablePurchaseRequests" layoutX="189.0"
-                                       layoutY="117.0" styleClass="table"
-                                       AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                                       AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <TableView fx:id="tablePurchaseRequests" layoutX="189.0" layoutY="117.0" styleClass="table" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <columns>
-                                          <TableColumn fx:id="columnRequestId" prefWidth="75.0"
-                                             text="Request ID" />
-                                          <TableColumn fx:id="columnRequestDate"
-                                             prefWidth="117.66667175292969" text="Request Date" />
-                                          <TableColumn fx:id="columnRequestedDepartment"
-                                             prefWidth="168.0" text="Requested Department" />
-                                          <TableColumn fx:id="columnRequestDueDate" minWidth="0.0"
-                                             prefWidth="103.0" text="Due Date" />
-                                          <TableColumn fx:id="columnRequestStatus" minWidth="0.0"
-                                             prefWidth="151.33331298828125" text="Status" />
+                                          <TableColumn fx:id="columnRequestId" prefWidth="75.0" text="Request ID" />
+                                          <TableColumn fx:id="columnRequestDate" prefWidth="117.66667175292969" text="Request Date" />
+                                          <TableColumn fx:id="columnRequestedDepartment" prefWidth="168.0" text="Requested Department" />
+                                          <TableColumn fx:id="columnRequestDueDate" minWidth="0.0" prefWidth="103.0" text="Due Date" />
+                                          <TableColumn fx:id="columnRequestStatus" minWidth="0.0" prefWidth="151.33331298828125" text="Status" />
                                        </columns>
                                     </TableView>
                                  </children>
@@ -69,22 +54,12 @@
                                     </StackPane>
                                     <AnchorPane>
                                        <children>
-                                          <TableView fx:id="tableItemsInPR"
-                                             AnchorPane.bottomAnchor="0.0"
-                                             AnchorPane.leftAnchor="0.0"
-                                             AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <TableView fx:id="tableItemsInPR" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <columns>
-                                                <TableColumn fx:id="columnItemName" editable="false"
-                                                   prefWidth="226.0" sortable="false"
-                                                   text="Item Name" />
-                                                <TableColumn fx:id="columnItemDescription"
-                                                   editable="false" prefWidth="238.0"
-                                                   sortable="false" text="Item Description" />
-                                                <TableColumn fx:id="columnQuantity" editable="false"
-                                                   prefWidth="166.0" sortable="false"
-                                                   text="Quantity" />
-                                                <TableColumn fx:id="columnUnit" editable="false"
-                                                   prefWidth="166.0" sortable="false" text="Unit" />
+                                                <TableColumn fx:id="columnItemName" editable="false" prefWidth="226.0" sortable="false" text="Item Name" />
+                                                <TableColumn fx:id="columnItemDescription" editable="false" prefWidth="238.0" sortable="false" text="Item Description" />
+                                                <TableColumn fx:id="columnQuantity" editable="false" prefWidth="166.0" sortable="false" text="Quantity" />
+                                                <TableColumn fx:id="columnUnit" editable="false" prefWidth="166.0" sortable="false" text="Unit" />
                                              </columns>
                                              <styleClass>
                                                 <String fx:value="table" />
@@ -99,26 +74,14 @@
                         </VBox>
                         <VBox alignment="TOP_CENTER" spacing="15.0" HBox.hgrow="SOMETIMES">
                            <children>
-                              <VBox alignment="CENTER" spacing="10.0"
-                                 styleClass="shortcut-button--container">
+                              <VBox alignment="CENTER" spacing="10.0" styleClass="shortcut-button--container">
                                  <children>
                                     <VBox spacing="7.0">
                                        <children>
-                                          <Button mnemonicParsing="false"
-                                             onAction="#showAddPurchaseRequestWindow"
-                                             styleClass="shortcut-button"
-                                             text="New Purchase Request" />
-                                          <Button fx:id="btnViewPurchaseRequest"
-                                             mnemonicParsing="false" onAction="#viewPurchaseRequest"
-                                             styleClass="shortcut-button"
-                                             text="Edit Purchase Request" />
-                                          <Button mnemonicParsing="false"
-                                             onAction="#viewPriceQuotations"
-                                             styleClass="shortcut-button"
-                                             text="View Price Quotations" />
-                                          <Button mnemonicParsing="false"
-                                             onAction="#PurchaseRequestUpdateStatus"
-                                             styleClass="shortcut-button" text="Update Status" />
+                                          <Button mnemonicParsing="false" onAction="#showAddPurchaseRequestWindow" styleClass="shortcut-button" text="New Purchase Request" />
+                                          <Button fx:id="btnViewPurchaseRequest" mnemonicParsing="false" onAction="#viewPurchaseRequest" styleClass="shortcut-button" text="View Purchase Request" />
+                                          <Button mnemonicParsing="false" onAction="#viewPriceQuotations" styleClass="shortcut-button" text="View Price Quotations" />
+                                          <Button mnemonicParsing="false" onAction="#PurchaseRequestUpdateStatus" styleClass="shortcut-button" text="Update Status" />
                                        </children>
                                     </VBox>
                                     <Separator>
@@ -128,11 +91,7 @@
                                     </Separator>
                                     <VBox spacing="7.0">
                                        <children>
-                                          <Button fx:id="btnApprovePurchaseRequest"
-                                             mnemonicParsing="false"
-                                             onAction="#approvePurchaseRequest"
-                                             styleClass="shortcut-button"
-                                             text="Approve Purchase Request" />
+                                          <Button fx:id="btnApprovePurchaseRequest" mnemonicParsing="false" onAction="#approvePurchaseRequest" styleClass="shortcut-button" text="Approve Purchase Request" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -150,11 +109,9 @@
                                     <Insets />
                                  </opaqueInsets>
                                  <children>
-                                    <StackPane alignment="TOP_LEFT" AnchorPane.leftAnchor="0.0"
-                                       AnchorPane.rightAnchor="0.0">
+                                    <StackPane alignment="TOP_LEFT" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                                        <children>
-                                          <Label styleClass="summary-panel--title"
-                                             text="Quick Summary" />
+                                          <Label styleClass="summary-panel--title" text="Quick Summary" />
                                        </children>
                                        <padding>
                                           <Insets left="10.0" top="5.0" />

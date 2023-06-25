@@ -73,8 +73,8 @@ public class PurchaseRequestDAO {
         block.accept(pr);
 
         String query = "INSERT INTO purchase_request " +
-                "(request_id, requested_date, due_date, requested_department, request_status) " +
-                "VALUES (?,?,?,?,?)";
+                "(request_id, requested_date, due_date, requested_department, request_status, approved) " +
+                "VALUES (?,?,?,?,?,?)";
 
         return DBConnection.executeQueryWithResults(con -> {
 
@@ -85,6 +85,35 @@ public class PurchaseRequestDAO {
                 prStatement.setString(3, pr.getDueDate().toString());
                 prStatement.setString(4, pr.getRequestedDepartment().toString());
                 prStatement.setString(5, pr.getRequestStatus().toString());
+                prStatement.setBoolean(6, pr.isApproved());
+
+                return prStatement.executeUpdate() > 0;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+
+        });
+
+    }
+
+    public boolean updateApprovedStatus(Consumer<PurchaseRequest> block) {
+
+        var pr = new PurchaseRequest();
+        block.accept(pr);
+
+        String query = "UPDATE purchase_request " +
+                "SET request_status=?, approved=? " +
+                "WHERE request_id=?";
+
+        return DBConnection.executeQueryWithResults(con -> {
+
+            try (var prStatement = con.prepareStatement(query)) {
+
+                prStatement.setString(1, pr.getRequestStatus().toString());
+                prStatement.setBoolean(2, pr.isApproved());
+                prStatement.setString(3, pr.getRequestId());
 
                 return prStatement.executeUpdate() > 0;
 
@@ -103,6 +132,7 @@ public class PurchaseRequestDAO {
                 .setRequestDate(rs.getDate("requested_date").toLocalDate())
                 .setDueDate(rs.getDate("due_date").toLocalDate())
                 .setRequestedDepartment(Department.valueOf(rs.getString("requested_department")))
+                .setApproved(rs.getBoolean("approved"))
                 .setRequestStatus(PurchaseRequestStatus.valueOf(rs.getString("request_status")));
     }
 }

@@ -12,6 +12,7 @@ public class PurchaseRequest {
     private LocalDate requestDate;
     private LocalDate dueDate;
     private Department requestedDepartment;
+    private boolean isApproved;
     private PurchaseRequestStatus requestStatus;
     private List<Item> items;
 
@@ -37,6 +38,15 @@ public class PurchaseRequest {
 
     public LocalDate getDueDate() {
         return dueDate;
+    }
+
+    public boolean isApproved() {
+        return isApproved;
+    }
+
+    public PurchaseRequest setApproved(boolean isApproved) {
+        this.isApproved = isApproved;
+        return this;
     }
 
     public PurchaseRequest setRequestId(String requestId) {

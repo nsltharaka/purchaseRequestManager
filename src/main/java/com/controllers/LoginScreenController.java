@@ -44,6 +44,7 @@ public class LoginScreenController implements Initializable {
         // }
 
         CurrentUser.setCurrentUser(new UserDTO().setUsername("").setUserRole(UserRole.PURCHASER));
+        CurrentUser.setCurrentUser(new UserDTO().setUsername("").setUserRole(UserRole.MANAGER));
 
         // successful login, redirects to main screen
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
