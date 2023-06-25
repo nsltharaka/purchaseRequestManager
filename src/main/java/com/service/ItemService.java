@@ -8,12 +8,26 @@ import com.model.dto.ItemDTO;
 import com.model.dto.mapper.ItemMapper;
 import com.model.idGenerators.ItemIdGenerator;
 import com.service.dao.ItemDAO;
+import com.util.PurchaseRequestStatus;
 
 import javafx.beans.property.SimpleListProperty;
 
 public class ItemService {
 
     private ItemDAO itemDAO = new ItemDAO();
+
+    public Optional<List<ItemDTO>> selectAllProcessingItems() {
+
+        var results = itemDAO.selectAll();
+
+        List<ItemDTO> allProcessing = results.stream()
+                .filter(item -> item.getItemStatus() != PurchaseRequestStatus.PENDING_APPROVAL)
+                .map(ItemMapper::toDTO)
+                .toList();
+
+        return allProcessing.isEmpty() ? Optional.empty() : Optional.of(allProcessing);
+
+    }
 
     public Optional<List<ItemDTO>> selectAllItems() {
 

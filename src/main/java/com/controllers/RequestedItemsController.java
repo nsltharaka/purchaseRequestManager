@@ -68,7 +68,7 @@ public class RequestedItemsController {
 
     private void populateTable() {
 
-        var allItems = itemService.selectAllItems();
+        var allItems = itemService.selectAllProcessingItems();
 
         allItems.ifPresent(list -> {
             tblItems.getItems().setAll(list);
