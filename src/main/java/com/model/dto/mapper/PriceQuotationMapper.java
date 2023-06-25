@@ -9,6 +9,7 @@ public class PriceQuotationMapper {
 
         return new PriceQuotation()
                 .setQuotationId(dto.priceQuotationId.get())
+                .setApproved(dto.isApproved.get())
                 .setSupplierName(dto.supplierName.get())
                 .setSupplierAddress(dto.supplierAddress.get())
                 .setPriceQuotationsReport(dto.priceQuotationReportId.get());

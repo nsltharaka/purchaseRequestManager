@@ -2,6 +2,7 @@ package com.model.dto;
 
 import java.util.Map;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleMapProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -11,6 +12,7 @@ public class PriceQuotationDTO {
     public SimpleStringProperty priceQuotationId;
     public SimpleStringProperty supplierName;
     public SimpleStringProperty supplierAddress;
+    public SimpleBooleanProperty isApproved;
     public SimpleMapProperty<String, Double> item_quotedPrice;
 
     public SimpleStringProperty priceQuotationReportId;
@@ -19,6 +21,7 @@ public class PriceQuotationDTO {
         this.priceQuotationId = new SimpleStringProperty();
         this.supplierName = new SimpleStringProperty();
         this.supplierAddress = new SimpleStringProperty();
+        this.isApproved = new SimpleBooleanProperty(false);
         this.item_quotedPrice = new SimpleMapProperty<>(FXCollections.observableHashMap());
     }
 
@@ -49,17 +52,24 @@ public class PriceQuotationDTO {
         return this;
     }
 
+    public PriceQuotationDTO setIsApproved(boolean isApproved) {
+        this.isApproved.set(isApproved);
+        return this;
+    }
+
     @Override
     public String toString() {
         return String.format("""
                 {
                     pr_id : %s,
+                    isApproved : %s
                     supplierName : %s,
                     supplierAddress : %s,
                     map : %s,
 
                 }
-                """, priceQuotationId.get(), supplierName.get(), supplierAddress.get(), item_quotedPrice.toString());
+                """, priceQuotationId.get(), isApproved.get(), supplierName.get(), supplierAddress.get(),
+                item_quotedPrice.toString());
     }
 
 }

@@ -51,13 +51,13 @@
                               </StackPane>
                               <AnchorPane>
                                  <children>
-                                    <TableView AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <TableView fx:id="tableItems" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <columns>
-                                          <TableColumn editable="false" prefWidth="123.0" sortable="false" text="Request ID" />
-                                          <TableColumn editable="false" prefWidth="115.0" sortable="false" text="Item Name" />
-                                          <TableColumn editable="false" prefWidth="151.0" sortable="false" text="Item Description" />
-                                          <TableColumn editable="false" prefWidth="150.0" sortable="false" text="Quantity" />
-                                          <TableColumn editable="false" prefWidth="166.0" sortable="false" text="Unit" />
+                                          <TableColumn fx:id="columnRequestId" editable="false" prefWidth="123.0" sortable="false" text="Request ID" />
+                                          <TableColumn fx:id="columnItemName" editable="false" prefWidth="115.0" sortable="false" text="Item Name" />
+                                          <TableColumn fx:id="columnItemDescription" editable="false" prefWidth="151.0" sortable="false" text="Item Description" />
+                                          <TableColumn fx:id="columnQuantity" editable="false" prefWidth="150.0" sortable="false" text="Quantity" />
+                                          <TableColumn fx:id="columnUnit" editable="false" prefWidth="166.0" sortable="false" text="Unit" />
                                        </columns>
                                        <styleClass>
                                           <String fx:value="table" />

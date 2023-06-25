@@ -7,6 +7,7 @@ public class PriceQuotation {
     private String quotationId;
     private String supplierName;
     private String supplierAddress;
+    private boolean isApproved;
     private Map<Item, Double> item_quotedPrice;
 
     private String priceQuotationsReportId;
@@ -29,6 +30,15 @@ public class PriceQuotation {
 
     public Map<Item, Double> getItem_quotedPrice() {
         return item_quotedPrice;
+    }
+
+    public boolean isApproved() {
+        return isApproved;
+    }
+
+    public PriceQuotation setApproved(boolean isApproved) {
+        this.isApproved = isApproved;
+        return this;
     }
 
     public PriceQuotation setQuotationId(String id) {
