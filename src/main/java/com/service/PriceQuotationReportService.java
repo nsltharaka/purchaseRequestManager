@@ -2,10 +2,14 @@ package com.service;
 
 import java.util.List;
 
+import com.model.PriceQuotation;
 import com.model.dto.PriceQuotationsReportDTO;
+import com.model.dto.mapper.PriceQuotationMapper;
 import com.model.dto.mapper.PriceQuotationReportMapper;
+import com.model.idGenerators.PriceQuotationIDGenerator;
 import com.model.idGenerators.QuotationReportIdGenerator;
 import com.service.dao.ItemDAO;
+import com.service.dao.PriceQuotationDAO;
 import com.service.dao.PriceQuotationReportDAO;
 import com.util.PurchaseRequestStatus;
 
@@ -42,19 +46,24 @@ public class PriceQuotationReportService {
                 .map(i -> i.itemId.get())
                 .toArray(size -> new String[size]);
 
+        List<PriceQuotation> pqList = dto.priceQuotationDTOs.stream()
+                .map(PriceQuotationMapper::toPriceQuotation)
+                .peek(pq -> pq.setQuotationId(PriceQuotationIDGenerator.generate()))
+                .peek(pq -> pq.setPriceQuotationsReport(reportId))
+                .toList();
+
         return reportDAO.insert(
                 pqr -> pqr
                         .setId(reportId)
                         .setCreatedDate(dto.createdDate.get())
                         .setStatus(dto.status.get()))
 
-                &&
-
-                itemDAO.updateColumnWhere("price_quotation_report_id", reportId, ItemIds)
-                &&
-                itemDAO.updateColumnWhere("item_status",
+                && itemDAO.updateColumnWhere("price_quotation_report_id", reportId, ItemIds)
+                && itemDAO.updateColumnWhere("item_status",
                         PurchaseRequestStatus.PROCESSING.toString(),
-                        ItemIds);
+                        ItemIds)
+
+                && new PriceQuotationDAO().insertAll(pqList);
 
     }
 

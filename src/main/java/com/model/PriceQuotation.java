@@ -1,10 +1,11 @@
 package com.model;
 
 import java.util.Map;
+import java.util.UUID;
 
 public class PriceQuotation {
 
-    private String quotationId;
+    private UUID quotationId;
     private String supplierName;
     private String supplierAddress;
     private boolean isApproved;
@@ -12,7 +13,7 @@ public class PriceQuotation {
 
     private String priceQuotationsReportId;
 
-    public String getQuotationId() {
+    public UUID getQuotationId() {
         return quotationId;
     }
 
@@ -41,7 +42,7 @@ public class PriceQuotation {
         return this;
     }
 
-    public PriceQuotation setQuotationId(String id) {
+    public PriceQuotation setQuotationId(UUID id) {
         this.quotationId = id;
         return this;
     }
