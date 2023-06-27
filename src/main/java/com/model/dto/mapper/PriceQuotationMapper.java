@@ -10,7 +10,8 @@ public class PriceQuotationMapper {
         return new PriceQuotation()
                 .setApproved(dto.isApproved.get())
                 .setSupplierName(dto.supplierName.get())
-                .setSupplierAddress(dto.supplierAddress.get());
+                .setSupplierAddress(dto.supplierAddress.get())
+                .setItem_quotedPrice(dto.item_quotedPrice);
 
     }
 

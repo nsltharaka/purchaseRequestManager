@@ -9,7 +9,7 @@ public class PriceQuotation {
     private String supplierName;
     private String supplierAddress;
     private boolean isApproved;
-    private Map<Item, Double> item_quotedPrice;
+    private Map<String, Double> item_quotedPrice;
 
     private String priceQuotationsReportId;
 
@@ -29,7 +29,7 @@ public class PriceQuotation {
         return supplierAddress;
     }
 
-    public Map<Item, Double> getItem_quotedPrice() {
+    public Map<String, Double> getItem_quotedPrice() {
         return item_quotedPrice;
     }
 
@@ -62,7 +62,7 @@ public class PriceQuotation {
         return this;
     }
 
-    public PriceQuotation setItem_quotedPrice(Map<Item, Double> item_quotedPrice) {
+    public PriceQuotation setItem_quotedPrice(Map<String, Double> item_quotedPrice) {
         this.item_quotedPrice = item_quotedPrice;
         return this;
     }

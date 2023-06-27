@@ -9,4 +9,8 @@ public class Tuple<T, R> {
         this.value_0 = t;
         this.value_1 = r;
     }
+
+    public String toString() {
+        return "(" + value_0 + ", " + value_1 + ")";
+    }
 }

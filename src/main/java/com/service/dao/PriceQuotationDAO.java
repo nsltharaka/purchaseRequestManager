@@ -2,6 +2,7 @@ package com.service.dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import com.model.PriceQuotation;
 import com.service.db.DBConnection;
@@ -62,6 +63,43 @@ public class PriceQuotationDAO {
             } catch (SQLException e) {
                 e.printStackTrace();
                 System.out.println("error inserting all priceQuotations");
+                return false;
+            }
+
+        }) && insertAllQuotedPrices(pqList);
+
+    }
+
+    private boolean insertAllQuotedPrices(List<PriceQuotation> pqList) {
+
+        final var itemMapQuery = "INSERT INTO price_quotation__quoted_price "
+                + "(quotation_id, price_quotation_report_id, item_id, quoted_price) "
+                + "VALUES (?, ?, ?, ?)";
+
+        return DBConnection.executeQueryWithResults(con -> {
+
+            try (var stmt = con.prepareStatement(itemMapQuery)) {
+
+                for (var pq : pqList) {
+
+                    stmt.setString(1, pq.getQuotationId().toString());
+                    stmt.setString(2, pq.getPriceQuotationsReportId());
+
+                    Map<String, Double> item_quotedPrice = pq.getItem_quotedPrice();
+
+                    for (var entry : item_quotedPrice.entrySet()) {
+                        stmt.setString(3, entry.getKey());
+                        stmt.setDouble(4, entry.getValue());
+                        stmt.addBatch();
+                    }
+
+                }
+
+                return stmt.executeBatch().length > 0;
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                System.out.println("error inserting all priceQuotations-quotedPrice");
                 return false;
             }
 

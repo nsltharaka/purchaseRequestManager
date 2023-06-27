@@ -69,7 +69,7 @@ public class PriceQuotationDTO {
 
                 }
                 """, priceQuotationId.get(), isApproved.get(), supplierName.get(), supplierAddress.get(),
-                item_quotedPrice.toString());
+                item_quotedPrice.get().toString());
     }
 
 }
