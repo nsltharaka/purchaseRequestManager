@@ -2,23 +2,29 @@ package com.controllers;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import com.controllers.dialogControllers.PriceQuotationReportDialog;
 import com.model.dto.ItemDTO;
+import com.model.dto.PriceQuotationDTO;
 import com.model.dto.PriceQuotationsReportDTO;
 import com.service.ItemService;
 import com.service.PriceQuotationReportService;
+import com.service.PriceQuotationService;
 import com.util.PriceQuotationReportStatus;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 public class PriceQuotationsController {
 
-    private PriceQuotationReportService PriceQuotationReportService;
+    private PriceQuotationReportService priceQuotationReportService;
+    private PriceQuotationService priceQuotationService;
     private ItemService itemService;
 
     private PriceQuotationsReportDTO selectedPQR;
@@ -41,7 +47,8 @@ public class PriceQuotationsController {
 
     @FXML
     void initialize() {
-        PriceQuotationReportService = new PriceQuotationReportService();
+        priceQuotationReportService = new PriceQuotationReportService();
+        priceQuotationService = new PriceQuotationService();
         itemService = new ItemService();
 
         selectedPQR = new PriceQuotationsReportDTO();
@@ -52,6 +59,19 @@ public class PriceQuotationsController {
 
         setPropertyBindings();
         tblPriceQuotationReports.getSelectionModel().selectedItemProperty().addListener(this::handleChange);
+
+    }
+
+    @FXML
+    void viewPriceQuotation(ActionEvent e) {
+
+        List<PriceQuotationDTO> pqDtos = priceQuotationService
+                .getPriceQuotations(selectedPQR.quotationReportId.get());
+
+        selectedPQR.setPriceQuotationDTOs(pqDtos);
+
+        var dialog = new PriceQuotationReportDialog(selectedPQR);
+        dialog.show();
 
     }
 
@@ -77,7 +97,7 @@ public class PriceQuotationsController {
     }
 
     private void populateTable() {
-        tblPriceQuotationReports.getItems().setAll(PriceQuotationReportService.getAllPriceQuotationReports());
+        tblPriceQuotationReports.getItems().setAll(priceQuotationReportService.getAllPriceQuotationReports());
     }
 
     private void setPriceQuotationReportTableProperties() {

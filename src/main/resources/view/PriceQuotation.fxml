@@ -77,7 +77,7 @@
                               <VBox spacing="7.0">
                                  <children>
                                     <Button mnemonicParsing="false" styleClass="shortcut-button" text="Create Purchase Order" />
-                                    <Button mnemonicParsing="false" styleClass="shortcut-button" text="View Price Quotation" />
+                                    <Button mnemonicParsing="false" onAction="#viewPriceQuotation" styleClass="shortcut-button" text="View Price Quotation" />
                                     <Button mnemonicParsing="false" styleClass="shortcut-button" text="Edit Price Quotation" />
                                  </children>
                               </VBox>

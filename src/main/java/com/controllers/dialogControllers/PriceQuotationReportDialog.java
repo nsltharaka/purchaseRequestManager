@@ -16,6 +16,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
@@ -62,13 +63,7 @@ public class PriceQuotationReportDialog extends Dialog<PriceQuotationsReportDTO>
         private void setQuotationTableProperties() {
             columnSupplierName.setCellValueFactory(param -> param.getValue().supplierName);
             columnSupplierAddress.setCellValueFactory(param -> param.getValue().supplierAddress);
-            columnQuotedPrice.setCellValueFactory(param -> {
-                Double sum = param.getValue().item_quotedPrice.values()
-                        .stream()
-                        .collect(Collectors.summingDouble(t -> t));
-
-                return new SimpleDoubleProperty(Double.parseDouble(String.format("%.2f", sum))).asObject();
-            });
+            columnQuotedPrice.setCellValueFactory(param -> param.getValue().quotedTotal.asObject());
         }
 
         private void setItemTableProperties() {
@@ -120,8 +115,11 @@ public class PriceQuotationReportDialog extends Dialog<PriceQuotationsReportDTO>
         controller.btnItemRemove.disableProperty()
                 .bind(controller.tblItems.getSelectionModel().selectedItemProperty().isNull());
 
-        this.getDialogPane().lookupButton(ButtonType.APPLY).disableProperty()
-                .bind(Bindings.isEmpty(controller.tblQuotations.getItems()));
+        Node applyButton;
+        if ((applyButton = this.getDialogPane().lookupButton(ButtonType.APPLY)) != null) {
+            applyButton.disableProperty()
+                    .bind(Bindings.isEmpty(controller.tblQuotations.getItems()));
+        }
     }
 
     private void handleAddQuotation(ActionEvent e) {

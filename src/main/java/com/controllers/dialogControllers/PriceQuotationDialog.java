@@ -3,12 +3,14 @@ package com.controllers.dialogControllers;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.model.dto.ItemDTO;
 import com.model.dto.PriceQuotationDTO;
 import com.util.UserRole;
 import com.util.helpers.CurrentUser;
 import com.util.helpers.DialogPath;
+import com.util.helpers.Tuple;
 
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.value.ObservableValue;
@@ -60,7 +62,7 @@ public class PriceQuotationDialog extends Dialog<PriceQuotationDTO> {
     private SimpleListProperty<ItemDTO> itemList = new SimpleListProperty<>(FXCollections.observableArrayList());
 
     private PriceQuotationDTO priceQuotationDTO;
-    private Map<ItemDTO, String> map;
+    private Map<ItemDTO, Tuple<Double, Double>> map;
 
     public PriceQuotationDialog(ObservableList<ItemDTO> itemList, ButtonType... buttonTypes) {
         super();
@@ -81,11 +83,11 @@ public class PriceQuotationDialog extends Dialog<PriceQuotationDTO> {
     private void handleMapBindings() {
 
         itemList.forEach(i -> {
-            map.put(i, "0.0");
+            map.put(i, new Tuple<Double, Double>(0.0, 0.0));
         });
 
         controller.tblItems.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            controller.txtQuotedPrice.setText(map.get(newValue));
+            controller.txtQuotedPrice.setText(map.get(newValue).value_0.toString());
         });
 
         controller.txtQuotedPrice.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -94,8 +96,15 @@ public class PriceQuotationDialog extends Dialog<PriceQuotationDTO> {
                 controller.txtQuotedPrice.setText(oldValue);
             }
 
-            map.put(
-                    controller.tblItems.getSelectionModel().selectedItemProperty().get(), newValue);
+            var i = controller.tblItems.getSelectionModel().selectedItemProperty().get();
+            map.compute(i, (item, tpl) -> {
+
+                double price = Double.parseDouble(newValue);
+                return new Tuple<Double, Double>(
+                        price,
+                        item.itemQuantity.get() * price);
+
+            });
 
         });
 
@@ -133,9 +142,14 @@ public class PriceQuotationDialog extends Dialog<PriceQuotationDTO> {
             return null;
 
         map.forEach((k, v) -> {
-            priceQuotationDTO.item_quotedPrice.put(k.itemId.get(), Double.parseDouble(v));
+            priceQuotationDTO.item_quotedPrice.put(k.itemId.get(), v.value_0);
         });
 
+        double sum = map.values().stream()
+                .map(t -> t.value_1)
+                .collect(Collectors.summarizingDouble(t -> t)).getSum();
+
+        priceQuotationDTO.setQuotedTotal(sum);
         return priceQuotationDTO;
 
     }

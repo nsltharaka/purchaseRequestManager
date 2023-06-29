@@ -10,8 +10,13 @@ public class PriceQuotation {
     private String supplierAddress;
     private boolean isApproved;
     private Map<String, Double> item_quotedPrice;
+    private double quotedTotal;
 
     private String priceQuotationsReportId;
+
+    public double getQuotedTotal() {
+        return quotedTotal;
+    }
 
     public UUID getQuotationId() {
         return quotationId;
@@ -64,6 +69,11 @@ public class PriceQuotation {
 
     public PriceQuotation setItem_quotedPrice(Map<String, Double> item_quotedPrice) {
         this.item_quotedPrice = item_quotedPrice;
+        return this;
+    }
+
+    public PriceQuotation setQuotedTotal(double quotedTotal) {
+        this.quotedTotal = quotedTotal;
         return this;
     }
 

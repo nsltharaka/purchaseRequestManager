@@ -25,4 +25,16 @@ public class PriceQuotationService {
 
     }
 
+    public List<PriceQuotationDTO> getPriceQuotations(String pqrId) {
+
+        List<PriceQuotation> pqList = dao.selectPriceQuotations(pqrId);
+
+        var list = pqList.stream()
+                .map(PriceQuotationMapper::toDTO)
+                .toList();
+
+        return list;
+
+    }
+
 }

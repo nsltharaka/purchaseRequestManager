@@ -7,7 +7,7 @@ import java.util.function.Function;
 
 public class DBConnection {
 
-    private static final String DATABASE_URI = "jdbc:mysql://localhost:3306/test";
+    private static final String DATABASE_URI = "jdbc:mysql://localhost:3306/pr_manager";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "";
 
