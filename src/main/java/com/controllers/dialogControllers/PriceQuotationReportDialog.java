@@ -3,7 +3,6 @@ package com.controllers.dialogControllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 import com.model.dto.ItemDTO;
 import com.model.dto.PriceQuotationDTO;
@@ -11,7 +10,6 @@ import com.model.dto.PriceQuotationsReportDTO;
 import com.util.helpers.DialogPath;
 
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -90,6 +88,8 @@ public class PriceQuotationReportDialog extends Dialog<PriceQuotationsReportDTO>
 
         controller.btnAddQuotation.setOnAction(this::handleAddQuotation);
         controller.btnItemRemove.setOnAction(this::handleRemoveItem);
+        controller.btnRemoveQuotation.setOnAction(this::handleRemoveQuotation);
+        controller.btnViewQuotation.setOnAction(this::handleViewQuotation);
 
     }
 
@@ -131,10 +131,23 @@ public class PriceQuotationReportDialog extends Dialog<PriceQuotationsReportDTO>
 
     }
 
-    // TODO considering a removal
+    private void handleRemoveQuotation(ActionEvent e) {
+    }
+
+    private void handleViewQuotation(ActionEvent e) {
+
+        var selectedQuotation = controller.tblQuotations.getSelectionModel().getSelectedItem();
+
+        if (selectedQuotation == null)
+            return;
+
+        PriceQuotationDialog dialog = new PriceQuotationDialog(priceQuotationsReportDTO.itemsDTOs);
+        dialog.setPriceQuotationDTO(selectedQuotation);
+        dialog.show();
+
+    }
+
     private void handleRemoveItem(ActionEvent e) {
-        var index = controller.tblItems.getSelectionModel().getSelectedIndex();
-        priceQuotationsReportDTO.itemsDTOs.remove(index);
     }
 
     private DialogPane loadFXML() {

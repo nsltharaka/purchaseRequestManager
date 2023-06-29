@@ -18,6 +18,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Dialog;
@@ -125,8 +126,11 @@ public class PriceQuotationDialog extends Dialog<PriceQuotationDTO> {
         controller.txtSupplierName.textProperty().bindBidirectional(priceQuotationDTO.supplierName);
         controller.txtSupplierAddress.textProperty().bindBidirectional(priceQuotationDTO.supplierAddress);
 
-        this.getDialogPane().lookupButton(ButtonType.APPLY).disableProperty()
-                .bind(validate());
+        Node button;
+        if ((button = this.getDialogPane().lookupButton(ButtonType.APPLY)) != null) {
+            button.disableProperty()
+                    .bind(validate());
+        }
     }
 
     private ObservableValue<? extends Boolean> validate() {
@@ -168,6 +172,25 @@ public class PriceQuotationDialog extends Dialog<PriceQuotationDTO> {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public void setPriceQuotationDTO(PriceQuotationDTO priceQuotationDTO) {
+        this.priceQuotationDTO
+                .setIsApproved(priceQuotationDTO.isApproved.get())
+                .setPriceQuotationId(priceQuotationDTO.priceQuotationId.get())
+                .setPriceQuotationReportId(priceQuotationDTO.priceQuotationReportId.get())
+                .setQuotedTotal(priceQuotationDTO.quotedTotal.get())
+                .setSupplierAddress(priceQuotationDTO.supplierAddress.get())
+                .setSupplierName(priceQuotationDTO.supplierName.get());
+
+        for (var en : map.entrySet()) {
+            for (var ent : priceQuotationDTO.item_quotedPrice.entrySet()) {
+                if (en.getKey().itemId.get().equals(ent.getKey())) {
+                    en.getValue().value_0 = ent.getValue();
+                }
+            }
+        }
+
     }
 
     private void setItems(ObservableList<ItemDTO> list) {
