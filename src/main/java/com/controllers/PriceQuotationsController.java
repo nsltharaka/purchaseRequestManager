@@ -18,6 +18,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -87,9 +89,24 @@ public class PriceQuotationsController {
         var dialog = new PriceQuotationReportDialog(selectedPQR, ButtonType.APPLY);
         var result = dialog.showAndWait();
 
-        result.ifPresent(priceQuotationReportService::setApproved);
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setHeaderText(null);
 
-        populateTable();
+        result.ifPresent(pq -> {
+
+            try {
+                priceQuotationReportService.setApproved(pq);
+                alert.setContentText("price quotation report approved");
+                alert.showAndWait();
+                populateTable();
+
+            } catch (UnsupportedOperationException e) {
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
+            }
+
+        });
+
     }
 
     private void setPropertyBindings() {
