@@ -89,7 +89,7 @@
                               <VBox spacing="7.0">
                                  <children>
                                     <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="shortcut-button" text="Add Comment" />
-                                    <Button mnemonicParsing="false" onAction="#approvePriceQuotationReport" styleClass="shortcut-button" text="Approve Price Quotation" />
+                                    <Button fx:id="btnApprovePurchaseRequest" mnemonicParsing="false" onAction="#approvePriceQuotationReport" styleClass="shortcut-button" text="Approve Price Quotation" />
                                  </children>
                               </VBox>
                            </children>

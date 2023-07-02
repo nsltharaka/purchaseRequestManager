@@ -13,6 +13,8 @@ import com.service.ItemService;
 import com.service.PriceQuotationReportService;
 import com.service.PriceQuotationService;
 import com.util.PriceQuotationReportStatus;
+import com.util.UserRole;
+import com.util.helpers.CurrentUser;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -20,6 +22,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -47,6 +50,8 @@ public class PriceQuotationsController {
     private @FXML TableColumn<ItemDTO, String> columnItemDescription;
     private @FXML TableColumn<ItemDTO, Integer> columnQuantity;
     private @FXML TableColumn<ItemDTO, String> columnUnit;
+
+    private @FXML Button btnApprovePurchaseRequest;
 
     @FXML
     void initialize() {
@@ -112,6 +117,9 @@ public class PriceQuotationsController {
     private void setPropertyBindings() {
 
         tableItems.itemsProperty().bindBidirectional(selectedPQR.itemsDTOs);
+
+        btnApprovePurchaseRequest.disableProperty()
+                .bind(CurrentUser.getCurrentUser().userRole.isEqualTo(UserRole.PURCHASER));
 
     }
 
