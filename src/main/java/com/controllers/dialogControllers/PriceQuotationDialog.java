@@ -65,8 +65,16 @@ public class PriceQuotationDialog extends Dialog<PriceQuotationDTO> {
     private PriceQuotationDTO priceQuotationDTO;
     private Map<ItemDTO, Tuple<Double, Double>> map;
 
-    public PriceQuotationDialog(ObservableList<ItemDTO> itemList, ButtonType... buttonTypes) {
+    public PriceQuotationDialog(ObservableList<ItemDTO> itemList,
+            ButtonType... buttonTypes) {
+
+        this(new PriceQuotationDTO(), itemList, buttonTypes);
+    }
+
+    public PriceQuotationDialog(PriceQuotationDTO priceQuotationDTO, ObservableList<ItemDTO> itemList,
+            ButtonType... buttonTypes) {
         super();
+        this.priceQuotationDTO = priceQuotationDTO;
         this.setTitle("Price Quotation");
         this.setDialogPane(loadFXML());
         this.getDialogPane().getButtonTypes().addAll(buttonTypes);
@@ -125,6 +133,7 @@ public class PriceQuotationDialog extends Dialog<PriceQuotationDTO> {
         // Price quotation property bindings
         controller.txtSupplierName.textProperty().bindBidirectional(priceQuotationDTO.supplierName);
         controller.txtSupplierAddress.textProperty().bindBidirectional(priceQuotationDTO.supplierAddress);
+        controller.chkSelectedSupplier.selectedProperty().bindBidirectional(priceQuotationDTO.isApproved);
 
         Node button;
         if ((button = this.getDialogPane().lookupButton(ButtonType.APPLY)) != null) {
@@ -175,13 +184,16 @@ public class PriceQuotationDialog extends Dialog<PriceQuotationDTO> {
     }
 
     public void setPriceQuotationDTO(PriceQuotationDTO priceQuotationDTO) {
-        this.priceQuotationDTO
-                .setIsApproved(priceQuotationDTO.isApproved.get())
-                .setPriceQuotationId(priceQuotationDTO.priceQuotationId.get())
-                .setPriceQuotationReportId(priceQuotationDTO.priceQuotationReportId.get())
-                .setQuotedTotal(priceQuotationDTO.quotedTotal.get())
-                .setSupplierAddress(priceQuotationDTO.supplierAddress.get())
-                .setSupplierName(priceQuotationDTO.supplierName.get());
+        // this.priceQuotationDTO
+        // .setIsApproved(priceQuotationDTO.isApproved.get())
+        // .setPriceQuotationId(priceQuotationDTO.priceQuotationId.get())
+        // .setPriceQuotationReportId(priceQuotationDTO.priceQuotationReportId.get())
+        // .setQuotedTotal(priceQuotationDTO.quotedTotal.get())
+        // .setSupplierAddress(priceQuotationDTO.supplierAddress.get())
+        // .setSupplierName(priceQuotationDTO.supplierName.get())
+        // .setIsApproved(priceQuotationDTO.isApproved.get());
+
+        this.priceQuotationDTO = priceQuotationDTO;
 
         for (var en : map.entrySet()) {
             for (var ent : priceQuotationDTO.item_quotedPrice.entrySet()) {
@@ -190,6 +202,8 @@ public class PriceQuotationDialog extends Dialog<PriceQuotationDTO> {
                 }
             }
         }
+
+        setPropertyBindings();
 
     }
 

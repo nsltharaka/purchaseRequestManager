@@ -77,4 +77,29 @@ public class PriceQuotationReportDAO {
 
     }
 
+    public Boolean setApproved(String pqID) {
+
+        final var query = "UPDATE price_quotation \n"
+                + "JOIN price_quotation_report ON price_quotation.price_quotation_report_id=price_quotation_report.report_id\n"
+                + "SET price_quotation.approved=true, \n"
+                + "price_quotation_report.quotation_report_status=\'APPROVED\' \n"
+                + "WHERE quotation_id=?;";
+
+        return DBConnection.executeQueryWithResults(con -> {
+
+            try (var stmt = con.prepareStatement(query)) {
+
+                stmt.setString(1, pqID);
+
+                return stmt.executeUpdate() > 0;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+
+        });
+
+    }
+
 }

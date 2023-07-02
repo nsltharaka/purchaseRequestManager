@@ -18,6 +18,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -73,6 +74,22 @@ public class PriceQuotationsController {
         var dialog = new PriceQuotationReportDialog(selectedPQR);
         dialog.show();
 
+    }
+
+    @FXML
+    void approvePriceQuotationReport(ActionEvent event) {
+
+        List<PriceQuotationDTO> pqDtos = priceQuotationService
+                .getPriceQuotations(selectedPQR.quotationReportId.get());
+
+        selectedPQR.setPriceQuotationDTOs(pqDtos);
+
+        var dialog = new PriceQuotationReportDialog(selectedPQR, ButtonType.APPLY);
+        var result = dialog.showAndWait();
+
+        result.ifPresent(priceQuotationReportService::setApproved);
+
+        populateTable();
     }
 
     private void setPropertyBindings() {

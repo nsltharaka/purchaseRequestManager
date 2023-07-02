@@ -15,56 +15,78 @@ import com.util.PurchaseRequestStatus;
 
 public class PriceQuotationReportService {
 
-    private PriceQuotationReportDAO reportDAO;
+        private PriceQuotationReportDAO reportDAO;
 
-    public PriceQuotationReportService() {
-        this.reportDAO = new PriceQuotationReportDAO();
-    }
+        public PriceQuotationReportService() {
+                this.reportDAO = new PriceQuotationReportDAO();
+        }
 
-    public List<PriceQuotationsReportDTO> getAllPriceQuotationReports() {
+        public List<PriceQuotationsReportDTO> getAllPriceQuotationReports() {
 
-        var resultSet = reportDAO.selectAll();
+                var resultSet = reportDAO.selectAll();
 
-        if (resultSet.isEmpty())
-            return List.of();
+                if (resultSet.isEmpty())
+                        return List.of();
 
-        var pqrList = resultSet.stream()
-                .map(PriceQuotationReportMapper::toDTO)
-                .toList();
+                var pqrList = resultSet.stream()
+                                .map(PriceQuotationReportMapper::toDTO)
+                                .toList();
 
-        return pqrList;
+                return pqrList;
 
-    }
+        }
 
-    public boolean insertPriceQuotationReport(PriceQuotationsReportDTO dto) {
+        public boolean insertPriceQuotationReport(PriceQuotationsReportDTO dto) {
 
-        var itemDAO = new ItemDAO();
+                var itemDAO = new ItemDAO();
 
-        String reportId = QuotationReportIdGenerator.generate();
+                String reportId = QuotationReportIdGenerator.generate();
 
-        String[] ItemIds = dto.itemsDTOs.stream()
-                .map(i -> i.itemId.get())
-                .toArray(size -> new String[size]);
+                String[] ItemIds = dto.itemsDTOs.stream()
+                                .map(i -> i.itemId.get())
+                                .toArray(size -> new String[size]);
 
-        List<PriceQuotation> pqList = dto.priceQuotationDTOs.stream()
-                .map(PriceQuotationMapper::toPriceQuotation)
-                .peek(pq -> pq.setQuotationId(PriceQuotationIDGenerator.generate()))
-                .peek(pq -> pq.setPriceQuotationsReport(reportId))
-                .toList();
+                List<PriceQuotation> pqList = dto.priceQuotationDTOs.stream()
+                                .map(PriceQuotationMapper::toPriceQuotation)
+                                .peek(pq -> pq.setQuotationId(PriceQuotationIDGenerator.generate()))
+                                .peek(pq -> pq.setPriceQuotationsReport(reportId))
+                                .toList();
 
-        return reportDAO.insert(
-                pqr -> pqr
-                        .setId(reportId)
-                        .setCreatedDate(dto.createdDate.get())
-                        .setStatus(dto.status.get()))
+                return reportDAO.insert(
+                                pqr -> pqr
+                                                .setId(reportId)
+                                                .setCreatedDate(dto.createdDate.get())
+                                                .setStatus(dto.status.get()))
 
-                && itemDAO.updateColumnWhere("price_quotation_report_id", reportId, ItemIds)
-                && itemDAO.updateColumnWhere("item_status",
-                        PurchaseRequestStatus.PROCESSING.toString(),
-                        ItemIds)
+                                && itemDAO.updateColumnWhere("price_quotation_report_id", reportId, ItemIds)
+                                && itemDAO.updateColumnWhere("item_status",
+                                                PurchaseRequestStatus.PROCESSING.toString(),
+                                                ItemIds)
 
-                && new PriceQuotationDAO().insertAll(pqList);
+                                && new PriceQuotationDAO().insertAll(pqList);
 
-    }
+        }
 
+        public boolean setApproved(PriceQuotationsReportDTO dto) {
+
+                // TODO
+                /**
+                 * VALIDATION
+                 * 
+                 * if the pq is already approved, unsupported operation
+                 */
+
+                var approvedPQ = dto.priceQuotationDTOs.stream()
+                                .filter(pq -> pq.isApproved.get())
+                                .findAny();
+
+                if (approvedPQ.isPresent()) {
+
+                        reportDAO.setApproved(approvedPQ.get().priceQuotationId.get());
+                        return true;
+                }
+
+                return false;
+
+        }
 }

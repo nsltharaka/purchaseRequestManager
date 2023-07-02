@@ -141,7 +141,8 @@ public class PriceQuotationReportDialog extends Dialog<PriceQuotationsReportDTO>
         if (selectedQuotation == null)
             return;
 
-        PriceQuotationDialog dialog = new PriceQuotationDialog(priceQuotationsReportDTO.itemsDTOs);
+        PriceQuotationDialog dialog = new PriceQuotationDialog(priceQuotationsReportDTO.itemsDTOs,
+                ButtonType.APPLY);
         dialog.setPriceQuotationDTO(selectedQuotation);
         dialog.show();
 
