@@ -6,12 +6,14 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import com.controllers.dialogControllers.PriceQuotationReportDialog;
+import com.controllers.dialogControllers.PurchaseOrderDialog;
 import com.model.dto.ItemDTO;
 import com.model.dto.PriceQuotationDTO;
 import com.model.dto.PriceQuotationsReportDTO;
 import com.service.ItemService;
 import com.service.PriceQuotationReportService;
 import com.service.PriceQuotationService;
+import com.service.PurchaseOrderService;
 import com.util.PriceQuotationReportStatus;
 import com.util.UserRole;
 import com.util.helpers.CurrentUser;
@@ -31,6 +33,7 @@ public class PriceQuotationsController {
 
     private PriceQuotationReportService priceQuotationReportService;
     private PriceQuotationService priceQuotationService;
+    private PurchaseOrderService purchaseOrderService;
     private ItemService itemService;
 
     private PriceQuotationsReportDTO selectedPQR;
@@ -57,6 +60,7 @@ public class PriceQuotationsController {
     void initialize() {
         priceQuotationReportService = new PriceQuotationReportService();
         priceQuotationService = new PriceQuotationService();
+        purchaseOrderService = new PurchaseOrderService();
         itemService = new ItemService();
 
         selectedPQR = new PriceQuotationsReportDTO();
@@ -111,6 +115,19 @@ public class PriceQuotationsController {
             }
 
         });
+
+    }
+
+    @FXML
+    void createPurchaseOrder(ActionEvent e) {
+
+        var approvedPq = priceQuotationService
+                .getApprovedPriceQuotation(selectedPQR.quotationReportId.get());
+
+        var dialog = new PurchaseOrderDialog(approvedPq.get(), selectedPQR.itemsDTOs);
+        var result = dialog.showAndWait();
+
+        result.ifPresent(po -> purchaseOrderService.insertPurchaseOrder(po));
 
     }
 

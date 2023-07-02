@@ -1,6 +1,7 @@
 package com.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.model.PriceQuotation;
 import com.model.dto.PriceQuotationDTO;
@@ -34,6 +35,22 @@ public class PriceQuotationService {
                 .toList();
 
         return list;
+
+    }
+
+    public Optional<PriceQuotationDTO> getApprovedPriceQuotation(String pqrId) {
+
+        var pqList = getPriceQuotations(pqrId);
+
+        var approvedPq = pqList.stream()
+                .filter(pq -> pq.isApproved.get())
+                .findAny();
+
+        if (approvedPq.isPresent()) {
+            return Optional.of(approvedPq.get());
+        } else {
+            return Optional.empty();
+        }
 
     }
 

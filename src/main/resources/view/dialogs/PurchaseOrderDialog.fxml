@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ButtonType?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<DialogPane prefHeight="681.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.dialogControllers.PurchaseOrderDialog$Controller">
+   <content>
+      <AnchorPane>
+         <children>
+            <Label layoutX="346.0" layoutY="18.0" text="Purchase Order ID :" />
+            <TextField fx:id="txtOrderId" editable="false" layoutX="466.0" layoutY="14.0" prefHeight="25.0" prefWidth="120.0" />
+            <Label layoutX="418.0" layoutY="52.0" text="Date :" />
+            <TextField fx:id="txtOrderDate" editable="false" layoutX="466.0" layoutY="48.0" prefHeight="25.0" prefWidth="120.0" />
+            <TableView fx:id="tblItems" layoutX="14.0" layoutY="84.0" prefHeight="227.0" prefWidth="573.0">
+              <columns>
+                <TableColumn fx:id="columnItemName" prefWidth="75.0" text="Item Name" />
+                <TableColumn fx:id="columnItemDescription" prefWidth="75.0" text="Item Description" />
+                  <TableColumn fx:id="columnItemQuantity" prefWidth="75.0" text="Qunatity" />
+                  <TableColumn fx:id="columnPrice" prefWidth="75.0" text="Price (LKR)" />
+                  <TableColumn fx:id="columnTotal" prefWidth="75.0" text="Total (LKR)" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+            <Label layoutX="14.0" layoutY="329.0" text="Terms &amp; Conditions">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="360.0" text="Delivery :">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtDelivery" layoutX="130.0" layoutY="356.0" prefHeight="25.0" prefWidth="200.0" />
+            <Label layoutX="14.0" layoutY="391.0" text="Delivery Location :">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtDeliveryLocation" layoutX="130.0" layoutY="387.0" prefHeight="25.0" prefWidth="200.0" />
+            <Label layoutX="14.0" layoutY="423.0" text="Payment Terms :">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtPaymentTerms" layoutX="130.0" layoutY="419.0" prefHeight="25.0" prefWidth="200.0" />
+            <Label layoutX="14.0" layoutY="453.0" text="Additional Notes :">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="txtAdditionalNotes" layoutX="131.0" layoutY="453.0" prefHeight="117.0" prefWidth="200.0" />
+            <Label layoutX="411.0" layoutY="329.0" text="Sub Total :">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblSubTotal" layoutX="494.0" layoutY="331.0" text="Label" />
+         </children>
+      </AnchorPane>
+   </content>
+   <header>
+      <Label text="Purchase Order">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </Label>
+   </header>
+   <buttonTypes>
+      <ButtonType fx:constant="CLOSE" />
+      <ButtonType fx:constant="APPLY" />
+   </buttonTypes>
+</DialogPane>

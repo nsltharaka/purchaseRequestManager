@@ -35,7 +35,6 @@ public class PriceQuotationDTO {
 
     public PriceQuotationDTO setPriceQuotationId(String priceQuotationId) {
         this.priceQuotationId.set(priceQuotationId);
-        ;
         return this;
     }
 
