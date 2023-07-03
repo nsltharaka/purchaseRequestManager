@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ButtonType?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+
+<DialogPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.dialogControllers.ReportDialog$Controller">
+   <content>
+      <AnchorPane>
+         <children>
+            <HBox alignment="CENTER" layoutX="28.0" layoutY="87.0" spacing="10.0">
+               <children>
+                  <Label text="From :" />
+                  <DatePicker fx:id="dtpFrom" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="42.0" layoutY="127.0" spacing="10.0">
+               <children>
+                  <Label text="To :" />
+                  <DatePicker fx:id="dtpTo" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="15.0" layoutY="14.0" spacing="10.0">
+               <children>
+                  <Label text="Report Type :" />
+                  <ComboBox fx:id="cmbType" prefWidth="150.0" promptText="select" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="47.0" layoutY="49.0" spacing="10.0">
+               <children>
+                  <Label text="Status :" />
+                  <ComboBox fx:id="cmbStatus" prefWidth="150.0" promptText="select" />
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </content>
+   <header>
+      <Label text="Report">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </Label>
+   </header>
+   <buttonTypes>
+      <ButtonType fx:constant="APPLY" />
+   </buttonTypes>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</DialogPane>

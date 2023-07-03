@@ -8,7 +8,8 @@ public enum DialogPath {
     ITEM_UPDATE_STATUS_DIALOG("/view/dialogs/ItemUpdateStatusDialog.fxml"),
     PR_UPDATE_STATUS_DIALOG("/view/dialogs/PurchaseRequestUpdateStatusDialog.fxml"),
     PRICE_QUOTATION_DIALOG("/view/dialogs/PriceQuotationDialog.fxml"),
-    PURCHASE_ORDER_DIALOG("/view/dialogs/PurchaseOrderDialog.fxml");
+    PURCHASE_ORDER_DIALOG("/view/dialogs/PurchaseOrderDialog.fxml"),
+    REPORT_DIALOG("/view/dialogs/ReportDialog.fxml");
 
     private String path;
 
