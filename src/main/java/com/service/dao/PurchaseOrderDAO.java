@@ -9,6 +9,7 @@ import com.model.dto.PurchaseOrderDTO;
 import com.service.ItemService;
 import com.service.PriceQuotationService;
 import com.service.db.DBConnection;
+import com.util.PurchaseRequestStatus;
 
 public class PurchaseOrderDAO {
 
@@ -28,7 +29,8 @@ public class PurchaseOrderDAO {
                     list.add(new PurchaseOrderDTO()
                             .setPurchaseOrderId(rs.getString("order_id"))
                             .setPurchaseOrderDate(LocalDate.parse(rs.getString("order_date")))
-                            .setPriceQuotationReportId(rs.getString("quotation_report_id")));
+                            .setPriceQuotationReportId(rs.getString("quotation_report_id"))
+                            .setStatus(PurchaseRequestStatus.valueOf(rs.getString("status"))));
 
                 }
 
@@ -62,8 +64,9 @@ public class PurchaseOrderDAO {
                 .toArray(str -> new String[str]);
 
         final var query = "INSERT INTO purchase_order " +
-                "(order_id, order_date, quotation_report_id, delivery, delivery_location, payment, additional_note) " +
-                "VALUES (?,?,?,?,?,?,?)";
+                "(order_id, order_date, quotation_report_id, delivery, delivery_location, payment, additional_note, status) "
+                +
+                "VALUES (?,?,?,?,?,?,?,?)";
 
         ItemDAO itemDAO = new ItemDAO();
         return DBConnection.executeQueryWithResults(con -> {
@@ -77,6 +80,7 @@ public class PurchaseOrderDAO {
                 stmt.setString(5, dto.termsAndConditions.get(1).get());
                 stmt.setString(6, dto.termsAndConditions.get(2).get());
                 stmt.setString(7, dto.termsAndConditions.get(3).get());
+                stmt.setString(8, dto.status.get().toString());
 
                 return stmt.executeUpdate() > 0;
 

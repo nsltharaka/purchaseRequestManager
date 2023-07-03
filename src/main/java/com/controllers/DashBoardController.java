@@ -9,8 +9,10 @@ import java.util.function.Predicate;
 import com.model.Item;
 import com.model.PriceQuotationsReport;
 import com.model.PurchaseRequest;
+import com.model.dto.PurchaseOrderDTO;
 import com.service.dao.ItemDAO;
 import com.service.dao.PriceQuotationReportDAO;
+import com.service.dao.PurchaseOrderDAO;
 import com.service.dao.PurchaseRequestDAO;
 import com.util.PriceQuotationReportStatus;
 import com.util.PurchaseRequestStatus;
@@ -51,7 +53,7 @@ public class DashBoardController {
 
     private void populateLabels(List<Item> items) {
         lblRequestedItemCount.setText(String.valueOf(
-                getCount(items, item -> item.getItemStatus().equals(PurchaseRequestStatus.PROCESSING))));
+                getCount(items, item -> true)));
 
         lblAwaitingDeliveryCount.setText(String.valueOf(
                 getCount(items, item -> item.getItemStatus().equals(PurchaseRequestStatus.AWAITING))));
@@ -70,30 +72,8 @@ public class DashBoardController {
 
         populatePRChart();
         populatePQChart();
+        populatePOChart();
 
-        pieChartPQs.getData().addAll(
-                new PieChart.Data("Approved", 25),
-                new PieChart.Data("Pending Approval", 75));
-
-        pieChartPQs.getData().forEach(data -> {
-            Tooltip tooltip = new Tooltip();
-            String percentage = String.format("%.2f%%", data.getPieValue());
-            String info = percentage + "\n" + data.getName();
-            tooltip.setText(info);
-            Tooltip.install(data.getNode(), tooltip);
-        });
-
-        pieChartPOs.getData().addAll(
-                new PieChart.Data("Delivered", 25),
-                new PieChart.Data("Awaiting Delivery", 10));
-
-        pieChartPOs.getData().forEach(data -> {
-            Tooltip tooltip = new Tooltip();
-            String percentage = String.format("%.2f%%", data.getPieValue());
-            String info = percentage + "\n" + data.getName();
-            tooltip.setText(info);
-            Tooltip.install(data.getNode(), tooltip);
-        });
     }
 
     private void populatePRChart() {
@@ -148,23 +128,29 @@ public class DashBoardController {
         });
     }
 
-    // private void populatePOChart() {
-    // final var prs = new PurchaseOrderDAO().selectAll();
+    private void populatePOChart() {
+        final var prs = new PurchaseOrderDAO().selectAll();
 
-    // Function<Predicate<PurchaseOrder>, Long> func = block -> {
-    // return prs.stream()
-    // .filter(block)
-    // .count();
-    // };
+        Function<Predicate<PurchaseOrderDTO>, Long> func = block -> {
+            return prs.stream()
+                    .filter(block)
+                    .count();
+        };
 
-    // var awaitingPos = func.apply(po ->
-    // po.getRequestStatus().equals(PurchaseRequestStatus.AWAITING));
-    // var deliveredPos = func.apply(po ->
-    // po.getRequestStatus().equals(PurchaseRequestStatus.DELIVERED));
+        var awaitingPos = func.apply(po -> po.status.get().equals(PurchaseRequestStatus.AWAITING));
+        var deliveredPos = func.apply(po -> po.status.get().equals(PurchaseRequestStatus.DELIVERED));
 
-    // pieChartPRs.getData().addAll(
-    // new PieChart.Data("Awaiting", awaitingPos),
-    // new PieChart.Data("Delivered", deliveredPos));
-    // }
+        pieChartPOs.getData().addAll(
+                new PieChart.Data("Awaiting", awaitingPos),
+                new PieChart.Data("Delivered", deliveredPos));
+
+        pieChartPOs.getData().forEach(data -> {
+            Tooltip tooltip = new Tooltip();
+            String percentage = String.format("%.2f%%", data.getPieValue());
+            String info = percentage + "\n" + data.getName();
+            tooltip.setText(info);
+            Tooltip.install(data.getNode(), tooltip);
+        });
+    }
 
 }

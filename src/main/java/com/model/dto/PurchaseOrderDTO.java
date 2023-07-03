@@ -2,7 +2,10 @@ package com.model.dto;
 
 import java.time.LocalDate;
 
+import com.util.PurchaseRequestStatus;
+
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,6 +15,8 @@ public class PurchaseOrderDTO {
     public SimpleStringProperty purchaseOrderId = new SimpleStringProperty();
     public SimpleStringProperty purchaseOrderDate = new SimpleStringProperty(LocalDate.now().toString());
     public SimpleStringProperty priceQuotationReportId = new SimpleStringProperty();
+    public SimpleObjectProperty<PurchaseRequestStatus> status = new SimpleObjectProperty<>(
+            PurchaseRequestStatus.AWAITING);
 
     public ObservableList<SimpleStringProperty> termsAndConditions = FXCollections.observableArrayList(
             new SimpleStringProperty(),
@@ -39,6 +44,11 @@ public class PurchaseOrderDTO {
 
     public PurchaseOrderDTO setPriceQuotationDTO(PriceQuotationDTO dto) {
         this.priceQuotationDTO = dto;
+        return this;
+    }
+
+    public PurchaseOrderDTO setStatus(PurchaseRequestStatus status) {
+        this.status.set(status);
         return this;
     }
 
