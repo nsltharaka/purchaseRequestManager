@@ -10,6 +10,7 @@ import com.controllers.dialogControllers.PurchaseOrderDialog;
 import com.model.dto.ItemDTO;
 import com.model.dto.PriceQuotationDTO;
 import com.model.dto.PriceQuotationsReportDTO;
+import com.model.dto.PurchaseOrderDTO;
 import com.service.ItemService;
 import com.service.PriceQuotationReportService;
 import com.service.PriceQuotationService;
@@ -121,13 +122,28 @@ public class PriceQuotationsController {
     @FXML
     void createPurchaseOrder(ActionEvent e) {
 
-        var approvedPq = priceQuotationService
-                .getApprovedPriceQuotation(selectedPQR.quotationReportId.get());
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setHeaderText(null);
 
-        var dialog = new PurchaseOrderDialog(approvedPq.get(), selectedPQR.itemsDTOs);
+        var poDto = new PurchaseOrderDTO();
+        poDto.setPriceQuotationReportId(selectedPQR.quotationReportId.get());
+
+        var approvedPq = priceQuotationService.getApprovedPriceQuotation(
+                selectedPQR.quotationReportId.get());
+
+        approvedPq.ifPresent(poDto::setPriceQuotationDTO);
+        poDto.items.setAll(selectedPQR.itemsDTOs.get());
+
+        var dialog = new PurchaseOrderDialog(poDto);
         var result = dialog.showAndWait();
 
-        result.ifPresent(po -> purchaseOrderService.insertPurchaseOrder(po));
+        result.ifPresent(po -> {
+            purchaseOrderService.insertPurchaseOrder(po);
+
+            alert.setContentText("Purchase Order Created");
+            alert.showAndWait();
+            populateTable();
+        });
 
     }
 

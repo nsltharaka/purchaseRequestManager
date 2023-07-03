@@ -37,7 +37,7 @@
                <children>
                   <VBox alignment="CENTER" spacing="10.0">
                      <children>
-                        <Label styleClass="itemsSummary--component-text" text="100" />
+                        <Label fx:id="lblRequestedItemCount" styleClass="itemsSummary--component-text" text="100" />
                         <Label text="Requested Items">
                            <styleClass>
                               <String fx:value="itemsSummary--component-text" />
@@ -49,7 +49,7 @@
                   <Separator opacity="0.2" orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="1" />
                   <VBox alignment="CENTER" spacing="10.0" GridPane.columnIndex="2">
                      <children>
-                        <Label styleClass="itemsSummary--component-text" text="99" />
+                        <Label fx:id="lblAwaitingDeliveryCount" styleClass="itemsSummary--component-text" text="99" />
                         <Label text="Awaiting Delivery">
                            <styleClass>
                               <String fx:value="itemsSummary--component-text" />
@@ -61,7 +61,7 @@
                   <Separator layoutX="10.0" layoutY="10.0" opacity="0.2" orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="3" />
                   <VBox alignment="CENTER" spacing="10.0" GridPane.columnIndex="4">
                      <children>
-                        <Label styleClass="itemsSummary--component-text" text="1" />
+                        <Label fx:id="lblDeliveredCount" styleClass="itemsSummary--component-text" text="1" />
                         <Label text="Delivered">
                            <styleClass>
                               <String fx:value="itemsSummary--component-text" />

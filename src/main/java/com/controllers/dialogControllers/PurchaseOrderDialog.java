@@ -7,7 +7,6 @@ import java.util.ResourceBundle;
 import com.model.dto.ItemDTO;
 import com.model.dto.PriceQuotationDTO;
 import com.model.dto.PurchaseOrderDTO;
-import com.model.idGenerators.PurchaseOrderIdGenerator;
 import com.util.helpers.DialogPath;
 
 import javafx.beans.property.SimpleDoubleProperty;
@@ -57,22 +56,25 @@ public class PurchaseOrderDialog extends Dialog<PurchaseOrderDTO> {
     }
 
     private Controller controller;
-    private PurchaseOrderDTO purchaseOrderDTO = new PurchaseOrderDTO();
+    private PurchaseOrderDTO purchaseOrderDTO;
 
-    public PurchaseOrderDialog(PriceQuotationDTO priceQuotationDTO, SimpleListProperty<ItemDTO> itemsDTOs,
-            ButtonType... buttons) {
+    public PurchaseOrderDialog(PurchaseOrderDTO dto, ButtonType... buttons) {
         super();
         this.setTitle("Purchase Order");
         this.setDialogPane(loadFXML());
         this.getDialogPane().getButtonTypes().addAll(buttons);
-
-        this.purchaseOrderDTO.priceQuotationDTO = priceQuotationDTO;
         this.setResultConverter(this::resultConverter);
 
-        populateTable(priceQuotationDTO, itemsDTOs);
-
+        this.purchaseOrderDTO = dto;
         setPropertyBindings();
 
+        populateTable(purchaseOrderDTO.priceQuotationDTO, purchaseOrderDTO.items);
+    }
+
+    public void setPurchaseOrderDTO(PurchaseOrderDTO purchaseOrderDTO) {
+        this.purchaseOrderDTO = purchaseOrderDTO;
+        setPropertyBindings();
+        populateTable(purchaseOrderDTO.priceQuotationDTO, purchaseOrderDTO.items);
     }
 
     public PurchaseOrderDTO resultConverter(ButtonType btn) {
@@ -81,12 +83,10 @@ public class PurchaseOrderDialog extends Dialog<PurchaseOrderDTO> {
             return null;
         }
 
-        return purchaseOrderDTO
-                .setPurchaseOrderId(PurchaseOrderIdGenerator.generate());
+        return purchaseOrderDTO;
     }
 
     private void populateTable(PriceQuotationDTO priceQuotationDTO, SimpleListProperty<ItemDTO> itemsDTOs) {
-        controller.tblItems.getItems().addAll(itemsDTOs);
 
         var map = priceQuotationDTO.item_quotedPrice.get();
 
@@ -122,6 +122,9 @@ public class PurchaseOrderDialog extends Dialog<PurchaseOrderDTO> {
     }
 
     private void setPropertyBindings() {
+
+        controller.tblItems.itemsProperty().bind(
+                purchaseOrderDTO.items);
 
         controller.txtOrderId.textProperty().bindBidirectional(
                 purchaseOrderDTO.purchaseOrderId);
