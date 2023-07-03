@@ -4,7 +4,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.controllers.dialogControllers.PriceQuotationReportDialog;
-import com.controllers.dialogControllers.PurchaseRequestUpdateStatusDialog;
 import com.model.dto.ItemDTO;
 import com.service.ItemService;
 import com.service.PriceQuotationReportService;
@@ -19,6 +18,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextInputDialog;
 
 public class RequestedItemsController {
 
@@ -109,9 +109,19 @@ public class RequestedItemsController {
     @FXML
     void updateItemStatus(ActionEvent event) {
 
-        PurchaseRequestUpdateStatusDialog dialog = new PurchaseRequestUpdateStatusDialog();
-        dialog.showAndWait();
+        var dialog = new TextInputDialog();
+        dialog.setTitle("Add GRN");
+        dialog.setHeaderText(null);
+        dialog.setContentText("enter GRN number :");
 
+        var result = dialog.showAndWait();
+
+        result.ifPresent(grn -> {
+
+            var itemId = tblItems.getSelectionModel().getSelectedItem().itemId.get();
+
+            itemService.addGRN(itemId, grn);
+        });
     }
 
 }

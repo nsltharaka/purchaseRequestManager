@@ -145,4 +145,10 @@ public class ItemDAO {
                 .setPurchaseRequestId(rs.getString("purchase_request_id"));
 
     }
+
+    public void addGRN(String grn) {
+
+        final var query = "";
+
+    }
 }

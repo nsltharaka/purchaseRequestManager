@@ -64,4 +64,11 @@ public class ItemService {
 
     }
 
+    public void addGRN(String itemId, String grn) {
+
+        itemDAO.updateColumnWhere("grn", grn, itemId);
+        itemDAO.updateColumnWhere("item_status", "DELIVERED", itemId);
+
+    }
+
 }
