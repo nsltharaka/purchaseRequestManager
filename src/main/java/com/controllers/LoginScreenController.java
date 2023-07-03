@@ -9,7 +9,6 @@ import org.kordamp.ikonli.javafx.FontIcon;
 
 import com.model.dto.UserDTO;
 import com.service.UserService;
-import com.util.UserRole;
 import com.util.helpers.CurrentUser;
 
 import javafx.event.ActionEvent;
@@ -33,18 +32,15 @@ public class LoginScreenController implements Initializable {
     @FXML
     void handleLogin(ActionEvent event) throws IOException {
 
-        // if (!validateFields()) {
-        // lblInfo.setText("Fields cannot be empty");
-        // return;
-        // }
+        if (!validateFields()) {
+            lblInfo.setText("Fields cannot be empty");
+            return;
+        }
 
-        // if (!validateUser()) {
-        // lblInfo.setText("User not found");
-        // return;
-        // }
-
-        CurrentUser.setCurrentUser(new UserDTO().setUsername("").setUserRole(UserRole.PURCHASER));
-        CurrentUser.setCurrentUser(new UserDTO().setUsername("").setUserRole(UserRole.MANAGER));
+        if (!validateUser()) {
+            lblInfo.setText("User not found");
+            return;
+        }
 
         // successful login, redirects to main screen
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

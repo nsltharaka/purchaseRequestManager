@@ -17,7 +17,6 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.HomeScreenController">
    <left>
       <VBox styleClass="control-panel" stylesheets="@../styles/dashBoard-controlPanel.css" BorderPane.alignment="CENTER">
@@ -74,7 +73,7 @@
                         <FontIcon iconColor="WHITE" iconLiteral="mdi2c-cart" iconSize="24" />
                      </graphic>
                   </Button>
-                  <Button fx:id="btnReports" graphicTextGap="15.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#getReportsWindow" prefHeight="45.0" prefWidth="300.0" styleClass="dashboard-navigationButton" text="Reports" textFill="WHITE">
+                  <Button fx:id="btnReports" disable="true" graphicTextGap="15.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#getReportsWindow" prefHeight="45.0" prefWidth="300.0" styleClass="dashboard-navigationButton" text="Reports" textFill="WHITE" visible="false">
                      <font>
                         <Font size="18.0" />
                      </font>
