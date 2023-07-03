@@ -5,14 +5,17 @@ import java.util.ResourceBundle;
 
 import com.controllers.dialogControllers.PriceQuotationReportDialog;
 import com.model.dto.ItemDTO;
+import com.model.dto.PurchaseRequestDTO;
 import com.service.ItemService;
 import com.service.PriceQuotationReportService;
 import com.util.PurchaseRequestStatus;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.SelectionMode;
@@ -37,6 +40,9 @@ public class RequestedItemsController {
     private @FXML TableColumn<ItemDTO, String> columnItemUnit;
     private @FXML TableColumn<ItemDTO, PurchaseRequestStatus> columnItemStatus;
 
+    private @FXML Button btnNewQuotation;
+    private @FXML Button btnAddGRN;
+
     @FXML
     void initialize() {
 
@@ -46,10 +52,26 @@ public class RequestedItemsController {
         setPropertyBindings();
         setTableProperties();
         populateTable();
+
+        tblItems.getSelectionModel().selectedItemProperty().addListener(this::handleChange);
+    }
+
+    private void handleChange(ObservableValue<? extends ItemDTO> observable,
+            ItemDTO oldValue,
+            ItemDTO newValue) {
+
+        var result = tblItems.getSelectionModel().getSelectedItems().stream()
+                .anyMatch(item -> !item.itemStatus.get().equals(PurchaseRequestStatus.PROCESSING));
+        btnNewQuotation.setDisable(result);
+
+        if (newValue.itemStatus.get().equals(PurchaseRequestStatus.DELIVERED)) {
+            btnAddGRN.setDisable(true);
+        } else
+            btnAddGRN.setDisable(false);
+
     }
 
     private void setPropertyBindings() {
-        // TODO bind selected item's properties to labels
 
     }
 
@@ -117,6 +139,10 @@ public class RequestedItemsController {
         var result = dialog.showAndWait();
 
         result.ifPresent(grn -> {
+
+            if (grn.isEmpty()) {
+                return;
+            }
 
             var itemId = tblItems.getSelectionModel().getSelectedItem().itemId.get();
 
