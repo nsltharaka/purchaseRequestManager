@@ -20,7 +20,7 @@
                   <HBox alignment="CENTER_LEFT" layoutX="30.0" layoutY="30.0" spacing="10.0">
                      <children>
                         <Label minWidth="100.0" text="Item Category" HBox.hgrow="NEVER" />
-                        <ComboBox fx:id="cmbItemCategory" prefHeight="25.0" prefWidth="150.0" HBox.hgrow="ALWAYS" />
+                        <ComboBox fx:id="cmbItemCategory" prefHeight="25.0" prefWidth="150.0" promptText="Select Category" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" spacing="10.0">

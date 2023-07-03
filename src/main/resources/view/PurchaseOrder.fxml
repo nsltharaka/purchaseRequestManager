@@ -52,9 +52,9 @@
                                  <children>
                                     <VBox spacing="7.0">
                                        <children>
-                                          <Button mnemonicParsing="false" styleClass="shortcut-button" text="View Purchase Order" />
-                                          <Button mnemonicParsing="false" styleClass="shortcut-button" text="Edit Purchase Order" />
-                                          <Button mnemonicParsing="false" styleClass="shortcut-button" text="Update Status" />
+                                          <Button mnemonicParsing="false" onAction="#viewPurchaseOrder" styleClass="shortcut-button" text="View Purchase Order" />
+                                          <Button fx:id="btnEditPo" mnemonicParsing="false" styleClass="shortcut-button" text="Edit Purchase Order" />
+                                          <Button fx:id="btnUpdatePO" mnemonicParsing="false" styleClass="shortcut-button" text="Update Status" />
                                        </children>
                                     </VBox>
                                     <Separator>
@@ -64,8 +64,8 @@
                                     </Separator>
                                     <VBox spacing="7.0">
                                        <children>
-                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="shortcut-button" text="Add Comment" />
-                                          <Button mnemonicParsing="false" styleClass="shortcut-button" text="Print Purchase Order" />
+                                          <Button fx:id="btnAddComment" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="shortcut-button" text="Add Comment" />
+                                          <Button mnemonicParsing="false" onAction="#printPO" styleClass="shortcut-button" text="Print Purchase Order" />
                                        </children>
                                     </VBox>
                                  </children>

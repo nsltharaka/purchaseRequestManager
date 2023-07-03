@@ -21,6 +21,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 
 public class PurchaseOrderDialog extends Dialog<PurchaseOrderDTO> {
 
@@ -46,9 +47,11 @@ public class PurchaseOrderDialog extends Dialog<PurchaseOrderDTO> {
 
         private @FXML Label lblSubTotal;
 
+        private @FXML VBox lblSignature;
+        private @FXML TextArea txtSupplierName;
+
         @FXML
         void initialize() {
-
             columnItemName.setCellValueFactory(param -> param.getValue().itemName);
             columnItemDescription.setCellValueFactory(param -> param.getValue().itemDescription);
             columnItemQuantity.setCellValueFactory(param -> param.getValue().itemQuantity.asObject());
@@ -64,6 +67,9 @@ public class PurchaseOrderDialog extends Dialog<PurchaseOrderDTO> {
         this.setDialogPane(loadFXML());
         this.getDialogPane().getButtonTypes().addAll(buttons);
         this.setResultConverter(this::resultConverter);
+
+        this.setOnShowing(event -> controller.lblSignature.setVisible(false));
+        this.setOnCloseRequest(event -> controller.lblSignature.setVisible(false));
 
         this.purchaseOrderDTO = dto;
         setPropertyBindings();
@@ -122,6 +128,13 @@ public class PurchaseOrderDialog extends Dialog<PurchaseOrderDTO> {
     }
 
     private void setPropertyBindings() {
+
+        controller.txtSupplierName.textProperty().bind(
+                purchaseOrderDTO.priceQuotationDTO.supplierName
+                        .concat("\n")
+                        .concat(purchaseOrderDTO.priceQuotationDTO.supplierAddress)
+
+        );
 
         controller.tblItems.itemsProperty().bind(
                 purchaseOrderDTO.items);

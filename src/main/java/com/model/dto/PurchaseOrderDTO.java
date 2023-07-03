@@ -52,4 +52,24 @@ public class PurchaseOrderDTO {
         return this;
     }
 
+    public PurchaseOrderDTO setDelivery(String delivery) {
+        this.termsAndConditions.get(0).set(delivery);
+        return this;
+    }
+
+    public PurchaseOrderDTO setDeliveryLocation(String deliveryLocation) {
+        this.termsAndConditions.get(1).set(deliveryLocation);
+        return this;
+    }
+
+    public PurchaseOrderDTO setPayment(String payment) {
+        this.termsAndConditions.get(2).set(payment);
+        return this;
+    }
+
+    public PurchaseOrderDTO setAdditionalNote(String additional) {
+        this.termsAndConditions.get(3).set(additional);
+        return this;
+    }
+
 }

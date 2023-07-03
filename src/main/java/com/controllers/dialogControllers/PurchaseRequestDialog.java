@@ -12,10 +12,13 @@ import com.util.UserRole;
 import com.util.helpers.CurrentUser;
 import com.util.helpers.DialogPath;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
@@ -150,6 +153,12 @@ public class PurchaseRequestDialog extends Dialog<PurchaseRequestDTO> {
 
         controller.chboxApproved.visibleProperty()
                 .bind(CurrentUser.getCurrentUser().userRole.isEqualTo(UserRole.MANAGER));
+
+        Node applyButton;
+        if ((applyButton = this.getDialogPane().lookupButton(ButtonType.APPLY)) != null) {
+            applyButton.disableProperty()
+                    .bind(validate().not());
+        }
     }
 
     private PurchaseRequestDTO resultConverter(ButtonType buttonType) {
@@ -159,5 +168,13 @@ public class PurchaseRequestDialog extends Dialog<PurchaseRequestDTO> {
         }
 
         return null;
+    }
+
+    private BooleanBinding validate() {
+
+        return controller.dtpDueDate.valueProperty().isNotNull()
+                .and(controller.cmbRequestedDepartment.valueProperty().isNotNull())
+                .and(Bindings.isEmpty(controller.tableItems.getItems()).not());
+
     }
 }

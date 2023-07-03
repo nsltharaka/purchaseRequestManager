@@ -30,7 +30,11 @@ public class PurchaseOrderDAO {
                             .setPurchaseOrderId(rs.getString("order_id"))
                             .setPurchaseOrderDate(LocalDate.parse(rs.getString("order_date")))
                             .setPriceQuotationReportId(rs.getString("quotation_report_id"))
-                            .setStatus(PurchaseRequestStatus.valueOf(rs.getString("status"))));
+                            .setStatus(PurchaseRequestStatus.valueOf(rs.getString("status")))
+                            .setDelivery(rs.getString("delivery"))
+                            .setDeliveryLocation(rs.getString("delivery_location"))
+                            .setPayment(rs.getString("payment"))
+                            .setAdditionalNote(rs.getString("additional_note")));
 
                 }
 

@@ -170,20 +170,4 @@ public class PurchaseRequestsController {
         });
 
     }
-
-    @FXML
-    void viewPriceQuotations(ActionEvent event) {
-
-        PriceQuotationReportDialog dialog = new PriceQuotationReportDialog();
-        dialog.show();
-
-    }
-
-    @FXML
-    void PurchaseRequestUpdateStatus(ActionEvent event) {
-
-        PurchaseRequestUpdateStatusDialog dialog = new PurchaseRequestUpdateStatusDialog();
-        dialog.showAndWait();
-
-    }
 }
